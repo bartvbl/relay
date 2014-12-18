@@ -7,6 +7,8 @@ import java.io.IOException;
 public class FileBuffer {
 	private final String fileContents;
 	private int charPointer = 0;
+	private int lineNumber = 1;
+	private int columnNumber = 0;
 
 	private FileBuffer(String fileContents) {
 		this.fileContents = fileContents;
@@ -23,7 +25,7 @@ public class FileBuffer {
 	
 	public void advanceToNonWhitespace() {
 		while(charPointer < fileContents.length() - 1) {
-			charPointer++;
+			advanceCharacter();
 			char currentCharacter = fileContents.charAt(charPointer);
 			if(!Character.isWhitespace(currentCharacter)) {
 				return;
@@ -34,6 +36,12 @@ public class FileBuffer {
 	public void advanceCharacter() {
 		if(charPointer < fileContents.length() - 1) {
 			charPointer++;
+			columnNumber++;
+			if(getCurrentCharacter() == '\n') {
+				lineNumber++;
+				columnNumber = 0;
+			}
+			
 		}
 	}
 	
@@ -51,5 +59,19 @@ public class FileBuffer {
 
 	public void advanceMultipleCharacters(int length) {
 		charPointer = Math.min(charPointer + length, fileContents.length() - 1);
+	}
+	
+	public int getCurrentLineNumber() {
+		return lineNumber;
+	}
+	
+	public int getCurrentColumnNumber() {
+		return columnNumber;
+	}
+
+	public void advanceToNextLine() {
+		while(getCurrentCharacter() != '\n') {
+			advanceCharacter();
+		}
 	}
 }

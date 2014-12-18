@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import relay.parser.FileBuffer;
 import relay.parser.RelayParser;
+import relay.parser.errors.RelayParseException;
 
 public class Main {
 
@@ -14,6 +15,8 @@ public class Main {
 			RelayParser.parse(buffer);
 			System.out.println("Complete.");
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RelayParseException e) {
 			e.printStackTrace();
 		}
 	}

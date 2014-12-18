@@ -1,5 +1,6 @@
 package relay.parser;
 
+import relay.parser.errors.RelayParseException;
 import relay.parser.struct.Block;
 import relay.parser.struct.Property;
 
@@ -7,11 +8,11 @@ public class BlockParser {
 	private static final char BLOCK_OPEN = '(';
 	private static final char BLOCK_CLOSE = ')';
 
-	public static Block parseBlock(FileBuffer buffer) {
+	public static Block parseBlock(FileBuffer buffer) throws RelayParseException {
 		System.out.println("Blocks");
 		
 		if(buffer.getCurrentCharacter() != BLOCK_OPEN) {
-			throw new RuntimeException("Expected block open, got " + buffer.getCurrentCharacter() + ".");
+			throw new RelayParseException("Expected block open, got " + buffer.getCurrentCharacter() + ".", buffer);
 		}
 		
 		buffer.advanceCharacter();
@@ -26,6 +27,9 @@ public class BlockParser {
 			if(buffer.getCurrentCharacter() == BLOCK_OPEN) {
 				Block child = BlockParser.parseBlock(buffer);
 				block.addChild(child);
+			}
+			if(buffer.lookAhead(2).equals("//")) {
+				buffer.advanceToNextLine();
 			}
 			
 			buffer.advanceToNonWhitespace();

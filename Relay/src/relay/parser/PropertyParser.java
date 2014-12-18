@@ -7,16 +7,16 @@ import relay.parser.types.PropertyType;
 
 public class PropertyParser {
 
-	public static Property parseProperty(FileBuffer buffer) {
+	public static Property parseProperty(FileBuffer buffer) throws RelayParseException {
 		PropertyType type = getCurrentKeyword(buffer);
 		buffer.advanceMultipleCharacters(type.toString().length());
 		
 		if(type == null) {
-			throw new RelayParseException("Unknown property type.");
+			throw new RelayParseException("Unknown property type.", buffer);
 		}
 		
 		if(buffer.getCurrentCharacter() != ':') {
-			throw new RelayParseException("Missing : in property.");
+			throw new RelayParseException("Missing : in property.", buffer);
 		}
 		
 		Value value = ExpressionParser.parseExpression(buffer);

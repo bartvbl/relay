@@ -1,9 +1,11 @@
 package relay.parser.errors;
 
-public class RelayParseException extends RuntimeException {
+import relay.parser.FileBuffer;
 
-	public RelayParseException(String message) {
-		super(message);
+public class RelayParseException extends Exception {
+
+	public RelayParseException(String message, FileBuffer buffer) {
+		super("Parse error at line " + buffer.getCurrentLineNumber() + ", char " + buffer.getCurrentColumnNumber() + ": " + message);
 	}
 
 }
