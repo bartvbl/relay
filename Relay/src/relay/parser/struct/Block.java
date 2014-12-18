@@ -5,6 +5,12 @@ import java.util.ArrayList;
 public class Block {
 	private ArrayList<Property> properties = new ArrayList<Property>();
 	private ArrayList<Block> children = new ArrayList<Block>();
+	
+	public final String name;
+
+	public Block(String name) {
+		this.name = name;
+	}
 
 	public void addProperty(Property property) {
 		properties.add(property);
@@ -12,6 +18,10 @@ public class Block {
 
 	public void addChild(Block child) {
 		children.add(child);
+	}
+
+	public void addCodeBlock(CodeBlock codeBlock) {
+		
 	}
 
 }

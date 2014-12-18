@@ -9,11 +9,12 @@ public class PropertyParser {
 
 	public static Property parseProperty(FileBuffer buffer) throws RelayParseException {
 		PropertyType type = getCurrentKeyword(buffer);
-		buffer.advanceMultipleCharacters(type.toString().length());
 		
 		if(type == null) {
 			throw new RelayParseException("Unknown property type.", buffer);
 		}
+
+		buffer.advanceMultipleCharacters(type.toString().length());
 		
 		if(buffer.getCurrentCharacter() != ':') {
 			throw new RelayParseException("Missing : in property.", buffer);
@@ -32,6 +33,7 @@ public class PropertyParser {
 			}
 		}
 		return null;
+		
 	}
 
 	public static boolean isAtProperty(FileBuffer buffer) {
