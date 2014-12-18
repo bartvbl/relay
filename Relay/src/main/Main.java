@@ -1,7 +1,10 @@
-package relay.parser;
+package main;
 
 import java.io.File;
 import java.io.IOException;
+
+import relay.parser.FileBuffer;
+import relay.parser.RelayParser;
 
 public class Main {
 

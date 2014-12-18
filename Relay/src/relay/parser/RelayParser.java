@@ -4,8 +4,8 @@ import relay.parser.struct.Block;
 
 public class RelayParser {
 
-	public static void parse(FileBuffer buffer) {
-		Block block = BlockParser.parseBlock(buffer);
+	public static Block parse(FileBuffer buffer) {
+		return BlockParser.parseBlock(buffer);
 	}
 
 }

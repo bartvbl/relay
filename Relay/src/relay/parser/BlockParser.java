@@ -14,6 +14,8 @@ public class BlockParser {
 			throw new RuntimeException("Expected block open, got " + buffer.getCurrentCharacter() + ".");
 		}
 		
+		buffer.advanceCharacter();
+		
 		Block block = new Block();
 		
 		while(buffer.getCurrentCharacter() != BLOCK_CLOSE) {

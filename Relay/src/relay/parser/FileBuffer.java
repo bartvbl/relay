@@ -17,10 +17,8 @@ public class FileBuffer {
 	}
 	
 	public String lookAhead(int characterCount) {
-		if(charPointer + characterCount >= fileContents.length()) {
-			throw new IndexOutOfBoundsException("Went past end of buffer");
-		}
-		return fileContents.substring(charPointer, charPointer + characterCount);
+		int end = Math.min(charPointer + characterCount, fileContents.length());
+		return fileContents.substring(charPointer, end);
 	}
 	
 	public void advanceToNonWhitespace() {
@@ -49,5 +47,9 @@ public class FileBuffer {
 		stream.read(fileContents);
 		stream.close();
 		return new FileBuffer(new String(fileContents));
+	}
+
+	public void advanceMultipleCharacters(int length) {
+		charPointer = Math.min(charPointer + length, fileContents.length() - 1);
 	}
 }
