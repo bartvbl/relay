@@ -6,6 +6,10 @@ public class PropertyParser {
 	private static final String[] keywords = {"left", "right", "top", "bottom"};
 
 	public static Property parseProperty(FileBuffer buffer) {
+		StringBuffer keywordBuffer = new StringBuffer();
+		while(buffer.getCurrentCharacter() != ':') {
+			
+		}
 		return null;
 	}
 	
