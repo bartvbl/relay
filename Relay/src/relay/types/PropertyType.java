@@ -1,4 +1,4 @@
-package relay.parser.types;
+package relay.types;
 
 public enum PropertyType {
 	left,

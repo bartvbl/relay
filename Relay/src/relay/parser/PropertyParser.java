@@ -3,7 +3,7 @@ package relay.parser;
 import relay.data.Expression;
 import relay.data.Property;
 import relay.parser.errors.RelayParseException;
-import relay.parser.types.PropertyType;
+import relay.types.PropertyType;
 
 public class PropertyParser {
 

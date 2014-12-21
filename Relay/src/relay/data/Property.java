@@ -1,6 +1,6 @@
 package relay.data;
 
-import relay.parser.types.PropertyType;
+import relay.types.PropertyType;
 
 public class Property {
 	public final PropertyType type;
