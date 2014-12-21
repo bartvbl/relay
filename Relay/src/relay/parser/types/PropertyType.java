@@ -7,5 +7,6 @@ public enum PropertyType {
 	bottom,
 	width,
 	height,
-	origin
+	origin,
+	content
 }

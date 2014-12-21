@@ -24,4 +24,12 @@ public class Block {
 		
 	}
 
+	public Block[] getChildren() {
+		return children.toArray(new Block[children.size()]);
+	}
+	
+	public Property[] getProperties() {
+		return properties.toArray(new Property[properties.size()]);
+	}
+
 }
