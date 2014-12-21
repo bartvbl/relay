@@ -1,10 +1,17 @@
 package relay.data;
 
-public class Expression {
-	private final String expression;
+import java.util.ArrayList;
 
-	public Expression(String expression) {
-		this.expression = expression;
+import relay.types.ExpressionTokenType;
+
+public class Expression {
+
+	private final ArrayList<ExpressionTokenType> tokenTypes;
+	private final ArrayList<String> tokens;
+
+	public Expression(ArrayList<ExpressionTokenType> tokenTypes, ArrayList<String> tokens) {
+		this.tokenTypes = tokenTypes;
+		this.tokens = tokens;
 	}
 
 	public double evaluate() {
@@ -12,6 +19,6 @@ public class Expression {
 	}
 	
 	public String toString() {
-		return "[Expression: " + expression + "]";
+		return "[Expression: " + tokens + "]";
 	}
 }
