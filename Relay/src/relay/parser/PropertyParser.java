@@ -20,6 +20,8 @@ public class PropertyParser {
 			throw new RelayParseException("Missing : in property.", buffer);
 		}
 		
+		buffer.advanceToNonWhitespace(); //move away from : character
+		
 		Expression value = ExpressionParser.parseExpression(buffer);
 		return new Property(type, value);
 	}
