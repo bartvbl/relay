@@ -1,7 +1,7 @@
 package relay.parser;
 
+import relay.data.Expression;
 import relay.data.Property;
-import relay.data.Value;
 import relay.parser.errors.RelayParseException;
 import relay.parser.types.PropertyType;
 
@@ -20,7 +20,7 @@ public class PropertyParser {
 			throw new RelayParseException("Missing : in property.", buffer);
 		}
 		
-		Value value = ExpressionParser.parseExpression(buffer);
+		Expression value = ExpressionParser.parseExpression(buffer);
 		return new Property(type, value);
 	}
 	
