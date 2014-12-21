@@ -1,7 +1,7 @@
 package relay.parser;
 
+import relay.data.Block;
 import relay.parser.errors.RelayParseException;
-import relay.parser.struct.Block;
 
 public class RelayParser {
 

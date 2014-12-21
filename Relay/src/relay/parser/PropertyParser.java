@@ -1,8 +1,8 @@
 package relay.parser;
 
+import relay.data.Property;
+import relay.data.Value;
 import relay.parser.errors.RelayParseException;
-import relay.parser.struct.Property;
-import relay.parser.struct.Value;
 import relay.parser.types.PropertyType;
 
 public class PropertyParser {

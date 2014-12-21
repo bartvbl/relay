@@ -1,9 +1,9 @@
 package relay.parser;
 
+import relay.data.Block;
+import relay.data.CodeBlock;
+import relay.data.Property;
 import relay.parser.errors.RelayParseException;
-import relay.parser.struct.Block;
-import relay.parser.struct.CodeBlock;
-import relay.parser.struct.Property;
 
 public class BlockParser {
 	private static final char BLOCK_OPEN = '(';

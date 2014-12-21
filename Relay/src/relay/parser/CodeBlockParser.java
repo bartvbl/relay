@@ -1,6 +1,6 @@
 package relay.parser;
 
-import relay.parser.struct.CodeBlock;
+import relay.data.CodeBlock;
 
 public class CodeBlockParser {
 

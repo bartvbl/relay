@@ -1,4 +1,4 @@
-package relay.parser.struct;
+package relay.data;
 
 import java.util.ArrayList;
 
