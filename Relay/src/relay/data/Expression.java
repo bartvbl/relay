@@ -19,6 +19,12 @@ public class Expression {
 	}
 	
 	public String toString() {
-		return "[Expression: " + tokens + "]";
+		String tokenString = "";
+		for(int i = 0; i < tokens.size()-1; i++) {
+			tokenString += tokens.get(i);
+			tokenString += " ";
+		}
+		tokenString += tokens.get(tokens.size()-1);
+		return "[Expression: " + tokenString + "]";
 	}
 }

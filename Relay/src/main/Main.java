@@ -17,8 +17,8 @@ public class Main {
 			FileBuffer buffer = FileBuffer.open(new File("res/testfile.rl"));
 			Block root = RelayParser.parse(buffer);
 			System.out.println("Complete.");
-			//new TreeVisualiser(root);
-			new TreeRenderer(root);
+			new TreeVisualiser(root);
+			//new TreeRenderer(root);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RelayParseException e) {
