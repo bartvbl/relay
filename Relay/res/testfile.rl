@@ -34,7 +34,7 @@
 		top: parent.top
 		height: content.height
 
-		origin: bottom left
+		origin: bottom-left
 
 		{
 			line from (left, top) to (right, top)
@@ -48,8 +48,8 @@
 		right: parent.right
 	)
 
-	left: 0
-	right: 0
+	left: 0px
+	right: 0px
 	top: screen.width
 	height: screen.height
 )
