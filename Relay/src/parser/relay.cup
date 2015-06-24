@@ -1,0 +1,144 @@
+import java_cup.runtime.*;
+
+/* terminals */
+
+terminal NEW_LINE;
+terminal NUMBER;
+terminal COLON;
+terminal DOT;
+terminal IDENTIFYER;
+terminal COMMA;
+
+terminal BLOCK_OPEN;
+terminal BLOCK_CLOSE;
+
+terminal CODE_BLOCK_OPEN;
+terminal CODE_BLOCK_CLOSE;
+
+terminal PROPERTY_WIDTH;
+terminal PROPERTY_HEIGHT;
+terminal PROPERTY_BOTTOM;
+terminal PROPERTY_TOP;
+terminal PROPERTY_LEFT;
+terminal PROPERTY_RIGHT;
+terminal PROPERTY_ORIGIN;
+
+terminal UNIT_PIXELS;
+terminal UNIT_PERCENT;
+
+terminal ORIGIN_TOP_LEFT;
+terminal ORIGIN_TOP_RIGHT;
+terminal ORIGIN_BOTTOM_LEFT;
+terminal ORIGIN_BOTTOM_RIGHT;
+
+terminal OPERATOR_PLUS;
+terminal OPERATOR_MINUS;
+
+terminal KEYWORD_LINE;
+terminal KEYWORD_FROM;
+terminal KEYWORD_TO;
+
+/* non-terminals */
+
+non terminal goal;
+non terminal block;
+non terminal identifyer;
+non terminal block_content_list;
+non terminal block_content_item;
+non terminal block_property;
+non terminal expression;
+non terminal property;
+non terminal unit;
+non terminal origin_type;
+non terminal variable_access;
+non terminal function_call;
+non terminal code_block;
+non terminal code_statement_list;
+non terminal code_statement;
+
+/* precedence rules */
+
+precedence left OPERATOR_PLUS, OPERATOR_MINUS; 
+
+/* start symbol definition */
+
+start with goal;
+
+/* grammar definition */
+
+goal ::=	
+		block
+	;
+
+block ::=	
+		BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE
+	|	BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE
+	;
+
+block_content_list ::=	
+		/* empty */
+	|	block_content_list block_content_item
+	;
+
+block_content_item ::=
+		block NEW_LINE
+	|	block_property NEW_LINE
+	|	code_block
+	;
+
+code_block ::=
+		CODE_BLOCK_OPEN code_statement_list CODE_BLOCK_CLOSE
+	;
+
+code_statement_list ::=
+		code_statement code_statement_list
+	|	code_statement
+	;
+
+code_statement ::=
+		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE
+	;
+
+block_property ::=
+		property COLON expression
+	;
+
+property ::=
+		PROPERTY_WIDTH
+	|	PROPERTY_HEIGHT
+	|	PROPERTY_BOTTOM
+	|	PROPERTY_TOP
+	|	PROPERTY_LEFT
+	|	PROPERTY_RIGHT
+	|	PROPERTY_ORIGIN
+	;
+
+expression ::=
+		NUMBER unit
+	|	expression OPERATOR_PLUS expression
+	|	expression OPERATOR_MINUS expression
+	|	variable_access
+	|	origin_type
+	|	function_call
+	;
+
+function_call ::=
+		IDENTIFYER BLOCK_OPEN variable_access BLOCK_CLOSE
+	;
+
+variable_access ::=
+		IDENTIFYER DOT variable_access
+	|	IDENTIFYER
+	;
+
+origin_type ::=
+		ORIGIN_BOTTOM_LEFT
+	|	ORIGIN_BOTTOM_RIGHT
+	|	ORIGIN_TOP_LEFT
+	|	ORIGIN_TOP_RIGHT
+	;
+
+unit ::=
+		UNIT_PIXELS
+	|	UNIT_PERCENT
+	;
