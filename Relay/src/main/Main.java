@@ -2,8 +2,8 @@ package main;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
+import java_cup.runtime.Scanner;
 import parser.RelayParser;
 import relay.data.Block;
 import relay.parser.FileBuffer;
@@ -18,7 +18,7 @@ public class Main {
 		try {
 			File sourceFile = new File("res/testfile.rl");
 			System.out.println("Complete.");
-			Scanner scanner = new Scanner(sourceFile);
+			
 			RelaySymbolFactory symbolFactory = new RelaySymbolFactory();
 			RelayParser parser = new RelayParser(scanner, symbolFactory);
 		} catch (IOException e) {
