@@ -1,29 +1,29 @@
 package main;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
-import java_cup.runtime.Scanner;
+import java_cup.runtime.Symbol;
 import parser.RelayParser;
-import relay.data.Block;
-import relay.parser.FileBuffer;
+import parser.Scanner;
 import relay.parser.RelaySymbolFactory;
 import relay.parser.errors.RelayParseException;
-import relay.renderer.TreeRenderer;
-import relay.tools.TreeVisualiser;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try {
 			File sourceFile = new File("res/testfile.rl");
-			System.out.println("Complete.");
 			
+			Scanner scanner = new Scanner(new FileReader(sourceFile));
 			RelaySymbolFactory symbolFactory = new RelaySymbolFactory();
 			RelayParser parser = new RelayParser(scanner, symbolFactory);
+			Symbol symbol = parser.debug_parse();
+			System.out.println("Complete.");
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (RelayParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
