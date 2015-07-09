@@ -15,22 +15,8 @@ terminal BLOCK_CLOSE;
 terminal CODE_BLOCK_OPEN;
 terminal CODE_BLOCK_CLOSE;
 
-terminal PROPERTY_WIDTH;
-terminal PROPERTY_HEIGHT;
-terminal PROPERTY_BOTTOM;
-terminal PROPERTY_TOP;
-terminal PROPERTY_LEFT;
-terminal PROPERTY_RIGHT;
-terminal PROPERTY_ORIGIN;
-terminal PROPERTY_PROPERTIES;
-
 terminal UNIT_PIXELS;
 terminal UNIT_PERCENT;
-
-terminal ORIGIN_TOP_LEFT;
-terminal ORIGIN_TOP_RIGHT;
-terminal ORIGIN_BOTTOM_LEFT;
-terminal ORIGIN_BOTTOM_RIGHT;
 
 terminal OPERATOR_PLUS;
 terminal OPERATOR_MINUS;
@@ -50,7 +36,6 @@ non terminal block_property;
 non terminal expression;
 non terminal property;
 non terminal unit;
-non terminal origin_type;
 non terminal variable_access;
 non terminal function_call;
 non terminal code_block;
@@ -105,14 +90,7 @@ block_property ::=
 	;
 
 property ::=
-		PROPERTY_WIDTH
-	|	PROPERTY_HEIGHT
-	|	PROPERTY_BOTTOM
-	|	PROPERTY_TOP
-	|	PROPERTY_LEFT
-	|	PROPERTY_RIGHT
-	|	PROPERTY_ORIGIN
-	|	PROPERTY_PROPERTIES
+		IDENTIFYER
 	;
 
 expression ::=
@@ -120,7 +98,6 @@ expression ::=
 	|	expression OPERATOR_PLUS expression
 	|	expression OPERATOR_MINUS expression
 	|	variable_access
-	|	origin_type
 	|	function_call
 	;
 
@@ -129,18 +106,15 @@ function_call ::=
 	;
 
 variable_access ::=
-		IDENTIFYER DOT variable_access
-	|	IDENTIFYER
-	;
-
-origin_type ::=
-		ORIGIN_BOTTOM_LEFT
-	|	ORIGIN_BOTTOM_RIGHT
-	|	ORIGIN_TOP_LEFT
-	|	ORIGIN_TOP_RIGHT
+		identifyer DOT variable_access
+	|	identifyer
 	;
 
 unit ::=
 		UNIT_PIXELS
 	|	UNIT_PERCENT
+	;
+
+identifyer ::=
+		IDENTIFYER
 	;

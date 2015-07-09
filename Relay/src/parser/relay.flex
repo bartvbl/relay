@@ -33,7 +33,7 @@ import static parser.sym.*;
 LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
 
-WhiteSpace = {LineTerminator} | [ \t\f]
+WhiteSpace = [ \t\f]
 
 /* comments */
 Comment = {TraditionalComment} | {EndOfLineComment} | 
@@ -78,7 +78,7 @@ SingleCharacter = [^\r\n\'\\]
 <YYINITIAL> {
 
 	/* keywords */
-	"\n"						{ return symbol(NEW_LINE); }
+	{LineTerminator}			{ return symbol(NEW_LINE); }
 	":"							{ return symbol(COLON); }
 	"."							{ return symbol(DOT); }
 	","							{ return symbol(COMMA); }
@@ -89,22 +89,8 @@ SingleCharacter = [^\r\n\'\\]
 	"{"							{ return symbol(CODE_BLOCK_OPEN); }
 	"}"							{ return symbol(CODE_BLOCK_CLOSE); }
 
-	"width"						{ return symbol(PROPERTY_WIDTH); }
-	"height"					{ return symbol(PROPERTY_HEIGHT); }
-	"bottom"					{ return symbol(PROPERTY_BOTTOM); }
-	"top"						{ return symbol(PROPERTY_TOP); }
-	"left"						{ return symbol(PROPERTY_LEFT); }
-	"right"						{ return symbol(PROPERTY_RIGHT); }
-	"origin"					{ return symbol(PROPERTY_ORIGIN); }
-	"properties"				{ return symbol(PROPERTY_PROPERTIES); }
-
 	"px"						{ return symbol(UNIT_PIXELS); }
 	"%"							{ return symbol(UNIT_PERCENT); }
-	
-	"top-left"					{ return symbol(ORIGIN_TOP_LEFT); }
-	"top-right"					{ return symbol(ORIGIN_TOP_RIGHT); }
-	"bottom-left"				{ return symbol(ORIGIN_BOTTOM_LEFT); }
-	"bottom-right"				{ return symbol(ORIGIN_BOTTOM_RIGHT); }
 
 	"+"							{ return symbol(OPERATOR_PLUS); }
 	"-"							{ return symbol(OPERATOR_MINUS); }
@@ -115,6 +101,7 @@ SingleCharacter = [^\r\n\'\\]
 	
 	{DoubleLiteral}				{ return symbol(NUMBER); }
 	{Identifier}				{ return symbol(IDENTIFYER); }
+	{WhiteSpace}				{ /* ignore */ }
 }
 
 /* error fallback */
