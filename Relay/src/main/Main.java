@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import parser.RelayParser;
 import parser.RelaySymbols;
@@ -26,7 +27,7 @@ public class Main {
 			scanner = new Scanner(new FileReader(sourceFile));
 			System.out.println("----- PARSING START -----");
 			RelaySymbolFactory symbolFactory = new RelaySymbolFactory();
-			RelayParser parser = new RelayParser(scanner);
+			RelayParser parser = new RelayParser(scanner, new ComplexSymbolFactory());
 			parser.debug_parse();
 			System.out.println("Complete.");
 		} catch (IOException e) {

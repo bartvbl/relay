@@ -3,7 +3,7 @@
 package parser;
 
 import java_cup.runtime.*;
-import static parser.sym.*;
+import static parser.RelaySymbols.*;
 
 
 /**
@@ -11,7 +11,7 @@ import static parser.sym.*;
  * <a href="http://www.jflex.de/">JFlex</a> 1.6.1
  * from the specification file <tt>relay.flex</tt>
  */
-public class Scanner implements sym, java_cup.runtime.Scanner {
+public class Scanner implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -883,7 +883,7 @@ public class Scanner implements sym, java_cup.runtime.Scanner {
    */
   private String getTokenName(int token) {
     try {
-      java.lang.reflect.Field [] classFields = sym.class.getFields();
+      java.lang.reflect.Field [] classFields = RelaySymbols.class.getFields();
       for (int i = 0; i < classFields.length; i++) {
         if (classFields[i].getInt(null) == token) {
           return classFields[i].getName();

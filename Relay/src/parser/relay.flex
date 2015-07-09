@@ -20,11 +20,11 @@ import static parser.RelaySymbols.*;
 	StringBuilder string = new StringBuilder();
 	
 	private Symbol symbol(int type) {
-		return new JavaSymbol(type, yyline+1, yycolumn+1);
+		return new ComplexSymbolFactory.ComplexSymbol(type, new ComplexSymbolFactory.Location(yyline+1, yycolumn+1));
 	}
 
 	private Symbol symbol(int type, Object value) {
-		return new JavaSymbol(type, yyline+1, yycolumn+1, value);
+		return new ComplexSymbolFactory.ComplexSymbol(type, new ComplexSymbolFactory.Location(yyline+1, yycolumn+1), value);
 	}
 %}
 

@@ -69,7 +69,7 @@ block_content_item ::=
 		block NEW_LINE
 	|	block_property NEW_LINE
 	|	code_block NEW_LINE
-	|	NEW_LINE
+	|	NEW_LINE NEW_LINE
 	;
 
 code_block ::=

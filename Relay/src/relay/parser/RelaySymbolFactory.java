@@ -9,39 +9,39 @@ public class RelaySymbolFactory implements SymbolFactory {
 	private int currentSymbolNumber = 1;
 
 	@Override
-	public Symbol newSymbol(String arg0, int arg1) {
-		System.out.println("Function 0 called: " + arg0 + ", " + arg1);
+	public Symbol newSymbol(String name, int id) {
+		System.out.println("Function 0 called: " + name + ", " + id);
 		return null;
 	}
 
 	@Override
-	public Symbol newSymbol(String arg0, int arg1, Object arg2) {
-		System.out.println("Function 1 called: " + arg0 + ", " + arg1 + ", " + arg2);
+	public Symbol newSymbol(String name, int id, Object value) {
+		System.out.println("Function 1 called: " + name + ", " + id + ", " + value);
 		return null;
 	}
 
 	@Override
-	public Symbol newSymbol(String arg0, int arg1, Symbol arg2, Symbol arg3) {
-		System.out.println("Function 2 called: " + arg0 + ", " + arg1 + ", " + arg2 + ", " + arg3);
+	public Symbol newSymbol(String name, int id, Symbol left, Symbol right) {
+		System.out.println("Function 2 called: " + name + ", " + id + ", " + left + ", " + right);
 		return null;
 	}
 
 	@Override
-	public Symbol newSymbol(String arg0, int arg1, Symbol arg2, Object arg3) {
-		System.out.println("Function 3 called: " + arg0 + ", " + arg1 + ", " + arg2 + ", " + arg3);
+	public Symbol newSymbol(String name, int id, Symbol left, Object value) {
+		System.out.println("Function 3 called: " + name + ", " + id + ", " + left + ", " + value);
 		return null;
 	}
 
 	@Override
-	public Symbol newSymbol(String arg0, int arg1, Symbol arg2, Symbol arg3, Object arg4) {
-		System.out.println("Function 4 called: " + arg0 + ", " + arg1 + ", " + arg2 + ", " + arg3 + ", " + arg4);
+	public Symbol newSymbol(String name, int id, Symbol left, Symbol right, Object value) {
+		System.out.println("Function 4 called: " + name + ", " + id + ", " + left + ", " + right + ", " + value);
 		return null;
 	}
 
 	@Override
-	public Symbol startSymbol(String name, int line, int column) {
-		System.out.println("Function 5 called: " + name + ", " + line + ", " + column);
-		return new RelaySymbol(currentSymbolNumber, name, line, column);
+	public Symbol startSymbol(String name, int id, int state) {
+		System.out.println("Function 5 called: " + name + ", " + id + ", " + state);
+		return new RelaySymbol(name, id, state);
 	}
 
 }
