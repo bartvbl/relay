@@ -34,7 +34,6 @@ non terminal block_content_list;
 non terminal block_content_item;
 non terminal block_property;
 non terminal expression;
-non terminal property;
 non terminal unit;
 non terminal variable_access;
 non terminal function_call;
@@ -69,7 +68,8 @@ block_content_list ::=
 block_content_item ::=
 		block NEW_LINE
 	|	block_property NEW_LINE
-	|	code_block
+	|	code_block NEW_LINE
+	|	NEW_LINE
 	;
 
 code_block ::=
@@ -86,11 +86,7 @@ code_statement ::=
 	;
 
 block_property ::=
-		property COLON expression
-	;
-
-property ::=
-		IDENTIFYER
+		identifyer COLON expression
 	;
 
 expression ::=

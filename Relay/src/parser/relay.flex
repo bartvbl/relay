@@ -1,13 +1,12 @@
 package parser;
 
 import java_cup.runtime.*;
-import static parser.sym.*;
+import static parser.RelaySymbols.*;
 
 %%
 
 %public
 %class Scanner
-%implements sym
 
 %unicode
 
@@ -101,6 +100,7 @@ SingleCharacter = [^\r\n\'\\]
 	
 	{DoubleLiteral}				{ return symbol(NUMBER); }
 	{Identifier}				{ return symbol(IDENTIFYER); }
+	{Comment}					{ /* ignore */ }
 	{WhiteSpace}				{ /* ignore */ }
 }
 
