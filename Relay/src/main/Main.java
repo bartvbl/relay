@@ -8,7 +8,6 @@ import java_cup.runtime.Symbol;
 import parser.RelayParser;
 import parser.Scanner;
 import relay.parser.RelaySymbolFactory;
-import relay.parser.errors.RelayParseException;
 
 public class Main {
 
@@ -17,8 +16,14 @@ public class Main {
 			File sourceFile = new File("res/testfile.rl");
 			
 			Scanner scanner = new Scanner(new FileReader(sourceFile));
+//			Symbol symbol = scanner.debug_next_token();
+//			int symbolID = 0;
+//			while(symbol != null) {
+//				System.out.println(symbol);
+//				symbol = scanner.debug_next_token();
+//			}
 			RelaySymbolFactory symbolFactory = new RelaySymbolFactory();
-			RelayParser parser = new RelayParser(scanner, symbolFactory);
+			RelayParser parser = new RelayParser(scanner);
 			Symbol symbol = parser.debug_parse();
 			System.out.println("Complete.");
 		} catch (IOException e) {
