@@ -398,11 +398,11 @@ public class Scanner implements java_cup.runtime.Scanner {
 	StringBuilder string = new StringBuilder();
 	
 	private Symbol symbol(int type) {
-		return new JavaSymbol(type, yyline+1, yycolumn+1);
+		return new RelaySymbol(type, yyline+1, yycolumn+1);
 	}
 
 	private Symbol symbol(int type, Object value) {
-		return new JavaSymbol(type, yyline+1, yycolumn+1, value);
+		return new RelaySymbol(type, yyline+1, yycolumn+1, value);
 	}
 
 
@@ -883,7 +883,7 @@ public class Scanner implements java_cup.runtime.Scanner {
    */
   private String getTokenName(int token) {
     try {
-      java.lang.reflect.Field [] classFields = RelaySymbols.class.getFields();
+      java.lang.reflect.Field [] classFields = sym.class.getFields();
       for (int i = 0; i < classFields.length; i++) {
         if (classFields[i].getInt(null) == token) {
           return classFields[i].getName();

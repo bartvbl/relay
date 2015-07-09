@@ -27,7 +27,7 @@ public class Main {
 			scanner = new Scanner(new FileReader(sourceFile));
 			System.out.println("----- PARSING START -----");
 			RelaySymbolFactory symbolFactory = new RelaySymbolFactory();
-			RelayParser parser = new RelayParser(scanner, new ComplexSymbolFactory());
+			RelayParser parser = new RelayParser(scanner);
 			parser.debug_parse();
 			System.out.println("Complete.");
 		} catch (IOException e) {
