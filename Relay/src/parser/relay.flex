@@ -16,15 +16,18 @@ import static parser.RelaySymbols.*;
 %cup
 %cupdebug
 
+%cupsym RelaySymbols
+
 %{
 	StringBuilder string = new StringBuilder();
 	
 	private Symbol symbol(int type) {
-		return new RelaySymbol(RelaySymbols.terminalNames[type], type, yyline+1, yycolumn+1);
+		return symbol(type, yytext());
 	}
 
 	private Symbol symbol(int type, Object value) {
-		return new RelaySymbol(RelaySymbols.terminalNames[type], type, yyline+1, yycolumn+1, value);
+		System.out.println(yyline + ", " + yycolumn);
+		return new Symbol(type, yyline, yycolumn, value);
 	}
 %}
 
@@ -79,6 +82,7 @@ SingleCharacter = [^\r\n\'\\]
 	/* keywords */
 	{LineTerminator}			{ return symbol(NEW_LINE); }
 	":"							{ return symbol(COLON); }
+	";"							{ return symbol(SEMICOLON); }
 	"."							{ return symbol(DOT); }
 	","							{ return symbol(COMMA); }
 

@@ -8,31 +8,33 @@ package parser;
 /** CUP generated class containing symbol constants. */
 public class RelaySymbols {
   /* terminals */
-  public static final int KEYWORD_LINE = 16;
-  public static final int IDENTIFYER = 6;
-  public static final int BLOCK_OPEN = 8;
-  public static final int UNIT_PERCENT = 13;
-  public static final int KEYWORD_FROM = 17;
+  public static final int KEYWORD_LINE = 17;
+  public static final int SEMICOLON = 5;
+  public static final int IDENTIFYER = 7;
+  public static final int BLOCK_OPEN = 9;
+  public static final int UNIT_PERCENT = 14;
+  public static final int KEYWORD_FROM = 18;
   public static final int COLON = 4;
   public static final int NEW_LINE = 2;
-  public static final int COMMA = 7;
-  public static final int BLOCK_CLOSE = 9;
+  public static final int COMMA = 8;
+  public static final int BLOCK_CLOSE = 10;
   public static final int EOF = 0;
   public static final int NUMBER = 3;
-  public static final int CODE_BLOCK_CLOSE = 11;
+  public static final int CODE_BLOCK_CLOSE = 12;
   public static final int error = 1;
-  public static final int DOT = 5;
-  public static final int CODE_BLOCK_OPEN = 10;
-  public static final int OPERATOR_PLUS = 14;
-  public static final int OPERATOR_MINUS = 15;
-  public static final int KEYWORD_TO = 18;
-  public static final int UNIT_PIXELS = 12;
+  public static final int DOT = 6;
+  public static final int CODE_BLOCK_OPEN = 11;
+  public static final int OPERATOR_PLUS = 15;
+  public static final int OPERATOR_MINUS = 16;
+  public static final int KEYWORD_TO = 19;
+  public static final int UNIT_PIXELS = 13;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "NEW_LINE",
   "NUMBER",
   "COLON",
+  "SEMICOLON",
   "DOT",
   "IDENTIFYER",
   "COMMA",

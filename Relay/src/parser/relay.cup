@@ -5,6 +5,7 @@ import java_cup.runtime.*;
 terminal NEW_LINE;
 terminal NUMBER;
 terminal COLON;
+terminal SEMICOLON;
 terminal DOT;
 terminal IDENTIFYER;
 terminal COMMA;
@@ -31,6 +32,7 @@ non terminal goal;
 non terminal block;
 non terminal identifyer;
 non terminal block_content_list;
+non terminal block_content_line;
 non terminal block_content_item;
 non terminal block_property;
 non terminal expression;
@@ -62,14 +64,18 @@ block ::=
 
 block_content_list ::=	
 		/* empty */
-	|	block_content_list block_content_item
+	|	block_content_list block_content_line
+	;
+
+block_content_line ::=
+		block_content_item NEW_LINE
+	|	block_content_item SEMICOLON
 	;
 
 block_content_item ::=
-		block NEW_LINE
-	|	block_property NEW_LINE
-	|	code_block NEW_LINE
-	|	NEW_LINE NEW_LINE
+		block
+	|	block_property
+	|	code_block
 	;
 
 code_block ::=
