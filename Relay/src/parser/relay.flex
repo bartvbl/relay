@@ -104,7 +104,7 @@ SingleCharacter = [^\r\n\'\\]
 	
 	{DoubleLiteral}				{ return symbol(NUMBER); }
 	{Identifier}				{ return symbol(IDENTIFYER); }
-	{Comment}					{ /* ignore */ }
+	{Comment}					{ return symbol(NEW_LINE); }
 	{WhiteSpace}				{ /* ignore */ }
 }
 

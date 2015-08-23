@@ -194,12 +194,11 @@ public class Scanner implements java_cup.runtime.Scanner {
   private static final String ZZ_ACTION_PACKED_0 =
     "\2\0\1\1\2\2\1\3\1\1\1\4\1\5\1\6"+
     "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\4\1\20\3\4\1\3\1\0\1\6\1\0"+
-    "\1\21\2\4\1\22\1\3\2\0\1\6\2\4\1\23"+
-    "\1\24";
+    "\1\17\1\4\1\20\3\4\1\2\1\0\1\6\1\0"+
+    "\1\21\2\4\1\22\2\0\1\6\2\4\1\23\1\24";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[40];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -228,10 +227,10 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\0\100\0\300\0\340\0\100\0\100\0\100\0\100\0\100"+
     "\0\100\0\100\0\100\0\u0100\0\100\0\u0120\0\u0140\0\u0160"+
     "\0\u0180\0\u01a0\0\u01c0\0\u01e0\0\240\0\u0200\0\u0220\0\240"+
-    "\0\u0240\0\u0260\0\u0280\0\u0280\0\u02a0\0\u02c0\0\240\0\240";
+    "\0\u0240\0\u0260\0\u0260\0\u0280\0\u02a0\0\240\0\240";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[40];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -265,18 +264,18 @@ public class Scanner implements java_cup.runtime.Scanner {
     "\2\10\1\0\1\10\1\36\7\10\6\0\4\10\1\0"+
     "\1\10\10\0\2\10\1\0\5\10\1\37\3\10\6\0"+
     "\4\10\1\0\1\10\10\0\2\10\1\0\6\10\1\40"+
-    "\2\10\1\31\1\41\1\6\35\31\5\32\1\42\32\32"+
-    "\11\0\1\33\1\0\1\34\16\0\1\34\14\0\1\43"+
-    "\1\0\1\44\2\0\1\43\31\0\4\10\1\0\1\10"+
-    "\10\0\2\10\1\0\2\10\1\45\6\10\6\0\4\10"+
-    "\1\0\1\10\10\0\2\10\1\0\6\10\1\46\2\10"+
-    "\2\0\1\6\35\0\4\32\1\6\1\42\32\32\11\0"+
-    "\1\44\34\0\4\10\1\0\1\10\10\0\2\10\1\0"+
-    "\3\10\1\47\5\10\6\0\4\10\1\0\1\10\10\0"+
-    "\2\10\1\0\7\10\1\50\1\10";
+    "\2\10\1\31\1\4\1\5\35\31\5\32\1\41\32\32"+
+    "\11\0\1\33\1\0\1\34\16\0\1\34\14\0\1\42"+
+    "\1\0\1\43\2\0\1\42\31\0\4\10\1\0\1\10"+
+    "\10\0\2\10\1\0\2\10\1\44\6\10\6\0\4\10"+
+    "\1\0\1\10\10\0\2\10\1\0\6\10\1\45\2\10"+
+    "\4\32\1\5\1\41\32\32\11\0\1\43\34\0\4\10"+
+    "\1\0\1\10\10\0\2\10\1\0\3\10\1\46\5\10"+
+    "\6\0\4\10\1\0\1\10\10\0\2\10\1\0\7\10"+
+    "\1\47\1\10";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[736];
+    int [] result = new int[704];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -315,11 +314,11 @@ public class Scanner implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\2\0\1\11\1\1\2\11\2\1\1\11\2\1\10\11"+
-    "\1\1\1\11\4\1\1\0\1\1\1\0\5\1\2\0"+
+    "\1\1\1\11\4\1\1\0\1\1\1\0\4\1\2\0"+
     "\5\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[40];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;

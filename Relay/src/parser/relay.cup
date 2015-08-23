@@ -46,6 +46,7 @@ non terminal code_statement;
 /* precedence rules */
 
 precedence left OPERATOR_PLUS, OPERATOR_MINUS; 
+precedence left NEW_LINE, BLOCK_CLOSE;
 
 /* start symbol definition */
 
