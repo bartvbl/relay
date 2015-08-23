@@ -76,6 +76,7 @@ block_content_item ::=
 		block
 	|	block_property
 	|	code_block
+	|	/* empty */
 	;
 
 code_block ::=

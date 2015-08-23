@@ -26,8 +26,8 @@ import static parser.RelaySymbols.*;
 	}
 
 	private Symbol symbol(int type, Object value) {
-		System.out.println(yyline + ", " + yycolumn);
-		return new Symbol(type, yyline, yycolumn, value);
+		System.out.println("Created symbol on line " + (yyline+1) + " and column " + yycolumn + ". Value: " + value);
+		return new Symbol(type, yyline+1, yycolumn, value);
 	}
 %}
 
@@ -46,7 +46,7 @@ EndOfLineComment = "//" {InputCharacter}* {LineTerminator}?
 DocumentationComment = "/*" "*"+ [^/*] ~"*/"
 
 /* identifiers */
-Identifier = [:jletter:][:jletterdigit:]*
+Identifier = [:jletter:] (-|_|[:jletterdigit:])*
 
 /* integer literals */
 DecIntegerLiteral = 0 | [1-9][0-9]*
@@ -109,6 +109,5 @@ SingleCharacter = [^\r\n\'\\]
 }
 
 /* error fallback */
-[^]                              { throw new RuntimeException("Illegal character \""+yytext()+
-																															"\" at line "+yyline+", column "+yycolumn); }
+[^]                              { throw new RuntimeException("Illegal character" + yytext());}
 <<EOF>>                          { return symbol(EOF); }

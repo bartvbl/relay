@@ -31,15 +31,15 @@ public class RelayParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\033\000\002\002\004\000\002\002\003\000\002\003" +
+    "\000\034\000\002\002\004\000\002\002\003\000\002\003" +
     "\007\000\002\003\006\000\002\005\002\000\002\005\004" +
     "\000\002\006\004\000\002\006\004\000\002\007\003\000" +
-    "\002\007\003\000\002\007\003\000\002\015\005\000\002" +
-    "\016\004\000\002\016\003\000\002\017\017\000\002\010" +
-    "\005\000\002\011\004\000\002\011\005\000\002\011\005" +
-    "\000\002\011\003\000\002\011\003\000\002\014\006\000" +
-    "\002\013\005\000\002\013\003\000\002\012\003\000\002" +
-    "\012\003\000\002\004\003" });
+    "\002\007\003\000\002\007\003\000\002\007\002\000\002" +
+    "\015\005\000\002\016\004\000\002\016\003\000\002\017" +
+    "\017\000\002\010\005\000\002\011\004\000\002\011\005" +
+    "\000\002\011\005\000\002\011\003\000\002\011\003\000" +
+    "\002\014\006\000\002\013\005\000\002\013\003\000\002" +
+    "\012\003\000\002\012\003\000\002\004\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -49,45 +49,47 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     unpackFromStrings(new String[] {
     "\000\072\000\004\013\005\001\002\000\004\002\074\001" +
     "\002\000\006\004\010\011\011\001\002\000\004\002\000" +
-    "\001\002\000\004\004\071\001\002\000\012\011\ufffd\013" +
-    "\ufffd\014\ufffd\015\ufffd\001\002\000\022\004\uffe7\006\uffe7" +
-    "\007\uffe7\010\uffe7\012\uffe7\014\uffe7\021\uffe7\022\uffe7\001" +
-    "\002\000\012\011\011\013\005\014\017\015\020\001\002" +
-    "\000\004\006\051\001\002\000\006\004\050\007\047\001" +
-    "\002\000\012\011\ufffc\013\ufffc\014\ufffc\015\ufffc\001\002" +
-    "\000\006\004\ufff9\007\ufff9\001\002\000\010\002\ufffe\004" +
-    "\ufffe\007\ufffe\001\002\000\004\023\025\001\002\000\006" +
-    "\004\ufff8\007\ufff8\001\002\000\006\004\ufff7\007\ufff7\001" +
-    "\002\000\006\016\ufff4\023\025\001\002\000\004\016\045" +
-    "\001\002\000\004\024\026\001\002\000\004\013\027\001" +
-    "\002\000\004\011\011\001\002\000\004\012\034\001\002" +
-    "\000\020\004\uffea\007\uffea\010\032\012\uffea\014\uffea\021" +
-    "\uffea\022\uffea\001\002\000\004\011\011\001\002\000\016" +
-    "\004\uffeb\007\uffeb\012\uffeb\014\uffeb\021\uffeb\022\uffeb\001" +
-    "\002\000\004\011\011\001\002\000\004\014\036\001\002" +
-    "\000\004\025\037\001\002\000\004\013\040\001\002\000" +
-    "\004\011\011\001\002\000\004\012\042\001\002\000\004" +
-    "\011\011\001\002\000\004\014\044\001\002\000\006\016" +
-    "\ufff3\023\ufff3\001\002\000\006\004\ufff6\007\ufff6\001\002" +
-    "\000\004\016\ufff5\001\002\000\012\011\ufffa\013\ufffa\014" +
-    "\ufffa\015\ufffa\001\002\000\012\011\ufffb\013\ufffb\014\ufffb" +
-    "\015\ufffb\001\002\000\006\005\053\011\054\001\002\000" +
-    "\012\004\uffee\007\uffee\021\uffee\022\uffee\001\002\000\006" +
-    "\017\066\020\067\001\002\000\016\004\uffe7\007\uffe7\010" +
-    "\uffe7\013\063\021\uffe7\022\uffe7\001\002\000\012\004\ufff2" +
-    "\007\ufff2\021\060\022\057\001\002\000\012\004\uffed\007" +
-    "\uffed\021\uffed\022\uffed\001\002\000\006\005\053\011\054" +
-    "\001\002\000\006\005\053\011\054\001\002\000\012\004" +
-    "\ufff0\007\ufff0\021\ufff0\022\ufff0\001\002\000\012\004\uffef" +
-    "\007\uffef\021\uffef\022\uffef\001\002\000\004\011\011\001" +
-    "\002\000\004\014\065\001\002\000\012\004\uffec\007\uffec" +
-    "\021\uffec\022\uffec\001\002\000\012\004\uffe9\007\uffe9\021" +
-    "\uffe9\022\uffe9\001\002\000\012\004\uffe8\007\uffe8\021\uffe8" +
-    "\022\uffe8\001\002\000\012\004\ufff1\007\ufff1\021\ufff1\022" +
-    "\ufff1\001\002\000\012\011\ufffd\013\ufffd\014\ufffd\015\ufffd" +
-    "\001\002\000\012\011\011\013\005\014\073\015\020\001" +
-    "\002\000\010\002\uffff\004\uffff\007\uffff\001\002\000\004" +
-    "\002\001\001\002" });
+    "\001\002\000\004\004\071\001\002\000\016\004\ufffd\007" +
+    "\ufffd\011\ufffd\013\ufffd\014\ufffd\015\ufffd\001\002\000\022" +
+    "\004\uffe6\006\uffe6\007\uffe6\010\uffe6\012\uffe6\014\uffe6\021" +
+    "\uffe6\022\uffe6\001\002\000\016\004\ufff6\007\ufff6\011\011" +
+    "\013\005\014\017\015\020\001\002\000\004\006\051\001" +
+    "\002\000\006\004\050\007\047\001\002\000\016\004\ufffc" +
+    "\007\ufffc\011\ufffc\013\ufffc\014\ufffc\015\ufffc\001\002\000" +
+    "\006\004\ufff9\007\ufff9\001\002\000\010\002\ufffe\004\ufffe" +
+    "\007\ufffe\001\002\000\004\023\025\001\002\000\006\004" +
+    "\ufff8\007\ufff8\001\002\000\006\004\ufff7\007\ufff7\001\002" +
+    "\000\006\016\ufff3\023\025\001\002\000\004\016\045\001" +
+    "\002\000\004\024\026\001\002\000\004\013\027\001\002" +
+    "\000\004\011\011\001\002\000\004\012\034\001\002\000" +
+    "\020\004\uffe9\007\uffe9\010\032\012\uffe9\014\uffe9\021\uffe9" +
+    "\022\uffe9\001\002\000\004\011\011\001\002\000\016\004" +
+    "\uffea\007\uffea\012\uffea\014\uffea\021\uffea\022\uffea\001\002" +
+    "\000\004\011\011\001\002\000\004\014\036\001\002\000" +
+    "\004\025\037\001\002\000\004\013\040\001\002\000\004" +
+    "\011\011\001\002\000\004\012\042\001\002\000\004\011" +
+    "\011\001\002\000\004\014\044\001\002\000\006\016\ufff2" +
+    "\023\ufff2\001\002\000\006\004\ufff5\007\ufff5\001\002\000" +
+    "\004\016\ufff4\001\002\000\016\004\ufffa\007\ufffa\011\ufffa" +
+    "\013\ufffa\014\ufffa\015\ufffa\001\002\000\016\004\ufffb\007" +
+    "\ufffb\011\ufffb\013\ufffb\014\ufffb\015\ufffb\001\002\000\006" +
+    "\005\053\011\054\001\002\000\012\004\uffed\007\uffed\021" +
+    "\uffed\022\uffed\001\002\000\006\017\066\020\070\001\002" +
+    "\000\016\004\uffe6\007\uffe6\010\uffe6\013\063\021\uffe6\022" +
+    "\uffe6\001\002\000\012\004\ufff1\007\ufff1\021\060\022\057" +
+    "\001\002\000\012\004\uffec\007\uffec\021\uffec\022\uffec\001" +
+    "\002\000\006\005\053\011\054\001\002\000\006\005\053" +
+    "\011\054\001\002\000\012\004\uffef\007\uffef\021\uffef\022" +
+    "\uffef\001\002\000\012\004\uffee\007\uffee\021\uffee\022\uffee" +
+    "\001\002\000\004\011\011\001\002\000\004\014\065\001" +
+    "\002\000\012\004\uffeb\007\uffeb\021\uffeb\022\uffeb\001\002" +
+    "\000\012\004\uffe8\007\uffe8\021\uffe8\022\uffe8\001\002\000" +
+    "\012\004\ufff0\007\ufff0\021\ufff0\022\ufff0\001\002\000\012" +
+    "\004\uffe7\007\uffe7\021\uffe7\022\uffe7\001\002\000\016\004" +
+    "\ufffd\007\ufffd\011\ufffd\013\ufffd\014\ufffd\015\ufffd\001\002" +
+    "\000\016\004\ufff6\007\ufff6\011\011\013\005\014\073\015" +
+    "\020\001\002\000\010\002\uffff\004\uffff\007\uffff\001\002" +
+    "\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -112,7 +114,7 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\012\004\030\011\054" +
     "\013\051\014\055\001\001\000\002\001\001\000\004\012" +
-    "\067\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\066\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\012\004\030\011\061\013\051\014\055\001" +
     "\001\000\012\004\030\011\060\013\051\014\055\001\001" +
     "\000\002\001\001\000\002\001\001\000\006\004\030\013" +
@@ -287,7 +289,16 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // code_block ::= CODE_BLOCK_OPEN code_statement_list CODE_BLOCK_CLOSE 
+          case 11: // block_content_item ::= 
+            {
+              Object RESULT =null;
+
+              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
+            }
+          return CUP$RelayParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // code_block ::= CODE_BLOCK_OPEN code_statement_list CODE_BLOCK_CLOSE 
             {
               Object RESULT =null;
 
@@ -296,7 +307,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // code_statement_list ::= code_statement code_statement_list 
+          case 13: // code_statement_list ::= code_statement code_statement_list 
             {
               Object RESULT =null;
 
@@ -305,7 +316,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // code_statement_list ::= code_statement 
+          case 14: // code_statement_list ::= code_statement 
             {
               Object RESULT =null;
 
@@ -314,7 +325,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // code_statement ::= KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE 
+          case 15: // code_statement ::= KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE 
             {
               Object RESULT =null;
 
@@ -323,7 +334,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // block_property ::= identifyer COLON expression 
+          case 16: // block_property ::= identifyer COLON expression 
             {
               Object RESULT =null;
 
@@ -332,7 +343,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // expression ::= NUMBER unit 
+          case 17: // expression ::= NUMBER unit 
             {
               Object RESULT =null;
 
@@ -341,7 +352,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // expression ::= expression OPERATOR_PLUS expression 
+          case 18: // expression ::= expression OPERATOR_PLUS expression 
             {
               Object RESULT =null;
 
@@ -350,7 +361,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // expression ::= expression OPERATOR_MINUS expression 
+          case 19: // expression ::= expression OPERATOR_MINUS expression 
             {
               Object RESULT =null;
 
@@ -359,7 +370,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // expression ::= variable_access 
+          case 20: // expression ::= variable_access 
             {
               Object RESULT =null;
 
@@ -368,7 +379,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // expression ::= function_call 
+          case 21: // expression ::= function_call 
             {
               Object RESULT =null;
 
@@ -377,7 +388,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // function_call ::= IDENTIFYER BLOCK_OPEN variable_access BLOCK_CLOSE 
+          case 22: // function_call ::= IDENTIFYER BLOCK_OPEN variable_access BLOCK_CLOSE 
             {
               Object RESULT =null;
 
@@ -386,7 +397,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // variable_access ::= identifyer DOT variable_access 
+          case 23: // variable_access ::= identifyer DOT variable_access 
             {
               Object RESULT =null;
 
@@ -395,7 +406,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // variable_access ::= identifyer 
+          case 24: // variable_access ::= identifyer 
             {
               Object RESULT =null;
 
@@ -404,7 +415,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // unit ::= UNIT_PIXELS 
+          case 25: // unit ::= UNIT_PIXELS 
             {
               Object RESULT =null;
 
@@ -413,7 +424,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // unit ::= UNIT_PERCENT 
+          case 26: // unit ::= UNIT_PERCENT 
             {
               Object RESULT =null;
 
@@ -422,7 +433,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // identifyer ::= IDENTIFYER 
+          case 27: // identifyer ::= IDENTIFYER 
             {
               Object RESULT =null;
 
