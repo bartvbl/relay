@@ -2,11 +2,12 @@ package parser;
 
 import java_cup.runtime.*;
 import static parser.RelaySymbols.*;
+import java_cup.runtime.ComplexSymbolFactory.Location;
 
 %%
 
 %public
-%class Scanner
+%class Lexer
 
 %unicode
 
@@ -19,16 +20,28 @@ import static parser.RelaySymbols.*;
 %cupsym RelaySymbols
 
 %{
-	StringBuilder string = new StringBuilder();
-	
-	private Symbol symbol(int type) {
-		return symbol(type, yytext());
-	}
+	StringBuffer string = new StringBuffer();
 
-	private Symbol symbol(int type, Object value) {
-		System.out.println("Created symbol on line " + (yyline+1) + " and column " + yycolumn + ". Value: " + value);
-		return new Symbol(type, yyline+1, yycolumn, value);
-	}
+    public Lexer(java.io.Reader in, ComplexSymbolFactory sf) {
+		this(in);
+		symbolFactory = sf;
+    }
+    ComplexSymbolFactory symbolFactory;
+
+  private Symbol symbol(String name, int sym) {
+      return symbolFactory.newSymbol(name, sym, new Location(yyline+1,yycolumn+1,yychar), new Location(yyline+1,yycolumn+yylength(),yychar+yylength()));
+  }
+
+  private Symbol symbol(String name, int sym, Object val) {
+      Location left = new Location(yyline+1,yycolumn+1,yychar);
+      Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
+      return symbolFactory.newSymbol(name, sym, left, right,val);
+  }
+  private Symbol symbol(String name, int sym, Object val,int buflength) {
+      Location left = new Location(yyline+1,yycolumn+yylength()-buflength,yychar+yylength()-buflength);
+      Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
+      return symbolFactory.newSymbol(name, sym, left, right,val);
+  }
 %}
 
 /* main character classes */
@@ -80,34 +93,34 @@ SingleCharacter = [^\r\n\'\\]
 <YYINITIAL> {
 
 	/* keywords */
-	{LineTerminator}			{ return symbol(NEW_LINE); }
-	":"							{ return symbol(COLON); }
-	";"							{ return symbol(SEMICOLON); }
-	"."							{ return symbol(DOT); }
-	","							{ return symbol(COMMA); }
+	{LineTerminator}			{ return symbol("newline", NEW_LINE); }
+	":"							{ return symbol(":", COLON); }
+	";"							{ return symbol(";", SEMICOLON); }
+	"."							{ return symbol(".", DOT); }
+	","							{ return symbol(",", COMMA); }
 
-	"("							{ return symbol(BLOCK_OPEN); }
-	")"							{ return symbol(BLOCK_CLOSE); }
+	"("							{ return symbol("block_open", BLOCK_OPEN); }
+	")"							{ return symbol("block_close", BLOCK_CLOSE); }
 
-	"{"							{ return symbol(CODE_BLOCK_OPEN); }
-	"}"							{ return symbol(CODE_BLOCK_CLOSE); }
+	"{"							{ return symbol("code_block_open", CODE_BLOCK_OPEN); }
+	"}"							{ return symbol("code_block_close", CODE_BLOCK_CLOSE); }
 
-	"px"						{ return symbol(UNIT_PIXELS); }
-	"%"							{ return symbol(UNIT_PERCENT); }
+	"px"						{ return symbol("unit_pixels", UNIT_PIXELS); }
+	"%"							{ return symbol("unit_percent", UNIT_PERCENT); }
 
-	"+"							{ return symbol(OPERATOR_PLUS); }
-	"-"							{ return symbol(OPERATOR_MINUS); }
+	"+"							{ return symbol("operator_plus", OPERATOR_PLUS); }
+	"-"							{ return symbol("operator_minus", OPERATOR_MINUS); }
 
-	"line"						{ return symbol(KEYWORD_LINE); }
-	"from"						{ return symbol(KEYWORD_FROM); }
-	"to"						{ return symbol(KEYWORD_TO); }
+	"line"						{ return symbol("keyword_line", KEYWORD_LINE); }
+	"from"						{ return symbol("keyword_from", KEYWORD_FROM); }
+	"to"						{ return symbol("keyword_to", KEYWORD_TO); }
 	
-	{DoubleLiteral}				{ return symbol(NUMBER); }
-	{Identifier}				{ return symbol(IDENTIFYER); }
-	{Comment}					{ return symbol(NEW_LINE); }
+	{DoubleLiteral}				{ return symbol("number", NUMBER); }
+	{Identifier}				{ return symbol("identifyer", IDENTIFYER); }
+	{Comment}					{ return symbol("comment", NEW_LINE); }
 	{WhiteSpace}				{ /* ignore */ }
 }
 
 /* error fallback */
 [^]                              { throw new RuntimeException("Illegal character" + yytext());}
-<<EOF>>                          { return symbol(EOF); }
+<<EOF>>                          { return symbol("end_of_file", EOF); }

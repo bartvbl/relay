@@ -55,17 +55,17 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block
+		block:block 																			{: RESULT = new RootNode(block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE
-	|	BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(name, blockContent); :}
+	|	BLOCK_OPEN NEW_LINE block_content_lis:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode("[untitled block]", blockContent); :}
 	;
 
 block_content_list ::=	
-		/* empty */
-	|	block_content_list block_content_line
+		/* empty */																				{: RESULT = null; :}
+	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(listNode, remainingNodes); :}
 	;
 
 block_content_line ::=
