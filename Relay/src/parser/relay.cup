@@ -1,4 +1,7 @@
 import java_cup.runtime.*;
+import parser.nodes.RootNode;
+import parser.nodes.BlockNode;
+import parser.nodes.ListNode;
 
 /* terminals */
 
@@ -55,17 +58,17 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block:block 																			{: RESULT = new RootNode(block); :}
+		block:block 																			{: RESULT = new RootNode(null, (Symbol) block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(name, blockContent); :}
-	|	BLOCK_OPEN NEW_LINE block_content_lis:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode("[untitled block]", blockContent); :}
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(null, (String) blockName, (Symbol) blockContent); :}
+	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode(null, "[untitled block]", (Symbol) blockContent); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(listNode, remainingNodes); :}
+	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(null, (Symbol) listNode, (Symbol) remainingNodes); :}
 	;
 
 block_content_line ::=

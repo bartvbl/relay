@@ -5,11 +5,11 @@ import java_cup.runtime.Symbol;
 public class RelaySymbol {
 
 	public final Symbol symbol;
-	public final RelaySymbol[] children;
+	public final Symbol[] children;
 
-	public RelaySymbol(Symbol symbol, RelaySymbol[] children) {
+	public RelaySymbol(Symbol symbol, Symbol[] symbols) {
 		this.symbol = symbol;
-		this.children = children;
+		this.children = symbols;
 	}
 
 }
