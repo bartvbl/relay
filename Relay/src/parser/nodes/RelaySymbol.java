@@ -1,15 +1,13 @@
 package parser.nodes;
 
-import java_cup.runtime.Symbol;
-
 public class RelaySymbol {
 
-	public final Symbol symbol;
-	public final Symbol[] children;
+	public final RelaySymbolType type;
+	public final RelaySymbol[] children;
 
-	public RelaySymbol(Symbol symbol, Symbol[] symbols) {
-		this.symbol = symbol;
-		this.children = symbols;
+	public RelaySymbol(RelaySymbolType type, RelaySymbol[] children) {
+		this.type = type;
+		this.children = children;
 	}
 
 }

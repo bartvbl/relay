@@ -58,22 +58,22 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block:block 																			{: RESULT = new RootNode(null, (Symbol) block); :}
+		block:block 																			{: RESULT = new RootNode(null, block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(null, (String) blockName, (Symbol) blockContent); :}
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(null, blockName, (Symbol) blockContent); :}
 	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode(null, "[untitled block]", (Symbol) blockContent); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(null, (Symbol) listNode, (Symbol) remainingNodes); :}
+	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(null, listNode, (Symbol) remainingNodes); :}
 	;
 
 block_content_line ::=
-		block_content_item NEW_LINE
-	|	block_content_item SEMICOLON
+		block_content_item:item NEW_LINE														{: RESULT = item; :}
+	|	block_content_item:item SEMICOLON														{: RESULT = item; :}
 	;
 
 block_content_item ::=

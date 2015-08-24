@@ -6,8 +6,8 @@ public class BlockNode extends RelaySymbol {
 
 	public final String name;
 
-	public BlockNode(Symbol symbol, String name, Symbol children) {
-		super(symbol, new Symbol[]{children});
+	public BlockNode(String name, RelaySymbol childList) {
+		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.name = name;
 	}
 
