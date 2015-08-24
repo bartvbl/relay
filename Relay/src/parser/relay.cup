@@ -10,7 +10,7 @@ terminal NUMBER;
 terminal COLON;
 terminal SEMICOLON;
 terminal DOT;
-terminal IDENTIFYER;
+terminal IdentifyerNode IDENTIFYER;
 terminal COMMA;
 
 terminal BLOCK_OPEN;
@@ -19,8 +19,8 @@ terminal BLOCK_CLOSE;
 terminal CODE_BLOCK_OPEN;
 terminal CODE_BLOCK_CLOSE;
 
-terminal UNIT_PIXELS;
-terminal UNIT_PERCENT;
+terminal UnitNode UNIT_PIXELS;
+terminal UnitNode UNIT_PERCENT;
 
 terminal OPERATOR_PLUS;
 terminal OPERATOR_MINUS;
@@ -31,21 +31,21 @@ terminal KEYWORD_TO;
 
 /* non-terminals */
 
-non terminal goal;
-non terminal block;
-non terminal identifyer;
-non terminal block_content_list;
-non terminal block_content_line;
-non terminal block_content_item;
-non terminal block_property;
-non terminal expression;
-non terminal unit;
-non terminal variable_access;
-non terminal function_call;
-non terminal code_block;
-non terminal code_statement_list;
-non terminal code_statement;
-non terminal parameter_list;
+non terminal RootNode goal;
+non terminal BlockNode block;
+non terminal IdentifyerNode identifyer;
+non terminal ListNode block_content_list;
+non terminal BlockContentItemNode block_content_line;
+non terminal BlockContentItemNode block_content_item;
+non terminal BlockPropertyNode block_property;
+non terminal ExpressionNode expression;
+non terminal UnitNode unit;
+non terminal VariableAccessNode variable_access;
+non terminal FunctionCallNode function_call;
+non terminal CodeBlockNode code_block;
+non terminal StatementListNode code_statement_list;
+non terminal CodeStatementNode code_statement;
+non terminal ParameterListNode parameter_list;
 
 /* precedence rules */
 

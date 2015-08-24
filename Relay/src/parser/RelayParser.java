@@ -200,7 +200,7 @@ class CUP$RelayParser$actions {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int start_valright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		RootNode start_val = (RootNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		RESULT = start_val;
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -211,10 +211,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 1: // goal ::= block 
             {
-              Object RESULT =null;
+              RootNode RESULT =null;
 		int blockleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int blockright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object block = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		BlockNode block = (BlockNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new RootNode(block); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("goal",0, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -223,13 +223,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 2: // block ::= BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE 
             {
-              Object RESULT =null;
+              BlockNode RESULT =null;
 		int blockNameleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).left;
 		int blockNameright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).right;
-		Object blockName = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
+		IdentifyerNode blockName = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
 		int blockContentleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int blockContentright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object blockContent = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		ListNode blockContent = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = new BlockNode(blockName, blockContent); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -238,10 +238,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // block ::= BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE 
             {
-              Object RESULT =null;
+              BlockNode RESULT =null;
 		int blockContentleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int blockContentright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object blockContent = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		ListNode blockContent = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = new BlockNode("[untitled block]", blockContent); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -250,7 +250,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // block_content_list ::= 
             {
-              Object RESULT =null;
+              ListNode RESULT =null;
 		 RESULT = null; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_list",3, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -259,13 +259,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // block_content_list ::= block_content_list block_content_line 
             {
-              Object RESULT =null;
+              ListNode RESULT =null;
 		int remainingNodesleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int remainingNodesright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object remainingNodes = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		ListNode remainingNodes = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		int listNodeleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int listNoderight = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object listNode = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		BlockContentItemNode listNode = (BlockContentItemNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new ListNode(listNode, remainingNodes); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_list",3, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -274,10 +274,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // block_content_line ::= block_content_item NEW_LINE 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object item = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		BlockContentItemNode item = (BlockContentItemNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = item; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_line",4, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -286,10 +286,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // block_content_line ::= block_content_item SEMICOLON 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object item = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		BlockContentItemNode item = (BlockContentItemNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = item; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_line",4, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -298,10 +298,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // block_content_item ::= block 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object item = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		BlockNode item = (BlockNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = item; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -310,10 +310,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // block_content_item ::= block_property 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object item = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		BlockPropertyNode item = (BlockPropertyNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = item; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -322,10 +322,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // block_content_item ::= code_block 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object item = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		CodeBlockNode item = (CodeBlockNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = item; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -334,7 +334,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // block_content_item ::= 
             {
-              Object RESULT =null;
+              BlockContentItemNode RESULT =null;
 		 RESULT = null; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -343,10 +343,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // code_block ::= CODE_BLOCK_OPEN code_statement_list CODE_BLOCK_CLOSE 
             {
-              Object RESULT =null;
+              CodeBlockNode RESULT =null;
 		int statementListleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int statementListright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object statementList = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		StatementListNode statementList = (StatementListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = statementList; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_block",11, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -355,13 +355,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // code_statement_list ::= code_statement code_statement_list 
             {
-              Object RESULT =null;
+              StatementListNode RESULT =null;
 		int statementleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int statementright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object statement = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		CodeStatementNode statement = (CodeStatementNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		int remainingNodesleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int remainingNodesright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object remainingNodes = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		StatementListNode remainingNodes = (StatementListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new ListNode(statement, remainingNodes); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement_list",12, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -370,10 +370,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // code_statement_list ::= code_statement 
             {
-              Object RESULT =null;
+              StatementListNode RESULT =null;
 		int statementleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int statementright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object statement = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		CodeStatementNode statement = (CodeStatementNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new ListNode(statement, null); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement_list",12, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -382,7 +382,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // code_statement ::= KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE 
             {
-              Object RESULT =null;
+              CodeStatementNode RESULT =null;
 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement",13, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-12)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -391,13 +391,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // block_property ::= identifyer COLON expression 
             {
-              Object RESULT =null;
+              BlockPropertyNode RESULT =null;
 		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).left;
 		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).right;
-		Object identifyer = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		IdentifyerNode identifyer = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
 		int expressionleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int expressionright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object expression = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		ExpressionNode expression = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new BlockPropertyNode(identifyer, expression); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_property",6, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -406,13 +406,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // expression ::= NUMBER unit 
             {
-              Object RESULT =null;
+              ExpressionNode RESULT =null;
 		int valueleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int valueright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
 		Object value = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		int unitleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int unitright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object unit = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		UnitNode unit = (UnitNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new ValueNode(value, unit); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("expression",7, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -421,13 +421,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // expression ::= expression OPERATOR_PLUS expression 
             {
-              Object RESULT =null;
+              ExpressionNode RESULT =null;
 		int lefthandsideleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).left;
 		int lefthandsideright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).right;
-		Object lefthandside = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		ExpressionNode lefthandside = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
 		int righthandsideleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int righthandsideright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object righthandside = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		ExpressionNode righthandside = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new AdditionExpressionNode(lefthandside, righthandside); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("expression",7, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -436,13 +436,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // expression ::= expression OPERATOR_MINUS expression 
             {
-              Object RESULT =null;
+              ExpressionNode RESULT =null;
 		int lefthandsideleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).left;
 		int lefthandsideright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).right;
-		Object lefthandside = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		ExpressionNode lefthandside = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
 		int righthandsideleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int righthandsideright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object righthandside = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		ExpressionNode righthandside = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new SubtractionExpressionNode(lefthandside, righthandside); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("expression",7, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -451,10 +451,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // expression ::= variable_access 
             {
-              Object RESULT =null;
+              ExpressionNode RESULT =null;
 		int variable_accessleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int variable_accessright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object variable_access = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		VariableAccessNode variable_access = (VariableAccessNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = variable_access; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("expression",7, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -463,10 +463,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // expression ::= function_call 
             {
-              Object RESULT =null;
+              ExpressionNode RESULT =null;
 		int callleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int callright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object call = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		FunctionCallNode call = (FunctionCallNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = call; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("expression",7, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -475,7 +475,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // function_call ::= IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE 
             {
-              Object RESULT =null;
+              FunctionCallNode RESULT =null;
 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("function_call",10, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -484,13 +484,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // parameter_list ::= expression COMMA parameter_list 
             {
-              Object RESULT =null;
+              ParameterListNode RESULT =null;
 		int expressionleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).left;
 		int expressionright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).right;
-		Object expression = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		ExpressionNode expression = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
 		int remainingNodesleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int remainingNodesright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object remainingNodes = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		ParameterListNode remainingNodes = (ParameterListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new ParameterListNode(expression, remainingNodes); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("parameter_list",14, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -499,7 +499,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // parameter_list ::= 
             {
-              Object RESULT =null;
+              ParameterListNode RESULT =null;
 		 RESULT = null; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("parameter_list",14, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -508,13 +508,13 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // variable_access ::= identifyer DOT variable_access 
             {
-              Object RESULT =null;
+              VariableAccessNode RESULT =null;
 		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).left;
 		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).right;
-		Object identifyer = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		IdentifyerNode identifyer = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
 		int remainingAccessleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int remainingAccessright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object remainingAccess = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		VariableAccessNode remainingAccess = (VariableAccessNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new VariableAccessNode(identifyer, remainingAccess); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("variable_access",9, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -523,10 +523,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // variable_access ::= identifyer 
             {
-              Object RESULT =null;
+              VariableAccessNode RESULT =null;
 		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object identifyer = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		IdentifyerNode identifyer = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new VariableAccessNode(identifyer); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("variable_access",9, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -535,7 +535,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // unit ::= UNIT_PIXELS 
             {
-              Object RESULT =null;
+              UnitNode RESULT =null;
 		 RESULT = new UnitNode(Unit.PIXELS); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("unit",8, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -544,7 +544,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 28: // unit ::= UNIT_PERCENT 
             {
-              Object RESULT =null;
+              UnitNode RESULT =null;
 		 RESULT = new UnitNode(Unit.PERCENT); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("unit",8, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -553,10 +553,10 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 29: // identifyer ::= IDENTIFYER 
             {
-              Object RESULT =null;
+              IdentifyerNode RESULT =null;
 		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		Object identifyer = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		IdentifyerNode identifyer = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new IdentifyerNode(identifyer); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("identifyer",2, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
