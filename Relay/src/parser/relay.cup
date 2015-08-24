@@ -45,6 +45,7 @@ non terminal function_call;
 non terminal code_block;
 non terminal code_statement_list;
 non terminal code_statement;
+non terminal parameter_list;
 
 /* precedence rules */
 
@@ -58,17 +59,17 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block:block 																			{: RESULT = new RootNode(null, block); :}
+		block:block 																			{: RESULT = new RootNode(block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(null, blockName, (Symbol) blockContent); :}
-	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode(null, "[untitled block]", (Symbol) blockContent); :}
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(blockName, blockContent); :}
+	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode("[untitled block]", blockContent); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(null, listNode, (Symbol) remainingNodes); :}
+	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(listNode, remainingNodes); :}
 	;
 
 block_content_line ::=
@@ -77,19 +78,19 @@ block_content_line ::=
 	;
 
 block_content_item ::=
-		block
-	|	block_property
-	|	code_block
-	|	/* empty */
+		block:item 																				{: RESULT = item; :}
+	|	block_property:item 																	{: RESULT = item; :}
+	|	code_block:item 																		{: RESULT = item; :}
+	|	/* empty */																				{: RESULT = null; :}
 	;
 
 code_block ::=
-		CODE_BLOCK_OPEN code_statement_list CODE_BLOCK_CLOSE
+		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = statementList; :}
 	;
 
 code_statement_list ::=
-		code_statement code_statement_list
-	|	code_statement
+		code_statement:statement code_statement_list:remainingNodes 							{: RESULT = new ListNode(statement, remainingNodes); :}
+	|	code_statement:statement 																{: RESULT = new ListNode(statement, null); :}
 	;
 
 code_statement ::=
@@ -97,31 +98,36 @@ code_statement ::=
 	;
 
 block_property ::=
-		identifyer COLON expression
+		identifyer:identifyer COLON expression:expression										{: RESULT = new BlockPropertyNode(identifyer, expression); :}
 	;
 
 expression ::=
-		NUMBER unit
-	|	expression OPERATOR_PLUS expression
-	|	expression OPERATOR_MINUS expression
-	|	variable_access
-	|	function_call
+		NUMBER:value unit:unit 																	{: RESULT = new ValueNode(value, unit); :}
+	|	expression:lefthandside OPERATOR_PLUS expression:righthandside							{: RESULT = new AdditionExpressionNode(lefthandside, righthandside); :}
+	|	expression:lefthandside OPERATOR_MINUS expression:righthandside							{: RESULT = new SubtractionExpressionNode(lefthandside, righthandside); :}
+	|	variable_access:variable_access 														{: RESULT = variable_access; :}
+	|	function_call:call																		{: RESULT = call; :}
 	;
 
 function_call ::=
-		IDENTIFYER BLOCK_OPEN variable_access BLOCK_CLOSE
+		IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE
+	;
+
+parameter_list ::=
+		expression:expression COMMA parameter_list:remainingNodes 								{: RESULT = new ParameterListNode(expression, remainingNodes); :}
+	|	/* empty */ 																			{: RESULT = null; :}
 	;
 
 variable_access ::=
-		identifyer DOT variable_access
-	|	identifyer
+		identifyer:identifyer DOT variable_access:remainingAccess								{: RESULT = new VariableAccessNode(identifyer, remainingAccess); :}
+	|	identifyer:identifyer 																	{: RESULT = new VariableAccessNode(identifyer); :}
 	;
 
 unit ::=
-		UNIT_PIXELS
-	|	UNIT_PERCENT
+		UNIT_PIXELS 																			{: RESULT = new UnitNode(Unit.PIXELS); :}
+	|	UNIT_PERCENT 																			{: RESULT = new UnitNode(Unit.PERCENT); :}
 	;
 
 identifyer ::=
-		IDENTIFYER
+		IDENTIFYER:identifyer 																	{: RESULT = new IdentifyerNode(identifyer); :}
 	;
