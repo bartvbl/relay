@@ -1,6 +1,6 @@
 package parser.nodes;
 
-public class VariableAccessNode extends RelaySymbol {
+public class VariableAccessNode extends ExpressionNode {
 
 	public final IdentifyerNode identifyer;
 	public final boolean furtherAccessRemains;

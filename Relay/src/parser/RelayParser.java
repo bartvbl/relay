@@ -5,20 +5,24 @@
 
 package parser;
 
-import java_cup.runtime.*;
+import parser.nodes.AdditionExpressionNode;
 import parser.nodes.BlockContentItemNode;
 import parser.nodes.BlockContentListNode;
 import parser.nodes.BlockPropertyNode;
 import parser.nodes.CodeBlockNode;
 import parser.nodes.CodeStatementNode;
+import parser.nodes.ExpressionNode;
+import parser.nodes.FunctionCallNode;
 import parser.nodes.IdentifyerNode;
+import parser.nodes.ParameterListNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
 import parser.nodes.StatementListNode;
+import parser.nodes.StatementType;
 import parser.nodes.UnitNode;
+import parser.nodes.ValueNode;
 import parser.nodes.VariableAccessNode;
 import relay.data.Unit;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20150326 (SVN rev 63) generated parser.
   */
@@ -501,7 +505,13 @@ class CUP$RelayParser$actions {
           case 22: // function_call ::= IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE 
             {
               FunctionCallNode RESULT =null;
-
+		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).left;
+		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).right;
+		String identifyer = (String)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
+		int parametersleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
+		int parametersright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
+		ParameterListNode parameters = (ParameterListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		 RESULT = new FunctionCallNode(identifyer, parameters); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("function_call",10, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;

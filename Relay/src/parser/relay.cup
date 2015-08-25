@@ -1,13 +1,20 @@
 import java_cup.runtime.*;
+import parser.nodes.AdditionExpressionNode;
 import parser.nodes.BlockContentItemNode;
 import parser.nodes.BlockContentListNode;
 import parser.nodes.BlockPropertyNode;
 import parser.nodes.CodeBlockNode;
+import parser.nodes.CodeStatementNode;
+import parser.nodes.ExpressionNode;
+import parser.nodes.FunctionCallNode;
 import parser.nodes.IdentifyerNode;
+import parser.nodes.ParameterListNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
 import parser.nodes.StatementListNode;
+import parser.nodes.StatementType;
 import parser.nodes.UnitNode;
+import parser.nodes.ValueNode;
 import parser.nodes.VariableAccessNode;
 import relay.data.Unit;
 
@@ -118,7 +125,7 @@ expression ::=
 	;
 
 function_call ::=
-		IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE
+		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE 					{: RESULT = new FunctionCallNode(identifyer, parameters); :}
 	;
 
 parameter_list ::=
