@@ -11,6 +11,7 @@ import parser.Lexer;
 import parser.RelayParser;
 import parser.RelaySymbols;
 import parser.Scanner;
+import parser.nodes.RelaySymbol;
 
 public class Main {
 
@@ -22,7 +23,7 @@ public class Main {
 			Lexer lexer = new Lexer(new FileReader(sourceFile), factory);
 			System.out.println("----- PARSING START -----");
 			RelayParser parser = new RelayParser(lexer, factory);
-			ComplexSymbol root = (ComplexSymbol)parser.debug_parse();
+			RelaySymbol root = (RelaySymbol)parser.debug_parse().value;
 			dumpParseTree(root, 0);
 			System.out.println("Complete.");
 		} catch (IOException e) {
@@ -32,14 +33,26 @@ public class Main {
 		}
 	}
 
-	private static void dumpParseTree(ComplexSymbol node, int depth) {
+	private static void dumpParseTree(RelaySymbol node, int depth) {
 		for(int i = 0; i < depth; i++) {
-			System.out.print("\t");
+			System.out.print("  ");
 		}
-		System.out.print(node);
-		System.out.print("\n");
-		//for(int j = 0; j < node.)
-		//dumpParseTree();
+		System.out.print(node.type);
+		System.out.print(" (\n");
+		for(int i = 0; i < node.children.length; i++) {
+			if(node.children[i] != null) {
+				dumpParseTree(node.children[i], depth+1);				
+			} else {
+				for(int j = 0; j < depth+1; j++) {
+					System.out.print("  ");
+				}
+				System.out.print("<no children>\n");
+			}
+		}
+		for(int i = 0; i < depth; i++) {
+			System.out.print("  ");
+		}
+		System.out.print(")\n");
 	}
 
 }

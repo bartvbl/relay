@@ -7,7 +7,11 @@ public class ValueNode extends ExpressionNode {
 
 	public ValueNode(Double value, UnitNode unit) {
 		super(RelaySymbolType.EXPRESSION, ExpressionType.VALUE);
-		this.value = value;
+		if(value == null) {
+			this.value = 0;
+		} else  {
+			this.value = value;			
+		}
 		this.unit = unit;
 	}
 
