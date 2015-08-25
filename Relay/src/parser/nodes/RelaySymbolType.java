@@ -4,5 +4,7 @@ public enum RelaySymbolType {
 	ROOT, 
 	BLOCK,
 	LIST,
-	LIST_ITEM
+	LIST_ITEM, 
+	IDENTIFYER, UNIT, 
+	VARIABLE_ACCESS
 }

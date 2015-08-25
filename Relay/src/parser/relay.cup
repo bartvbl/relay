@@ -6,11 +6,11 @@ import parser.nodes.ListNode;
 /* terminals */
 
 terminal NEW_LINE;
-terminal NUMBER;
+terminal Double NUMBER;
 terminal COLON;
 terminal SEMICOLON;
 terminal DOT;
-terminal IdentifyerNode IDENTIFYER;
+terminal String IDENTIFYER;
 terminal COMMA;
 
 terminal BLOCK_OPEN;

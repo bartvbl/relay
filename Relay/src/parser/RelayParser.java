@@ -6,9 +6,13 @@
 package parser;
 
 import java_cup.runtime.*;
+import parser.nodes.IdentifyerNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
 import parser.nodes.ListNode;
+import parser.nodes.UnitNode;
+import parser.nodes.VariableAccessNode;
+import relay.data.Unit;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20150326 (SVN rev 63) generated parser.
@@ -409,7 +413,7 @@ class CUP$RelayParser$actions {
               ExpressionNode RESULT =null;
 		int valueleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int valueright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		Object value = (Object)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		Double value = (Double)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		int unitleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int unitright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		UnitNode unit = (UnitNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
@@ -556,7 +560,7 @@ class CUP$RelayParser$actions {
               IdentifyerNode RESULT =null;
 		int identifyerleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int identifyerright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
-		IdentifyerNode identifyer = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		String identifyer = (String)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new IdentifyerNode(identifyer); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("identifyer",2, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }

@@ -10,4 +10,9 @@ public class RelaySymbol {
 		this.children = children;
 	}
 
+	public RelaySymbol(RelaySymbolType type) {
+		this.type = type;
+		this.children = new RelaySymbol[]{};
+	}
+
 }

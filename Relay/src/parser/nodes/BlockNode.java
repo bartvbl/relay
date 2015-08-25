@@ -4,11 +4,11 @@ import java_cup.runtime.Symbol;
 
 public class BlockNode extends RelaySymbol {
 
-	public final String name;
+	private final IdentifyerNode nameNode;
 
-	public BlockNode(String name, RelaySymbol childList) {
+	public BlockNode(IdentifyerNode blockName, ListNode childList) {
 		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.name = name;
+		this.nameNode = blockName;
 	}
 
 }
