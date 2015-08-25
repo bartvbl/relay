@@ -8,5 +8,10 @@ public class IdentifyerNode extends RelaySymbol {
 		super(RelaySymbolType.IDENTIFYER);
 		this.value = identifyer;
 	}
+	
+	@Override
+	public String toString() {
+		return "Identifyer named: \"" + value + "\"";
+	}
 
 }

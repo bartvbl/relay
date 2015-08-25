@@ -1,7 +1,7 @@
 package parser.nodes;
 
 public class BlockContentItemNode extends RelaySymbol {
-	public final BlockItemType type;
+	public final BlockItemType itemType;
 	
 	public final BlockNode blockNode;
 	public final BlockPropertyNode propertyNode;
@@ -12,7 +12,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.blockNode = item;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
-		this.type = BlockItemType.BLOCK;
+		this.itemType = BlockItemType.BLOCK;
 	}
 
 	public BlockContentItemNode(BlockPropertyNode item) {
@@ -20,7 +20,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = item;
 		this.codeBlockNode = null;
-		this.type = BlockItemType.PROPERTY;
+		this.itemType = BlockItemType.PROPERTY;
 	}
 
 	public BlockContentItemNode(CodeBlockNode item) {
@@ -28,7 +28,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = item;
-		this.type = BlockItemType.CODE_BLOCK;
+		this.itemType = BlockItemType.CODE_BLOCK;
 	}
 	
 	public BlockContentItemNode() {
@@ -36,7 +36,12 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
-		this.type = BlockItemType.EMPTY;
+		this.itemType = BlockItemType.EMPTY;
+	}
+	
+	@Override
+	public String toString() {
+		return "Block content item of type: " + itemType;
 	}
 
 }

@@ -15,5 +15,10 @@ public class AdditionExpressionNode extends ExpressionNode {
 	public double evaluate() {
 		return leftHandSide.evaluate() + rightHandSide.evaluate();
 	}
+	
+	@Override
+	public String toString() {
+		return "Addition Expression";
+	}
 
 }

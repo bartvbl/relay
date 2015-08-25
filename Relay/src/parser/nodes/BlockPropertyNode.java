@@ -10,5 +10,9 @@ public class BlockPropertyNode extends RelaySymbol {
 		this.identifyer = identifyer;
 		this.expression = expression;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Block property of type \"" + identifyer.value + "\"";
+	}
 }
