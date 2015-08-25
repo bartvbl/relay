@@ -1,7 +1,15 @@
 import java_cup.runtime.*;
+import parser.nodes.BlockContentItemNode;
+import parser.nodes.BlockContentListNode;
+import parser.nodes.BlockPropertyNode;
+import parser.nodes.CodeBlockNode;
+import parser.nodes.IdentifyerNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
-import parser.nodes.ListNode;
+import parser.nodes.StatementListNode;
+import parser.nodes.UnitNode;
+import parser.nodes.VariableAccessNode;
+import relay.data.Unit;
 
 /* terminals */
 
@@ -31,21 +39,21 @@ terminal KEYWORD_TO;
 
 /* non-terminals */
 
-non terminal RootNode goal;
-non terminal BlockNode block;
-non terminal IdentifyerNode identifyer;
-non terminal ListNode block_content_list;
-non terminal BlockContentItemNode block_content_line;
-non terminal BlockContentItemNode block_content_item;
-non terminal BlockPropertyNode block_property;
-non terminal ExpressionNode expression;
-non terminal UnitNode unit;
-non terminal VariableAccessNode variable_access;
-non terminal FunctionCallNode function_call;
-non terminal CodeBlockNode code_block;
-non terminal StatementListNode code_statement_list;
-non terminal CodeStatementNode code_statement;
-non terminal ParameterListNode parameter_list;
+non terminal RootNode 				goal;
+non terminal BlockNode 				block;
+non terminal IdentifyerNode 		identifyer;
+non terminal BlockContentListNode	block_content_list;
+non terminal BlockContentItemNode 	block_content_line;
+non terminal BlockContentItemNode 	block_content_item;
+non terminal BlockPropertyNode 		block_property;
+non terminal ExpressionNode 		expression;
+non terminal UnitNode 				unit;
+non terminal VariableAccessNode 	variable_access;
+non terminal FunctionCallNode 		function_call;
+non terminal CodeBlockNode 			code_block;
+non terminal StatementListNode 		code_statement_list;
+non terminal CodeStatementNode 		code_statement;
+non terminal ParameterListNode 		parameter_list;
 
 /* precedence rules */
 
@@ -64,12 +72,12 @@ goal ::=
 
 block ::=	
 		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(blockName, blockContent); :}
-	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode("[untitled block]", blockContent); :}
+	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode(new IdentifyerNode("[untitled block]"), blockContent); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new ListNode(listNode, remainingNodes); :}
+	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new BlockContentListNode(listNode, remainingNodes); :}
 	;
 
 block_content_line ::=
@@ -78,23 +86,23 @@ block_content_line ::=
 	;
 
 block_content_item ::=
-		block:item 																				{: RESULT = item; :}
-	|	block_property:item 																	{: RESULT = item; :}
-	|	code_block:item 																		{: RESULT = item; :}
-	|	/* empty */																				{: RESULT = null; :}
+		block:item 																				{: RESULT = new BlockContentItemNode(item); :}
+	|	block_property:item 																	{: RESULT = new BlockContentItemNode(item); :}
+	|	code_block:item 																		{: RESULT = new BlockContentItemNode(item); :}
+	|	/* empty */																				{: RESULT = new BlockContentItemNode(); :}
 	;
 
 code_block ::=
-		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = statementList; :}
+		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = new CodeBlockNode(statementList); :}
 	;
 
 code_statement_list ::=
-		code_statement:statement code_statement_list:remainingNodes 							{: RESULT = new ListNode(statement, remainingNodes); :}
-	|	code_statement:statement 																{: RESULT = new ListNode(statement, null); :}
+		code_statement:statement code_statement_list:remainingNodes 							{: RESULT = new StatementListNode(statement, remainingNodes); :}
+	|	code_statement:statement 																{: RESULT = new StatementListNode(statement, null); :}
 	;
 
 code_statement ::=
-		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE
+		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new CodeStatementNode(StatementType.LINE, fromX, fromY, toX, toY); :}
 	;
 
 block_property ::=

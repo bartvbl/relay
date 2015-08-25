@@ -20,10 +20,6 @@ public class Block {
 		children.add(child);
 	}
 
-	public void addCodeBlock(CodeBlock codeBlock) {
-		
-	}
-
 	public Block[] getChildren() {
 		return children.toArray(new Block[children.size()]);
 	}

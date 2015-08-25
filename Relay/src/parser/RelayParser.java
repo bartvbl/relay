@@ -6,10 +6,15 @@
 package parser;
 
 import java_cup.runtime.*;
+import parser.nodes.BlockContentItemNode;
+import parser.nodes.BlockContentListNode;
+import parser.nodes.BlockPropertyNode;
+import parser.nodes.CodeBlockNode;
+import parser.nodes.CodeStatementNode;
 import parser.nodes.IdentifyerNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
-import parser.nodes.ListNode;
+import parser.nodes.StatementListNode;
 import parser.nodes.UnitNode;
 import parser.nodes.VariableAccessNode;
 import relay.data.Unit;
@@ -61,47 +66,50 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     "\ufffd\011\ufffd\013\ufffd\014\ufffd\015\ufffd\001\002\000\022" +
     "\004\uffe4\006\uffe4\007\uffe4\010\uffe4\012\uffe4\014\uffe4\021" +
     "\uffe4\022\uffe4\001\002\000\016\004\ufff6\007\ufff6\011\011" +
-    "\013\005\014\017\015\020\001\002\000\004\006\051\001" +
-    "\002\000\006\004\050\007\047\001\002\000\016\004\ufffc" +
+    "\013\005\014\017\015\020\001\002\000\004\006\072\001" +
+    "\002\000\006\004\071\007\070\001\002\000\016\004\ufffc" +
     "\007\ufffc\011\ufffc\013\ufffc\014\ufffc\015\ufffc\001\002\000" +
     "\006\004\ufff9\007\ufff9\001\002\000\010\002\ufffe\004\ufffe" +
     "\007\ufffe\001\002\000\004\023\025\001\002\000\006\004" +
     "\ufff8\007\ufff8\001\002\000\006\004\ufff7\007\ufff7\001\002" +
-    "\000\006\016\ufff3\023\025\001\002\000\004\016\045\001" +
+    "\000\006\016\ufff3\023\025\001\002\000\004\016\066\001" +
     "\002\000\004\024\026\001\002\000\004\013\027\001\002" +
-    "\000\004\011\011\001\002\000\004\012\034\001\002\000" +
-    "\020\004\uffe7\007\uffe7\010\032\012\uffe7\014\uffe7\021\uffe7" +
-    "\022\uffe7\001\002\000\004\011\011\001\002\000\016\004" +
-    "\uffe8\007\uffe8\012\uffe8\014\uffe8\021\uffe8\022\uffe8\001\002" +
-    "\000\004\011\011\001\002\000\004\014\036\001\002\000" +
-    "\004\025\037\001\002\000\004\013\040\001\002\000\004" +
-    "\011\011\001\002\000\004\012\042\001\002\000\004\011" +
-    "\011\001\002\000\004\014\044\001\002\000\006\016\ufff2" +
-    "\023\ufff2\001\002\000\006\004\ufff5\007\ufff5\001\002\000" +
-    "\004\016\ufff4\001\002\000\016\004\ufffa\007\ufffa\011\ufffa" +
-    "\013\ufffa\014\ufffa\015\ufffa\001\002\000\016\004\ufffb\007" +
-    "\ufffb\011\ufffb\013\ufffb\014\ufffb\015\ufffb\001\002\000\006" +
-    "\005\053\011\054\001\002\000\014\004\uffed\007\uffed\012" +
-    "\uffed\021\uffed\022\uffed\001\002\000\006\017\071\020\072" +
-    "\001\002\000\020\004\uffe4\007\uffe4\010\uffe4\012\uffe4\013" +
-    "\063\021\uffe4\022\uffe4\001\002\000\012\004\ufff1\007\ufff1" +
-    "\021\060\022\057\001\002\000\014\004\uffec\007\uffec\012" +
-    "\uffec\021\uffec\022\uffec\001\002\000\006\005\053\011\054" +
-    "\001\002\000\006\005\053\011\054\001\002\000\014\004" +
-    "\uffef\007\uffef\012\uffef\021\uffef\022\uffef\001\002\000\014" +
-    "\004\uffee\007\uffee\012\uffee\021\uffee\022\uffee\001\002\000" +
-    "\010\005\053\011\054\014\uffe9\001\002\000\004\014\070" +
-    "\001\002\000\010\012\066\021\060\022\057\001\002\000" +
-    "\010\005\053\011\054\014\uffe9\001\002\000\004\014\uffea" +
-    "\001\002\000\014\004\uffeb\007\uffeb\012\uffeb\021\uffeb\022" +
-    "\uffeb\001\002\000\014\004\uffe6\007\uffe6\012\uffe6\021\uffe6" +
-    "\022\uffe6\001\002\000\014\004\uffe5\007\uffe5\012\uffe5\021" +
-    "\uffe5\022\uffe5\001\002\000\014\004\ufff0\007\ufff0\012\ufff0" +
-    "\021\ufff0\022\ufff0\001\002\000\016\004\ufffd\007\ufffd\011" +
-    "\ufffd\013\ufffd\014\ufffd\015\ufffd\001\002\000\016\004\ufff6" +
-    "\007\ufff6\011\011\013\005\014\076\015\020\001\002\000" +
-    "\010\002\uffff\004\uffff\007\uffff\001\002\000\004\002\001" +
-    "\001\002" });
+    "\000\006\005\032\011\033\001\002\000\016\004\uffed\007" +
+    "\uffed\012\uffed\014\uffed\021\uffed\022\uffed\001\002\000\020" +
+    "\004\uffe7\007\uffe7\010\064\012\uffe7\014\uffe7\021\uffe7\022" +
+    "\uffe7\001\002\000\006\017\061\020\062\001\002\000\022" +
+    "\004\uffe4\007\uffe4\010\uffe4\012\uffe4\013\053\014\uffe4\021" +
+    "\uffe4\022\uffe4\001\002\000\010\012\036\021\040\022\037" +
+    "\001\002\000\016\004\uffec\007\uffec\012\uffec\014\uffec\021" +
+    "\uffec\022\uffec\001\002\000\006\005\032\011\033\001\002" +
+    "\000\006\005\032\011\033\001\002\000\006\005\032\011" +
+    "\033\001\002\000\016\004\uffef\007\uffef\012\uffef\014\uffef" +
+    "\021\uffef\022\uffef\001\002\000\016\004\uffee\007\uffee\012" +
+    "\uffee\014\uffee\021\uffee\022\uffee\001\002\000\010\014\044" +
+    "\021\040\022\037\001\002\000\004\025\045\001\002\000" +
+    "\004\013\046\001\002\000\006\005\032\011\033\001\002" +
+    "\000\010\012\050\021\040\022\037\001\002\000\006\005" +
+    "\032\011\033\001\002\000\010\014\052\021\040\022\037" +
+    "\001\002\000\006\016\ufff2\023\ufff2\001\002\000\010\005" +
+    "\032\011\033\014\uffe9\001\002\000\004\014\060\001\002" +
+    "\000\010\012\056\021\040\022\037\001\002\000\010\005" +
+    "\032\011\033\014\uffe9\001\002\000\004\014\uffea\001\002" +
+    "\000\016\004\uffeb\007\uffeb\012\uffeb\014\uffeb\021\uffeb\022" +
+    "\uffeb\001\002\000\016\004\uffe6\007\uffe6\012\uffe6\014\uffe6" +
+    "\021\uffe6\022\uffe6\001\002\000\016\004\uffe5\007\uffe5\012" +
+    "\uffe5\014\uffe5\021\uffe5\022\uffe5\001\002\000\016\004\ufff0" +
+    "\007\ufff0\012\ufff0\014\ufff0\021\ufff0\022\ufff0\001\002\000" +
+    "\004\011\011\001\002\000\016\004\uffe8\007\uffe8\012\uffe8" +
+    "\014\uffe8\021\uffe8\022\uffe8\001\002\000\006\004\ufff5\007" +
+    "\ufff5\001\002\000\004\016\ufff4\001\002\000\016\004\ufffa" +
+    "\007\ufffa\011\ufffa\013\ufffa\014\ufffa\015\ufffa\001\002\000" +
+    "\016\004\ufffb\007\ufffb\011\ufffb\013\ufffb\014\ufffb\015\ufffb" +
+    "\001\002\000\006\005\032\011\033\001\002\000\012\004" +
+    "\ufff1\007\ufff1\021\040\022\037\001\002\000\016\004\ufffd" +
+    "\007\ufffd\011\ufffd\013\ufffd\014\ufffd\015\ufffd\001\002\000" +
+    "\016\004\ufff6\007\ufff6\011\011\013\005\014\076\015\020" +
+    "\001\002\000\010\002\uffff\004\uffff\007\uffff\001\002\000" +
+    "\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -116,27 +124,28 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\006\016\023" +
     "\017\022\001\001\000\002\001\001\000\002\001\001\000" +
-    "\006\016\045\017\022\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\006\004\030\013\027\001" +
-    "\001\000\002\001\001\000\002\001\001\000\006\004\030" +
-    "\013\032\001\001\000\002\001\001\000\006\004\030\013" +
-    "\034\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\006\004\030\013\040\001\001\000\002\001" +
-    "\001\000\006\004\030\013\042\001\001\000\002\001\001" +
+    "\006\016\066\017\022\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\012\004\030\011\033\013" +
+    "\027\014\034\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\012\062\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\012\004\030\011\042\013\027" +
+    "\014\034\001\001\000\012\004\030\011\041\013\027\014" +
+    "\034\001\001\000\012\004\030\011\040\013\027\014\034" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\012\004\030" +
+    "\011\046\013\027\014\034\001\001\000\002\001\001\000" +
+    "\012\004\030\011\050\013\027\014\034\001\001\000\002" +
+    "\001\001\000\002\001\001\000\014\004\030\011\054\013" +
+    "\027\014\034\020\053\001\001\000\002\001\001\000\002" +
+    "\001\001\000\014\004\030\011\054\013\027\014\034\020" +
+    "\056\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\004" +
+    "\030\013\064\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\012\004\030\011\054" +
-    "\013\051\014\055\001\001\000\002\001\001\000\004\012" +
-    "\072\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\012\004\030\011\061\013\051\014\055\001" +
-    "\001\000\012\004\030\011\060\013\051\014\055\001\001" +
-    "\000\002\001\001\000\002\001\001\000\014\004\030\011" +
-    "\064\013\051\014\055\020\063\001\001\000\002\001\001" +
-    "\000\002\001\001\000\014\004\030\011\064\013\051\014" +
-    "\055\020\066\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\005\074\001\001\000\016\003\015\004\012\006\014" +
-    "\007\013\010\020\015\021\001\001\000\002\001\001\000" +
-    "\002\001\001" });
+    "\012\004\030\011\072\013\027\014\034\001\001\000\002" +
+    "\001\001\000\004\005\074\001\001\000\016\003\015\004" +
+    "\012\006\014\007\013\010\020\015\021\001\001\000\002" +
+    "\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -233,7 +242,7 @@ class CUP$RelayParser$actions {
 		IdentifyerNode blockName = (IdentifyerNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
 		int blockContentleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int blockContentright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		ListNode blockContent = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		BlockContentListNode blockContent = (BlockContentListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		 RESULT = new BlockNode(blockName, blockContent); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -245,8 +254,8 @@ class CUP$RelayParser$actions {
               BlockNode RESULT =null;
 		int blockContentleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int blockContentright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		ListNode blockContent = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
-		 RESULT = new BlockNode("[untitled block]", blockContent); 
+		BlockContentListNode blockContent = (BlockContentListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		 RESULT = new BlockNode(new IdentifyerNode("[untitled block]"), blockContent); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -254,7 +263,7 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // block_content_list ::= 
             {
-              ListNode RESULT =null;
+              BlockContentListNode RESULT =null;
 		 RESULT = null; 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_list",3, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
@@ -263,14 +272,14 @@ class CUP$RelayParser$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // block_content_list ::= block_content_list block_content_line 
             {
-              ListNode RESULT =null;
+              BlockContentListNode RESULT =null;
 		int remainingNodesleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int remainingNodesright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
-		ListNode remainingNodes = (ListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		BlockContentListNode remainingNodes = (BlockContentListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
 		int listNodeleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int listNoderight = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		BlockContentItemNode listNode = (BlockContentItemNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new ListNode(listNode, remainingNodes); 
+		 RESULT = new BlockContentListNode(listNode, remainingNodes); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_list",3, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -306,7 +315,7 @@ class CUP$RelayParser$actions {
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		BlockNode item = (BlockNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = item; 
+		 RESULT = new BlockContentItemNode(item); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -318,7 +327,7 @@ class CUP$RelayParser$actions {
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		BlockPropertyNode item = (BlockPropertyNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = item; 
+		 RESULT = new BlockContentItemNode(item); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -330,7 +339,7 @@ class CUP$RelayParser$actions {
 		int itemleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int itemright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		CodeBlockNode item = (CodeBlockNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = item; 
+		 RESULT = new BlockContentItemNode(item); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -339,7 +348,7 @@ class CUP$RelayParser$actions {
           case 11: // block_content_item ::= 
             {
               BlockContentItemNode RESULT =null;
-		 RESULT = null; 
+		 RESULT = new BlockContentItemNode(); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block_content_item",5, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -351,7 +360,7 @@ class CUP$RelayParser$actions {
 		int statementListleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int statementListright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
 		StatementListNode statementList = (StatementListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
-		 RESULT = statementList; 
+		 RESULT = new CodeBlockNode(statementList); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_block",11, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -366,7 +375,7 @@ class CUP$RelayParser$actions {
 		int remainingNodesleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int remainingNodesright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		StatementListNode remainingNodes = (StatementListNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new ListNode(statement, remainingNodes); 
+		 RESULT = new StatementListNode(statement, remainingNodes); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement_list",12, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -378,16 +387,28 @@ class CUP$RelayParser$actions {
 		int statementleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).left;
 		int statementright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()).right;
 		CodeStatementNode statement = (CodeStatementNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new ListNode(statement, null); 
+		 RESULT = new StatementListNode(statement, null); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement_list",12, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // code_statement ::= KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN variable_access COMMA variable_access BLOCK_CLOSE 
+          case 15: // code_statement ::= KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression COMMA expression BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression COMMA expression BLOCK_CLOSE 
             {
               CodeStatementNode RESULT =null;
-
+		int fromXleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-9)).left;
+		int fromXright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-9)).right;
+		ExpressionNode fromX = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-9)).value;
+		int fromYleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-7)).left;
+		int fromYright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-7)).right;
+		ExpressionNode fromY = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-7)).value;
+		int toXleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).left;
+		int toXright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).right;
+		ExpressionNode toX = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
+		int toYleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
+		int toYright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
+		ExpressionNode toY = (ExpressionNode)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		 RESULT = new CodeStatementNode(StatementType.LINE, fromX, fromY, toX, toY); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement",13, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-12)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
