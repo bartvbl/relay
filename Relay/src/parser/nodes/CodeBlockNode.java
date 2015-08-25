@@ -1,5 +1,7 @@
 package parser.nodes;
 
+import parser.nodes.types.RelaySymbolType;
+
 public class CodeBlockNode extends RelaySymbol {
 
 	public final StatementListNode statementList;

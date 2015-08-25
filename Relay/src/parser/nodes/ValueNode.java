@@ -1,5 +1,8 @@
 package parser.nodes;
 
+import parser.nodes.types.ExpressionType;
+import parser.nodes.types.RelaySymbolType;
+
 public class ValueNode extends ExpressionNode {
 
 	public final double value;

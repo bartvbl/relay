@@ -1,4 +1,4 @@
-package parser.nodes;
+package parser.nodes.types;
 
 public enum StatementType {
 	LINE

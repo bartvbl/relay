@@ -1,5 +1,7 @@
 package parser.nodes;
 
+import parser.nodes.types.RelaySymbolType;
+
 public class ParameterListNode extends RelaySymbol {
 
 	public final ExpressionNode parameterExpression;

@@ -1,5 +1,7 @@
 package parser.nodes;
 
+import parser.nodes.types.RelaySymbolType;
+
 public class BlockNode extends RelaySymbol {
 
 	private final IdentifyerNode nameNode;

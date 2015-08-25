@@ -1,5 +1,6 @@
 package parser.nodes;
 
+import parser.nodes.types.RelaySymbolType;
 import relay.data.Unit;
 
 public class UnitNode extends RelaySymbol {

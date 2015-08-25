@@ -19,11 +19,11 @@ import parser.nodes.ParameterListNode;
 import parser.nodes.RootNode;
 import parser.nodes.BlockNode;
 import parser.nodes.StatementListNode;
-import parser.nodes.StatementType;
 import parser.nodes.SubtractionExpressionNode;
 import parser.nodes.UnitNode;
 import parser.nodes.ValueNode;
 import parser.nodes.VariableAccessNode;
+import parser.nodes.types.StatementType;
 import relay.data.Unit;
 import java_cup.runtime.XMLElement;
 

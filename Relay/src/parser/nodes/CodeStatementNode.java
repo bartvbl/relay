@@ -1,5 +1,8 @@
 package parser.nodes;
 
+import parser.nodes.types.RelaySymbolType;
+import parser.nodes.types.StatementType;
+
 public class CodeStatementNode extends RelaySymbol {
 
 	public final StatementType statementType;

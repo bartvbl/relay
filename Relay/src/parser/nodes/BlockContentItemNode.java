@@ -1,5 +1,8 @@
 package parser.nodes;
 
+import parser.nodes.types.BlockItemType;
+import parser.nodes.types.RelaySymbolType;
+
 public class BlockContentItemNode extends RelaySymbol {
 	public final BlockItemType itemType;
 	
