@@ -5,6 +5,7 @@
 
 package parser;
 
+import java_cup.runtime.*;
 import parser.nodes.AdditionExpressionNode;
 import parser.nodes.BlockContentItemNode;
 import parser.nodes.BlockContentListNode;
@@ -24,6 +25,7 @@ import parser.nodes.UnitNode;
 import parser.nodes.ValueNode;
 import parser.nodes.VariableAccessNode;
 import relay.data.Unit;
+import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20150326 (SVN rev 63) generated parser.
   */

@@ -21,5 +21,10 @@ public class VariableAccessNode extends ExpressionNode {
 	public double evaluate() {
 		return 0;
 	}
+	
+	@Override
+	public String toString() {
+		return "Variable access node";
+	}
 
 }

@@ -819,7 +819,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 24: break;
           case 4: 
-            { return symbol("identifyer", IDENTIFYER);
+            { return symbol("identifyer", IDENTIFYER, yytext());
             }
           case 25: break;
           case 5: 
@@ -827,7 +827,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 26: break;
           case 6: 
-            { return symbol("number", NUMBER);
+            { return symbol("number", NUMBER, new Double(Double.parseDouble(yytext())));
             }
           case 27: break;
           case 7: 

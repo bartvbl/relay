@@ -1,16 +1,14 @@
 package main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import java_cup.runtime.ComplexSymbolFactory;
-import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import java_cup.runtime.Symbol;
 import parser.Lexer;
 import parser.RelayParser;
-import parser.RelaySymbols;
-import parser.Scanner;
 import parser.nodes.RelaySymbol;
 
 public class Main {
@@ -20,7 +18,9 @@ public class Main {
 			File sourceFile = new File("res/testfile.rl");
 
 			ComplexSymbolFactory factory = new ComplexSymbolFactory();
-			Lexer lexer = new Lexer(new FileReader(sourceFile), factory);
+			Lexer lexer;
+			//printLexemes(sourceFile, factory);
+			lexer = new Lexer(new FileReader(sourceFile), factory);
 			System.out.println("----- PARSING START -----");
 			RelayParser parser = new RelayParser(lexer, factory);
 			RelaySymbol root = (RelaySymbol)parser.parse().value;
@@ -30,6 +30,17 @@ public class Main {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private static void printLexemes(File sourceFile,
+			ComplexSymbolFactory factory) throws FileNotFoundException,
+			IOException {
+		Lexer lexer = new Lexer(new FileReader(sourceFile), factory);
+		Symbol symbol = lexer.debug_next_token();
+		while(symbol.sym != 0) {
+			System.out.println(symbol.sym + ", " + symbol.value);
+			symbol = lexer.debug_next_token();
 		}
 	}
 

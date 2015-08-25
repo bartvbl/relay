@@ -14,10 +14,10 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 %line
 %column
 
+%cupsym RelaySymbols
 %cup
 %cupdebug
 
-%cupsym RelaySymbols
 
 %{
 	StringBuffer string = new StringBuffer();
@@ -115,8 +115,8 @@ SingleCharacter = [^\r\n\'\\]
 	"from"						{ return symbol("keyword_from", KEYWORD_FROM); }
 	"to"						{ return symbol("keyword_to", KEYWORD_TO); }
 	
-	{DoubleLiteral}				{ return symbol("number", NUMBER); }
-	{Identifier}				{ return symbol("identifyer", IDENTIFYER); }
+	{DoubleLiteral}				{ return symbol("number", NUMBER, new Double(Double.parseDouble(yytext()))); }
+	{Identifier}				{ return symbol("identifyer", IDENTIFYER, yytext()); }
 	{Comment}					{ return symbol("comment", NEW_LINE); }
 	{WhiteSpace}				{ /* ignore */ }
 }
