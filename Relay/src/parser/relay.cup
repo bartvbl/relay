@@ -105,7 +105,7 @@ code_block ::=
 
 code_statement_list ::=
 		code_statement:statement code_statement_list:remainingNodes 							{: RESULT = new StatementListNode(statement, remainingNodes); :}
-	|	code_statement:statement 																{: RESULT = new StatementListNode(statement, null); :}
+	|	code_statement:statement 																{: RESULT = new StatementListNode(statement); :}
 	;
 
 code_statement ::=

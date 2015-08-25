@@ -47,4 +47,9 @@ public class BlockContentItemNode extends RelaySymbol {
 		return "Block content item of type: " + itemType;
 	}
 
+	@Override
+	public RelaySymbol simplify() {
+		return this;
+	}
+
 }

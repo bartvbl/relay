@@ -24,4 +24,9 @@ public class AdditionExpressionNode extends ExpressionNode {
 		return "Addition Expression";
 	}
 
+	@Override
+	public RelaySymbol simplify() {
+		return this;
+	}
+
 }

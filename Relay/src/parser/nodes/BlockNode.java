@@ -15,4 +15,9 @@ public class BlockNode extends RelaySymbol {
 	public String toString() {
 		return "Block named \"" + nameNode.value + "\"";
 	}
+
+	@Override
+	public RelaySymbol simplify() {
+		return this;
+	}
 }
