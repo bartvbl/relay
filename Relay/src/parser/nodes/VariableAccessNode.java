@@ -6,13 +6,13 @@ public class VariableAccessNode extends ExpressionNode {
 	public final boolean furtherAccessRemains;
 
 	public VariableAccessNode(IdentifyerNode identifyer) {
-		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS);
+		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer});
 		this.identifyer = identifyer;
 		this.furtherAccessRemains = false;
 	}
 
 	public VariableAccessNode(IdentifyerNode identifyer, VariableAccessNode remainingAccess) {
-		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{remainingAccess});
+		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer, remainingAccess});
 		this.identifyer = identifyer;
 		this.furtherAccessRemains = true;
 	}
