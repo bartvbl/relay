@@ -1,6 +1,7 @@
 package parser.symbols;
 
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.RelayNode;
 
 public abstract class RelaySymbol {
 
@@ -16,4 +17,6 @@ public abstract class RelaySymbol {
 		this.type = type;
 		this.children = new RelaySymbol[]{};
 	}
+	
+	public abstract RelayNode compact();
 }

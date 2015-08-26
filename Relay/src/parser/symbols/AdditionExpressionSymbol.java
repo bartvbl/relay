@@ -2,6 +2,9 @@ package parser.symbols;
 
 import parser.symbols.types.ExpressionType;
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.AdditionExpressionNode;
+import relay.nodes.ExpressionNode;
+import relay.nodes.RelayNode;
 
 public class AdditionExpressionSymbol extends ExpressionSymbol {
 
@@ -22,6 +25,13 @@ public class AdditionExpressionSymbol extends ExpressionSymbol {
 	@Override
 	public String toString() {
 		return "Addition Expression";
+	}
+
+	@Override
+	public RelayNode compact() {
+		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
+		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();
+		return new AdditionExpressionNode(leftHand, rightHand);
 	}
 
 }

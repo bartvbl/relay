@@ -1,6 +1,7 @@
 package parser.symbols;
 
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.RelayNode;
 
 public class BlockContentListSymbol extends RelaySymbol {
 	public final BlockContentItemSymbol listItem;
@@ -26,19 +27,9 @@ public class BlockContentListSymbol extends RelaySymbol {
 	public String toString() {
 		return "Block content list";
 	}
-	
-	/*
-	public RelaySymbol simplify() {
-		if(remainingItems == null) {
-			return this;
-		} else {
-			//simplify the child
-			BlockContentListNode remainingNodesSimplified = (BlockContentListNode) remainingItems.simplify();
-			BlockContentItemNode[] totalContents = new BlockContentItemNode[remainingNodesSimplified.contentsList.length + 1];
-			System.arraycopy(remainingNodesSimplified.contentsList, 0, totalContents, 0, remainingNodesSimplified.contentsList.length);
-			totalContents[totalContents.length - 1] = listItem;
-			return new BlockContentListNode(totalContents, remainingItems, listItem);
-		}
+
+	@Override
+	public RelayNode compact() {
+		throw new RuntimeException("Can't compact a block content list, has to be done by a Block symbol.");
 	}
-	*/
 }

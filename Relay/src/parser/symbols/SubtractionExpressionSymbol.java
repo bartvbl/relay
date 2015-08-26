@@ -2,6 +2,10 @@ package parser.symbols;
 
 import parser.symbols.types.ExpressionType;
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.AdditionExpressionNode;
+import relay.nodes.ExpressionNode;
+import relay.nodes.RelayNode;
+import relay.nodes.SubtractionExpressionNode;
 
 
 public class SubtractionExpressionSymbol extends ExpressionSymbol {
@@ -18,6 +22,13 @@ public class SubtractionExpressionSymbol extends ExpressionSymbol {
 	@Override
 	public double evaluate() {
 		return leftHandSide.evaluate() - rightHandSide.evaluate();
+	}
+
+	@Override
+	public RelayNode compact() {
+		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
+		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();
+		return new SubtractionExpressionNode(leftHand, rightHand);
 	}
 
 }

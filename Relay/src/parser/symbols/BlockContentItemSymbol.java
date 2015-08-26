@@ -2,6 +2,7 @@ package parser.symbols;
 
 import parser.symbols.types.BlockItemType;
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.RelayNode;
 
 public class BlockContentItemSymbol extends RelaySymbol {
 	public final BlockItemType itemType;
@@ -45,6 +46,22 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	@Override
 	public String toString() {
 		return "Block content item of type: " + itemType;
+	}
+
+	@Override
+	public RelayNode compact() {
+		switch(itemType) {
+		case BLOCK:
+			return blockNode.compact();
+		case CODE_BLOCK:
+			return codeBlockNode.compact();
+		case EMPTY:
+			throw new RuntimeException("An empty node can not be compacted!");
+		case PROPERTY:
+			return propertyNode.compact();
+		default:
+			throw new RuntimeException("Forgot to implement another type!");
+		}
 	}
 
 }
