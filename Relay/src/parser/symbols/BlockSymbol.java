@@ -1,12 +1,12 @@
-package parser.nodes;
+package parser.symbols;
 
-import parser.nodes.types.RelaySymbolType;
+import parser.symbols.types.RelaySymbolType;
 
 public class BlockSymbol extends RelaySymbol {
 
-	private final IdentifyerSYmbol nameNode;
+	private final IdentifyerSymbol nameNode;
 
-	public BlockSymbol(IdentifyerSYmbol blockName, BlockContentListSymbol childList) {
+	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList) {
 		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
 	}

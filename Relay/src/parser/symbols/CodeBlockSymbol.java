@@ -1,6 +1,6 @@
-package parser.nodes;
+package parser.symbols;
 
-import parser.nodes.types.RelaySymbolType;
+import parser.symbols.types.RelaySymbolType;
 
 public class CodeBlockSymbol extends RelaySymbol {
 

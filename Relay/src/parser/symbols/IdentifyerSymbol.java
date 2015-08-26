@@ -1,12 +1,12 @@
-package parser.nodes;
+package parser.symbols;
 
-import parser.nodes.types.RelaySymbolType;
+import parser.symbols.types.RelaySymbolType;
 
-public class IdentifyerSYmbol extends RelaySymbol {
+public class IdentifyerSymbol extends RelaySymbol {
 
 	public final String value;
 
-	public IdentifyerSYmbol(String identifyer) {
+	public IdentifyerSymbol(String identifyer) {
 		super(RelaySymbolType.IDENTIFYER);
 		this.value = identifyer;
 	}

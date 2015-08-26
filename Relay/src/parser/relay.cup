@@ -1,21 +1,21 @@
 import java_cup.runtime.*;
-import parser.nodes.AdditionExpressionNode;
-import parser.nodes.BlockContentItemNode;
-import parser.nodes.BlockContentListNode;
-import parser.nodes.BlockPropertyNode;
-import parser.nodes.CodeBlockNode;
-import parser.nodes.CodeStatementNode;
-import parser.nodes.ExpressionNode;
-import parser.nodes.FunctionCallNode;
-import parser.nodes.IdentifyerNode;
-import parser.nodes.ParameterListNode;
-import parser.nodes.RootNode;
-import parser.nodes.BlockNode;
-import parser.nodes.StatementListNode;
-import parser.nodes.StatementType;
-import parser.nodes.UnitNode;
-import parser.nodes.ValueNode;
-import parser.nodes.VariableAccessNode;
+import parser.symbols.AdditionExpressionSymbol;
+import parser.symbols.BlockContentItemSymbol;
+import parser.symbols.BlockContentListSymbol;
+import parser.symbols.BlockPropertySymbol;
+import parser.symbols.CodeBlockSymbol;
+import parser.symbols.CodeStatementSymbol;
+import parser.symbols.ExpressionSymbol;
+import parser.symbols.FunctionCallSymbol;
+import parser.symbols.IdentifyerSymbol;
+import parser.symbols.ParameterListSymbol;
+import parser.symbols.RootSymbol;
+import parser.symbols.BlockSymbol;
+import parser.symbols.StatementListSymbol;
+import parser.symbols.types.StatementType;
+import parser.symbols.UnitSymbol;
+import parser.symbols.ValueSymbol;
+import parser.symbols.VariableAccessSymbol;
 import relay.data.Unit;
 
 /* terminals */
@@ -34,8 +34,8 @@ terminal BLOCK_CLOSE;
 terminal CODE_BLOCK_OPEN;
 terminal CODE_BLOCK_CLOSE;
 
-terminal UnitNode UNIT_PIXELS;
-terminal UnitNode UNIT_PERCENT;
+terminal UnitSymbol UNIT_PIXELS;
+terminal UnitSymbol UNIT_PERCENT;
 
 terminal OPERATOR_PLUS;
 terminal OPERATOR_MINUS;
@@ -46,21 +46,21 @@ terminal KEYWORD_TO;
 
 /* non-terminals */
 
-non terminal RootNode 				goal;
-non terminal BlockNode 				block;
-non terminal IdentifyerNode 		identifyer;
-non terminal BlockContentListNode	block_content_list;
-non terminal BlockContentItemNode 	block_content_line;
-non terminal BlockContentItemNode 	block_content_item;
-non terminal BlockPropertyNode 		block_property;
-non terminal ExpressionNode 		expression;
-non terminal UnitNode 				unit;
-non terminal VariableAccessNode 	variable_access;
-non terminal FunctionCallNode 		function_call;
-non terminal CodeBlockNode 			code_block;
-non terminal StatementListNode 		code_statement_list;
-non terminal CodeStatementNode 		code_statement;
-non terminal ParameterListNode 		parameter_list;
+non terminal RootSymbol				goal;
+non terminal BlockSymbol			block;
+non terminal IdentifyerSymbol		identifyer;
+non terminal BlockContentListSymbol	block_content_list;
+non terminal BlockContentItemSymbol	block_content_line;
+non terminal BlockContentItemSymbol	block_content_item;
+non terminal BlockPropertySymbol	block_property;
+non terminal ExpressionSymbol 		expression;
+non terminal UnitSymbol				unit;
+non terminal VariableAccessSymbol	variable_access;
+non terminal FunctionCallSymbol		function_call;
+non terminal CodeBlockSymbol 		code_block;
+non terminal StatementListSymbol	code_statement_list;
+non terminal CodeStatementSymbol	code_statement;
+non terminal ParameterListSymbol	parameter_list;
 
 /* precedence rules */
 
@@ -74,17 +74,17 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block:block 																			{: RESULT = new RootNode(block); :}
+		block:block 																			{: RESULT = new RootSymbol(block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockNode(blockName, blockContent); :}
-	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockNode(new IdentifyerNode("[untitled block]"), blockContent); :}
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockSymbol(blockName, blockContent); :}
+	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingNodes block_content_line:listNode							{: RESULT = new BlockContentListNode(listNode, remainingNodes); :}
+	|	block_content_list:remainingSymbols block_content_line:listSymbol						{: RESULT = new BlockContentListSymbol(listSymbol, remainingSymbols); :}
 	;
 
 block_content_line ::=
@@ -93,56 +93,56 @@ block_content_line ::=
 	;
 
 block_content_item ::=
-		block:item 																				{: RESULT = new BlockContentItemNode(item); :}
-	|	block_property:item 																	{: RESULT = new BlockContentItemNode(item); :}
-	|	code_block:item 																		{: RESULT = new BlockContentItemNode(item); :}
-	|	/* empty */																				{: RESULT = new BlockContentItemNode(); :}
+		block:item 																				{: RESULT = new BlockContentItemSymbol(item); :}
+	|	block_property:item 																	{: RESULT = new BlockContentItemSymbol(item); :}
+	|	code_block:item 																		{: RESULT = new BlockContentItemSymbol(item); :}
+	|	/* empty */																				{: RESULT = new BlockContentItemSymbol(); :}
 	;
 
 code_block ::=
-		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = new CodeBlockNode(statementList); :}
+		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = new CodeBlockSymbol(statementList); :}
 	;
 
 code_statement_list ::=
-		code_statement:statement code_statement_list:remainingNodes 							{: RESULT = new StatementListNode(statement, remainingNodes); :}
-	|	code_statement:statement 																{: RESULT = new StatementListNode(statement); :}
+		code_statement:statement code_statement_list:remainingSymbols 							{: RESULT = new StatementListSymbol(statement, remainingSymbols); :}
+	|	code_statement:statement 																{: RESULT = new StatementListSymbol(statement); :}
 	;
 
 code_statement ::=
-		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new CodeStatementNode(StatementType.LINE, fromX, fromY, toX, toY); :}
+		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new CodeStatementSymbol(StatementType.LINE, fromX, fromY, toX, toY); :}
 	;
 
 block_property ::=
-		identifyer:identifyer COLON expression:expression										{: RESULT = new BlockPropertyNode(identifyer, expression); :}
+		identifyer:identifyer COLON expression:expression										{: RESULT = new BlockPropertySymbol(identifyer, expression); :}
 	;
 
 expression ::=
-		NUMBER:value unit:unit 																	{: RESULT = new ValueNode(value, unit); :}
-	|	expression:lefthandside OPERATOR_PLUS expression:righthandside							{: RESULT = new AdditionExpressionNode(lefthandside, righthandside); :}
-	|	expression:lefthandside OPERATOR_MINUS expression:righthandside							{: RESULT = new SubtractionExpressionNode(lefthandside, righthandside); :}
+		NUMBER:value unit:unit 																	{: RESULT = new ValueSymbol(value, unit); :}
+	|	expression:lefthandside OPERATOR_PLUS expression:righthandside							{: RESULT = new AdditionExpressionSymbol(lefthandside, righthandside); :}
+	|	expression:lefthandside OPERATOR_MINUS expression:righthandside							{: RESULT = new SubtractionExpressionSymbol(lefthandside, righthandside); :}
 	|	variable_access:variable_access 														{: RESULT = variable_access; :}
 	|	function_call:call																		{: RESULT = call; :}
 	;
 
 function_call ::=
-		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE 					{: RESULT = new FunctionCallNode(identifyer, parameters); :}
+		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE 					{: RESULT = new FunctionCallSymbol(identifyer, parameters); :}
 	;
 
 parameter_list ::=
-		expression:expression COMMA parameter_list:remainingNodes 								{: RESULT = new ParameterListNode(expression, remainingNodes); :}
+		expression:expression COMMA parameter_list:remainingSymbols 							{: RESULT = new ParameterListSymbol(expression, remainingSymbols); :}
 	|	/* empty */ 																			{: RESULT = null; :}
 	;
 
 variable_access ::=
-		identifyer:identifyer DOT variable_access:remainingAccess								{: RESULT = new VariableAccessNode(identifyer, remainingAccess); :}
-	|	identifyer:identifyer 																	{: RESULT = new VariableAccessNode(identifyer); :}
+		identifyer:identifyer DOT variable_access:remainingAccess								{: RESULT = new VariableAccessSymbol(identifyer, remainingAccess); :}
+	|	identifyer:identifyer 																	{: RESULT = new VariableAccessSymbol(identifyer); :}
 	;
 
 unit ::=
-		UNIT_PIXELS 																			{: RESULT = new UnitNode(Unit.PIXELS); :}
-	|	UNIT_PERCENT 																			{: RESULT = new UnitNode(Unit.PERCENT); :}
+		UNIT_PIXELS 																			{: RESULT = new UnitSymbol(Unit.PIXELS); :}
+	|	UNIT_PERCENT 																			{: RESULT = new UnitSymbol(Unit.PERCENT); :}
 	;
 
 identifyer ::=
-		IDENTIFYER:identifyer 																	{: RESULT = new IdentifyerNode(identifyer); :}
+		IDENTIFYER:identifyer 																	{: RESULT = new IdentifyerSymbol(identifyer); :}
 	;

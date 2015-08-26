@@ -1,7 +1,7 @@
-package parser.nodes;
+package parser.symbols;
 
-import parser.nodes.types.ExpressionType;
-import parser.nodes.types.RelaySymbolType;
+import parser.symbols.types.ExpressionType;
+import parser.symbols.types.RelaySymbolType;
 
 public class ValueSymbol extends ExpressionSymbol {
 

@@ -1,13 +1,13 @@
-package parser.nodes;
+package parser.symbols;
 
-import parser.nodes.types.RelaySymbolType;
+import parser.symbols.types.RelaySymbolType;
 
 public class BlockPropertySymbol extends RelaySymbol {
 
-	public final IdentifyerSYmbol identifyer;
+	public final IdentifyerSymbol identifyer;
 	public final ExpressionSymbol expression;
 
-	public BlockPropertySymbol(IdentifyerSYmbol identifyer, ExpressionSymbol expression) {
+	public BlockPropertySymbol(IdentifyerSymbol identifyer, ExpressionSymbol expression) {
 		super(RelaySymbolType.BLOCK_PROPERTY, new RelaySymbol[]{identifyer, expression});
 		this.identifyer = identifyer;
 		this.expression = expression;

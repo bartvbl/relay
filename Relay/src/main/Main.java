@@ -9,7 +9,7 @@ import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import parser.Lexer;
 import parser.RelayParser;
-import parser.nodes.RelaySymbol;
+import parser.symbols.RelaySymbol;
 
 public class Main {
 
