@@ -3,11 +3,11 @@ package parser.nodes;
 import parser.nodes.types.RelaySymbolType;
 import relay.data.Unit;
 
-public class UnitNode extends RelaySymbol {
+public class UnitSymbol extends RelaySymbol {
 
 	public final Unit value;
 
-	public UnitNode(Unit unit) {
+	public UnitSymbol(Unit unit) {
 		super(RelaySymbolType.UNIT);
 		this.value = unit;
 	}

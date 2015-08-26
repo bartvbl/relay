@@ -2,11 +2,11 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class BlockNode extends RelaySymbol {
+public class BlockSymbol extends RelaySymbol {
 
-	private final IdentifyerNode nameNode;
+	private final IdentifyerSYmbol nameNode;
 
-	public BlockNode(IdentifyerNode blockName, BlockContentListNode childList) {
+	public BlockSymbol(IdentifyerSYmbol blockName, BlockContentListSymbol childList) {
 		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
 	}
@@ -16,8 +16,4 @@ public class BlockNode extends RelaySymbol {
 		return "Block named \"" + nameNode.value + "\"";
 	}
 
-	@Override
-	public RelaySymbol simplify() {
-		return this;
-	}
 }

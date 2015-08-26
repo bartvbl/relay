@@ -2,20 +2,20 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class BlockContentListNode extends RelaySymbol {
-	public final BlockContentItemNode listItem;
-	public final BlockContentListNode remainingItems;
-	public final BlockContentItemNode[] contentsList;
+public class BlockContentListSymbol extends RelaySymbol {
+	public final BlockContentItemSymbol listItem;
+	public final BlockContentListSymbol remainingItems;
+	public final BlockContentItemSymbol[] contentsList;
 	
-	public BlockContentListNode(BlockContentItemNode listItem, BlockContentListNode remainingItems) {
+	public BlockContentListSymbol(BlockContentItemSymbol listItem, BlockContentListSymbol remainingItems) {
 		super(RelaySymbolType.BLOCK_CONTENT_LIST_ITEM, new RelaySymbol[]{listItem, remainingItems});
 		this.listItem = listItem;
 		this.remainingItems = remainingItems;
-		this.contentsList = new BlockContentItemNode[]{listItem};
+		this.contentsList = new BlockContentItemSymbol[]{listItem};
 	}
 
-	public BlockContentListNode(BlockContentItemNode[] totalContents,
-			BlockContentListNode remaining, BlockContentItemNode item) {
+	public BlockContentListSymbol(BlockContentItemSymbol[] totalContents,
+			BlockContentListSymbol remaining, BlockContentItemSymbol item) {
 		super(RelaySymbolType.BLOCK_CONTENT_LIST_ITEM, totalContents);
 		this.listItem = item;
 		this.remainingItems = remaining;
@@ -26,8 +26,8 @@ public class BlockContentListNode extends RelaySymbol {
 	public String toString() {
 		return "Block content list";
 	}
-
-	@Override
+	
+	/*
 	public RelaySymbol simplify() {
 		if(remainingItems == null) {
 			return this;
@@ -40,5 +40,5 @@ public class BlockContentListNode extends RelaySymbol {
 			return new BlockContentListNode(totalContents, remainingItems, listItem);
 		}
 	}
-	
+	*/
 }

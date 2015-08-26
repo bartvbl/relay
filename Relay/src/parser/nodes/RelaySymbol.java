@@ -16,7 +16,4 @@ public abstract class RelaySymbol {
 		this.type = type;
 		this.children = new RelaySymbol[]{};
 	}
-	
-	public abstract RelaySymbol simplify();
-
 }

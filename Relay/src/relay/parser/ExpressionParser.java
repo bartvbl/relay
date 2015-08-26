@@ -2,7 +2,7 @@ package relay.parser;
 
 import java.util.ArrayList;
 
-import relay.data.Expression;
+import relay.nodes.Expression;
 import relay.parser.errors.RelayParseException;
 import relay.types.ExpressionTokenType;
 

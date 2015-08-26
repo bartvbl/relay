@@ -3,18 +3,18 @@ package parser.nodes;
 import parser.nodes.types.ExpressionType;
 import parser.nodes.types.RelaySymbolType;
 
-public class VariableAccessNode extends ExpressionNode {
+public class VariableAccessSymbol extends ExpressionSymbol {
 
-	public final IdentifyerNode identifyer;
+	public final IdentifyerSYmbol identifyer;
 	public final boolean furtherAccessRemains;
 
-	public VariableAccessNode(IdentifyerNode identifyer) {
+	public VariableAccessSymbol(IdentifyerSYmbol identifyer) {
 		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer});
 		this.identifyer = identifyer;
 		this.furtherAccessRemains = false;
 	}
 
-	public VariableAccessNode(IdentifyerNode identifyer, VariableAccessNode remainingAccess) {
+	public VariableAccessSymbol(IdentifyerSYmbol identifyer, VariableAccessSymbol remainingAccess) {
 		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer, remainingAccess});
 		this.identifyer = identifyer;
 		this.furtherAccessRemains = true;

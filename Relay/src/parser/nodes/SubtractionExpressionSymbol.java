@@ -4,12 +4,12 @@ import parser.nodes.types.ExpressionType;
 import parser.nodes.types.RelaySymbolType;
 
 
-public class SubtractionExpressionNode extends ExpressionNode {
+public class SubtractionExpressionSymbol extends ExpressionSymbol {
 
-	private final ExpressionNode leftHandSide;
-	private final ExpressionNode rightHandSide;
+	private final ExpressionSymbol leftHandSide;
+	private final ExpressionSymbol rightHandSide;
 
-	public SubtractionExpressionNode(ExpressionNode leftHandSide, ExpressionNode rightHandSide) {
+	public SubtractionExpressionSymbol(ExpressionSymbol leftHandSide, ExpressionSymbol rightHandSide) {
 		super(RelaySymbolType.EXPRESSION, ExpressionType.SUBTRACTION, new RelaySymbol[]{leftHandSide, rightHandSide});
 		this.leftHandSide = leftHandSide;
 		this.rightHandSide = rightHandSide;

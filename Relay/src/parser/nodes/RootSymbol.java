@@ -2,10 +2,10 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class RootNode extends RelaySymbol {
-	public final BlockNode rootBlock;
+public class RootSymbol extends RelaySymbol {
+	public final BlockSymbol rootBlock;
 
-	public RootNode(BlockNode blockSymbol) {
+	public RootSymbol(BlockSymbol blockSymbol) {
 		super(RelaySymbolType.ROOT, new RelaySymbol[]{blockSymbol});
 		this.rootBlock = blockSymbol;
 	}

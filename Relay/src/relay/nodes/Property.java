@@ -1,4 +1,4 @@
-package relay.data;
+package relay.nodes;
 
 import relay.types.PropertyType;
 

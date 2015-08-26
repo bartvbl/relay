@@ -5,8 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import relay.data.Block;
-import relay.data.Property;
+import relay.nodes.Block;
+import relay.nodes.Property;
 
 public class TreeVisualiser {
 	public TreeVisualiser(Block root) {

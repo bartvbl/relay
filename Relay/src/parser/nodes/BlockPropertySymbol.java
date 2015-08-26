@@ -2,12 +2,12 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class BlockPropertyNode extends RelaySymbol {
+public class BlockPropertySymbol extends RelaySymbol {
 
-	public final IdentifyerNode identifyer;
-	public final ExpressionNode expression;
+	public final IdentifyerSYmbol identifyer;
+	public final ExpressionSymbol expression;
 
-	public BlockPropertyNode(IdentifyerNode identifyer, ExpressionNode expression) {
+	public BlockPropertySymbol(IdentifyerSYmbol identifyer, ExpressionSymbol expression) {
 		super(RelaySymbolType.BLOCK_PROPERTY, new RelaySymbol[]{identifyer, expression});
 		this.identifyer = identifyer;
 		this.expression = expression;

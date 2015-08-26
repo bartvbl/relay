@@ -2,11 +2,11 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class IdentifyerNode extends RelaySymbol {
+public class IdentifyerSYmbol extends RelaySymbol {
 
 	public final String value;
 
-	public IdentifyerNode(String identifyer) {
+	public IdentifyerSYmbol(String identifyer) {
 		super(RelaySymbolType.IDENTIFYER);
 		this.value = identifyer;
 	}

@@ -1,4 +1,4 @@
-package relay.data;
+package relay.nodes;
 
 import java.util.ArrayList;
 

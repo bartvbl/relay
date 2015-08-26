@@ -3,14 +3,14 @@ package parser.nodes;
 import parser.nodes.types.BlockItemType;
 import parser.nodes.types.RelaySymbolType;
 
-public class BlockContentItemNode extends RelaySymbol {
+public class BlockContentItemSymbol extends RelaySymbol {
 	public final BlockItemType itemType;
 	
-	public final BlockNode blockNode;
-	public final BlockPropertyNode propertyNode;
-	public final CodeBlockNode codeBlockNode;
+	public final BlockSymbol blockNode;
+	public final BlockPropertySymbol propertyNode;
+	public final CodeBlockSymbol codeBlockNode;
 
-	public BlockContentItemNode(BlockNode item) {
+	public BlockContentItemSymbol(BlockSymbol item) {
 		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = item;
 		this.propertyNode = null;
@@ -18,7 +18,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.itemType = BlockItemType.BLOCK;
 	}
 
-	public BlockContentItemNode(BlockPropertyNode item) {
+	public BlockContentItemSymbol(BlockPropertySymbol item) {
 		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = item;
@@ -26,7 +26,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.itemType = BlockItemType.PROPERTY;
 	}
 
-	public BlockContentItemNode(CodeBlockNode item) {
+	public BlockContentItemSymbol(CodeBlockSymbol item) {
 		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = null;
@@ -34,7 +34,7 @@ public class BlockContentItemNode extends RelaySymbol {
 		this.itemType = BlockItemType.CODE_BLOCK;
 	}
 	
-	public BlockContentItemNode() {
+	public BlockContentItemSymbol() {
 		super(RelaySymbolType.BLOCK_CONTENT_ITEM);
 		this.blockNode = null;
 		this.propertyNode = null;
@@ -45,11 +45,6 @@ public class BlockContentItemNode extends RelaySymbol {
 	@Override
 	public String toString() {
 		return "Block content item of type: " + itemType;
-	}
-
-	@Override
-	public RelaySymbol simplify() {
-		return this;
 	}
 
 }

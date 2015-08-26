@@ -3,12 +3,12 @@ package parser.nodes;
 import parser.nodes.types.ExpressionType;
 import parser.nodes.types.RelaySymbolType;
 
-public class ValueNode extends ExpressionNode {
+public class ValueSymbol extends ExpressionSymbol {
 
 	public final double value;
-	public final UnitNode unit;
+	public final UnitSymbol unit;
 
-	public ValueNode(Double value, UnitNode unit) {
+	public ValueSymbol(Double value, UnitSymbol unit) {
 		super(RelaySymbolType.EXPRESSION, ExpressionType.VALUE);
 		if(value == null) {
 			this.value = 0;

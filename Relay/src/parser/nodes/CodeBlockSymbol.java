@@ -2,11 +2,11 @@ package parser.nodes;
 
 import parser.nodes.types.RelaySymbolType;
 
-public class CodeBlockNode extends RelaySymbol {
+public class CodeBlockSymbol extends RelaySymbol {
 
-	public final StatementListNode statementList;
+	public final StatementListSymbol statementList;
 
-	public CodeBlockNode(StatementListNode statementList) {
+	public CodeBlockSymbol(StatementListSymbol statementList) {
 		super(RelaySymbolType.CODE_BLOCK, new RelaySymbol[]{statementList});
 		this.statementList = statementList;
 	}

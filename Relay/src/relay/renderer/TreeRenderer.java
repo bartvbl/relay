@@ -2,7 +2,7 @@ package relay.renderer;
 
 import org.lwjgl.opengl.Display;
 
-import relay.data.Block;
+import relay.nodes.Block;
 
 public class TreeRenderer {
 

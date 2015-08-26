@@ -3,12 +3,12 @@ package parser.nodes;
 import parser.nodes.types.ExpressionType;
 import parser.nodes.types.RelaySymbolType;
 
-public class FunctionCallNode extends ExpressionNode {
+public class FunctionCallSymbol extends ExpressionSymbol {
 
 	public final String functionName;
-	public final ParameterListNode parameters;
+	public final ParameterListSymbol parameters;
 
-	public FunctionCallNode(String identifyer, ParameterListNode parameters) {
+	public FunctionCallSymbol(String identifyer, ParameterListSymbol parameters) {
 		super(RelaySymbolType.EXPRESSION, ExpressionType.FUNCTION_CALL, new RelaySymbol[]{parameters});
 		this.functionName = identifyer;
 		this.parameters = parameters;

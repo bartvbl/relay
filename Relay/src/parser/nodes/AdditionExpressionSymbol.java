@@ -3,12 +3,12 @@ package parser.nodes;
 import parser.nodes.types.ExpressionType;
 import parser.nodes.types.RelaySymbolType;
 
-public class AdditionExpressionNode extends ExpressionNode {
+public class AdditionExpressionSymbol extends ExpressionSymbol {
 
-	private final ExpressionNode leftHandSide;
-	private final ExpressionNode rightHandSide;
+	private final ExpressionSymbol leftHandSide;
+	private final ExpressionSymbol rightHandSide;
 
-	public AdditionExpressionNode(ExpressionNode leftHandSide, ExpressionNode rightHandSide) {
+	public AdditionExpressionSymbol(ExpressionSymbol leftHandSide, ExpressionSymbol rightHandSide) {
 		super(RelaySymbolType.EXPRESSION, ExpressionType.ADDITION, new RelaySymbol[]{leftHandSide, rightHandSide});
 		this.leftHandSide = leftHandSide;
 		this.rightHandSide = rightHandSide;
@@ -22,11 +22,6 @@ public class AdditionExpressionNode extends ExpressionNode {
 	@Override
 	public String toString() {
 		return "Addition Expression";
-	}
-
-	@Override
-	public RelaySymbol simplify() {
-		return this;
 	}
 
 }
