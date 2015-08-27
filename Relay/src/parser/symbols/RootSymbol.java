@@ -1,6 +1,9 @@
 package parser.symbols;
 
 import parser.symbols.types.RelaySymbolType;
+import relay.nodes.BlockNode;
+import relay.nodes.RelayNode;
+import relay.nodes.RootNode;
 
 public class RootSymbol extends RelaySymbol {
 	public final BlockSymbol rootBlock;
@@ -13,5 +16,11 @@ public class RootSymbol extends RelaySymbol {
 	@Override
 	public String toString() {
 		return "Parse tree root node";
+	}
+
+	@Override
+	public RelayNode compact() {
+		BlockNode mainBlock = (BlockNode) rootBlock.compact();
+		return new RootNode(mainBlock);
 	}
 }

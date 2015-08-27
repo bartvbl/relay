@@ -19,9 +19,4 @@ public class BlockSymbol extends RelaySymbol {
 		return "Block named \"" + nameNode.value + "\"";
 	}
 
-	@Override
-	public RelayNode compact() {
-		return null;
-	}
-
 }
