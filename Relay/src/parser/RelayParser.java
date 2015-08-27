@@ -5,7 +5,6 @@
 
 package parser;
 
-import java_cup.runtime.*;
 import parser.symbols.AdditionExpressionSymbol;
 import parser.symbols.BlockContentItemSymbol;
 import parser.symbols.BlockContentListSymbol;
@@ -15,17 +14,16 @@ import parser.symbols.CodeStatementSymbol;
 import parser.symbols.ExpressionSymbol;
 import parser.symbols.FunctionCallSymbol;
 import parser.symbols.IdentifyerSymbol;
+import parser.symbols.LineStatementSymbol;
 import parser.symbols.ParameterListSymbol;
 import parser.symbols.RootSymbol;
 import parser.symbols.BlockSymbol;
 import parser.symbols.StatementListSymbol;
 import parser.symbols.SubtractionExpressionSymbol;
-import parser.symbols.types.StatementType;
 import parser.symbols.UnitSymbol;
 import parser.symbols.ValueSymbol;
 import parser.symbols.VariableAccessSymbol;
 import relay.data.Unit;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20150326 (SVN rev 63) generated parser.
   */
@@ -415,7 +413,7 @@ class CUP$RelayParser$actions {
 		int toYleft = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).left;
 		int toYright = ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).right;
 		ExpressionSymbol toY = (ExpressionSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
-		 RESULT = new CodeStatementSymbol(StatementType.LINE, fromX, fromY, toX, toY); 
+		 RESULT = new LineStatementSymbol(fromX, fromY, toX, toY); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("code_statement",13, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-12)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;

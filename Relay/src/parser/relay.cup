@@ -8,11 +8,12 @@ import parser.symbols.CodeStatementSymbol;
 import parser.symbols.ExpressionSymbol;
 import parser.symbols.FunctionCallSymbol;
 import parser.symbols.IdentifyerSymbol;
+import parser.symbols.LineStatementSymbol;
 import parser.symbols.ParameterListSymbol;
 import parser.symbols.RootSymbol;
 import parser.symbols.BlockSymbol;
 import parser.symbols.StatementListSymbol;
-import parser.symbols.types.StatementType;
+import parser.symbols.SubtractionExpressionSymbol;
 import parser.symbols.UnitSymbol;
 import parser.symbols.ValueSymbol;
 import parser.symbols.VariableAccessSymbol;
@@ -109,7 +110,7 @@ code_statement_list ::=
 	;
 
 code_statement ::=
-		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new CodeStatementSymbol(StatementType.LINE, fromX, fromY, toX, toY); :}
+		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new LineStatementSymbol(fromX, fromY, toX, toY); :}
 	;
 
 block_property ::=
