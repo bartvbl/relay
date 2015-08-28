@@ -13,5 +13,10 @@ public class ValueNode extends ExpressionNode {
 		this.value = value;
 		this.unit = unit;
 	}
+	
+	@Override
+	public String toString() {
+		return "Value node: " + value + " " + unit;
+	}
 
 }

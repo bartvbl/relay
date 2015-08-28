@@ -8,10 +8,15 @@ public class AdditionExpressionNode extends ExpressionNode {
 	public final ExpressionNode rightHandSide;
 
 	public AdditionExpressionNode(ExpressionNode leftHand, ExpressionNode rightHand) {
-		super(ExpressionType.ADDITION);
+		super(ExpressionType.ADDITION, new RelayNode[]{leftHand, rightHand});
 		
 		this.leftHandSide = leftHand;
 		this.rightHandSide = rightHand;
+	}
+	
+	@Override
+	public String toString() {
+		return "Addition expression";
 	}
 
 }

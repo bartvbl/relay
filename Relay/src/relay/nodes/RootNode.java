@@ -7,4 +7,9 @@ public class RootNode extends RelayNode {
 		super(RelayNodeType.ROOT, new RelayNode[]{rootBlock});
 		this.rootBlock = rootBlock;
 	}
+	
+	@Override
+	public String toString() {
+		return "Root node";
+	}
 }

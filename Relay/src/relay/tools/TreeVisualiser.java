@@ -5,11 +5,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import relay.nodes.Block;
-import relay.nodes.Property;
+import relay.nodes.RelayNode;
 
 public class TreeVisualiser {
-	public TreeVisualiser(Block root) {
+	public TreeVisualiser(RelayNode root) {
 		JFrame window = new JFrame("Relay tree");
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode("root");
 		buildTree(root, node);
@@ -22,18 +21,11 @@ public class TreeVisualiser {
 		window.setSize(500, 500);
 	}
 
-	private void buildTree(Block root, DefaultMutableTreeNode parent) {
-		for(Block block : root.getChildren()) {
-			DefaultMutableTreeNode node = new DefaultMutableTreeNode(block.name);
+	private void buildTree(RelayNode root, DefaultMutableTreeNode parent) {
+		for(RelayNode block : root.children) {
+			DefaultMutableTreeNode node = new DefaultMutableTreeNode(block);
 			parent.add(node);
-			addProperties(block, node);
 			buildTree(block, node);
-		}
-	}
-
-	private void addProperties(Block block, DefaultMutableTreeNode node) {
-		for(Property property : block.getProperties()) {
-			node.add(new DefaultMutableTreeNode(property.type + ": " + property.value));
 		}
 	}
 }

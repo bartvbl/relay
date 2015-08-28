@@ -11,6 +11,7 @@ import parser.Lexer;
 import parser.RelayParser;
 import parser.symbols.RelaySymbol;
 import relay.nodes.RelayNode;
+import relay.tools.TreeVisualiser;
 
 public class Main {
 
@@ -27,6 +28,7 @@ public class Main {
 			RelaySymbol root = (RelaySymbol)parser.parse().value;
 			//dumpParseTree(root, 0);
 			RelayNode rootNode = root.compact();
+			new TreeVisualiser(rootNode);
 			System.out.println("Complete.");
 		} catch (IOException e) {
 			e.printStackTrace();

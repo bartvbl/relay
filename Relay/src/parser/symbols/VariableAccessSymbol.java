@@ -43,9 +43,11 @@ public class VariableAccessSymbol extends ExpressionSymbol {
 		ArrayList<String> identifyers = new ArrayList<String>();
 
 		while(currentVariable.furtherAccessRemains) {
+			System.out.println("Adding " + identifyer.value);
 			identifyers.add(identifyer.value);
 			currentVariable = currentVariable.remainingAccess;			
 		}
+		identifyers.add(currentVariable.identifyer.value); // add the final one
 		
 		return new VariableAccessNode(identifyers.toArray(new String[identifyers.size()]));
 	}

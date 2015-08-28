@@ -2,8 +2,8 @@ package parser.symbols;
 
 import parser.symbols.types.StatementType;
 import relay.nodes.CodeStatementNode;
+import relay.nodes.ExpressionNode;
 import relay.nodes.LineStatementNode;
-import relay.nodes.RelayNode;
 
 public class LineStatementSymbol extends CodeStatementSymbol {
 
@@ -22,6 +22,6 @@ public class LineStatementSymbol extends CodeStatementSymbol {
 
 	@Override
 	public CodeStatementNode compactToStatementNode() {
-		return new LineStatementNode(fromX, fromY, toX, toY);
+		return new LineStatementNode((ExpressionNode) fromX.compact(), (ExpressionNode) fromY.compact(), (ExpressionNode) toX.compact(), (ExpressionNode) toY.compact());
 	}
 }

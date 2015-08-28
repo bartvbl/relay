@@ -7,4 +7,9 @@ public class BlockNode extends RelayNode {
 		super(RelayNodeType.BLOCK, childNodes);
 		this.name = blockName;
 	}
+	
+	@Override
+	public String toString() {
+		return "Block named \"" + name + "\"";
+	}
 }

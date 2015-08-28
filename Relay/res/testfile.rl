@@ -9,7 +9,7 @@
 			left: parent.left
 			right: parent.right
 			top: previous.top
-			height: 20px
+			height: 20% + 20px
 
 			( icon
 				left: parent.left
@@ -50,6 +50,6 @@
 
 	left: 0px
 	right: 0px
-	top: screen.width
+	width: screen.width
 	height: screen.height
 )

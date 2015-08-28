@@ -14,4 +14,8 @@ public class SubtractionExpressionNode extends ExpressionNode {
 		this.rightHandSide = rightHand;
 	}
 
+	@Override
+	public String toString() {
+		return "Subtraction expression";
+	}
 }
