@@ -41,12 +41,11 @@ public class VariableAccessSymbol extends ExpressionSymbol {
 	public RelayNode compact() {
 		VariableAccessSymbol currentVariable = this;
 		ArrayList<String> identifyers = new ArrayList<String>();
-		
-		do {
+
+		while(currentVariable.furtherAccessRemains) {
 			identifyers.add(identifyer.value);
 			currentVariable = currentVariable.remainingAccess;			
 		}
-		while(currentVariable.furtherAccessRemains);
 		
 		return new VariableAccessNode(identifyers.toArray(new String[identifyers.size()]));
 	}

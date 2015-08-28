@@ -1,11 +1,13 @@
 package relay.nodes;
 
-public class VariableAccessNode extends RelayNode {
+import parser.symbols.types.ExpressionType;
+
+public class VariableAccessNode extends ExpressionNode {
 
 	public final String[] identifyers;
 
 	public VariableAccessNode(String[] identifyers) {
-		super(RelayNodeType.VARIABLE_ACCESS);
+		super(ExpressionType.VARIABLE_ACCESS);
 		this.identifyers = identifyers;
 	}
 

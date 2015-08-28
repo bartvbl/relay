@@ -25,7 +25,7 @@ public class Main {
 			System.out.println("----- PARSING START -----");
 			RelayParser parser = new RelayParser(lexer, factory);
 			RelaySymbol root = (RelaySymbol)parser.parse().value;
-			dumpParseTree(root, 0);
+			//dumpParseTree(root, 0);
 			RelayNode rootNode = root.compact();
 			System.out.println("Complete.");
 		} catch (IOException e) {

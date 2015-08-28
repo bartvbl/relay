@@ -2,6 +2,7 @@ package parser.symbols;
 
 import java.util.ArrayList;
 
+import parser.symbols.types.BlockItemType;
 import parser.symbols.types.RelaySymbolType;
 import relay.nodes.BlockNode;
 import relay.nodes.RelayNode;
@@ -29,9 +30,12 @@ public class BlockSymbol extends RelaySymbol {
 		BlockContentListSymbol currentListNode = childList;
 		
 		do {
-			children.add(currentListNode.listItem.compact());
+			BlockContentItemSymbol currentChild = (BlockContentItemSymbol) currentListNode.listItem;
+			if(currentChild.itemType != BlockItemType.EMPTY) { // ensure empty block items are filtered out. Side effect of newlines having meaning in the grammar				
+				children.add(currentListNode.listItem.compact());
+			}
 			currentListNode = currentListNode.remainingItems;
-		} while(childList.hasItemsRemaining);
+		} while(currentListNode.hasItemsRemaining);
 		
 		RelayNode[] childNodes = children.toArray(new RelayNode[children.size()]);
 		
