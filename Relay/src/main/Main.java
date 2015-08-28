@@ -10,6 +10,7 @@ import java_cup.runtime.Symbol;
 import parser.Lexer;
 import parser.RelayParser;
 import parser.symbols.RelaySymbol;
+import relay.nodes.RelayNode;
 
 public class Main {
 
@@ -25,6 +26,7 @@ public class Main {
 			RelayParser parser = new RelayParser(lexer, factory);
 			RelaySymbol root = (RelaySymbol)parser.parse().value;
 			dumpParseTree(root, 0);
+			RelayNode rootNode = root.compact();
 			System.out.println("Complete.");
 		} catch (IOException e) {
 			e.printStackTrace();

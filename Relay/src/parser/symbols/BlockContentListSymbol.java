@@ -7,12 +7,14 @@ public class BlockContentListSymbol extends RelaySymbol {
 	public final BlockContentItemSymbol listItem;
 	public final BlockContentListSymbol remainingItems;
 	public final BlockContentItemSymbol[] contentsList;
+	public final boolean hasItemsRemaining;
 	
 	public BlockContentListSymbol(BlockContentItemSymbol listItem, BlockContentListSymbol remainingItems) {
 		super(RelaySymbolType.BLOCK_CONTENT_LIST_ITEM, new RelaySymbol[]{listItem, remainingItems});
 		this.listItem = listItem;
 		this.remainingItems = remainingItems;
 		this.contentsList = new BlockContentItemSymbol[]{listItem};
+		this.hasItemsRemaining = true;
 	}
 
 	public BlockContentListSymbol(BlockContentItemSymbol[] totalContents,
@@ -21,6 +23,7 @@ public class BlockContentListSymbol extends RelaySymbol {
 		this.listItem = item;
 		this.remainingItems = remaining;
 		this.contentsList = totalContents;
+		this.hasItemsRemaining = false;
 	}
 
 	@Override
