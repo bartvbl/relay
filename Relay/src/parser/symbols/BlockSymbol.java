@@ -36,6 +36,7 @@ public class BlockSymbol extends RelaySymbol {
 			}
 			currentListNode = currentListNode.remainingItems;
 		} while(currentListNode.hasItemsRemaining);
+		children.add(currentListNode.listItem.compact()); //Add the final item
 		
 		RelayNode[] childNodes = children.toArray(new RelayNode[children.size()]);
 		

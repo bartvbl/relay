@@ -11,7 +11,6 @@ public class VariableAccessNode extends ExpressionNode {
 	public VariableAccessNode(String[] identifyers) {
 		super(ExpressionType.VARIABLE_ACCESS);
 		this.identifyers = identifyers;
-		System.out.println(Arrays.toString(identifyers));
 	}
 	
 	@Override
