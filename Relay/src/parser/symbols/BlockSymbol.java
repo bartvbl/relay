@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import parser.symbols.types.BlockItemType;
 import parser.symbols.types.RelaySymbolType;
 import relay.nodes.BlockNode;
+import relay.nodes.BlockPropertyNode;
+import relay.nodes.CodeBlockNode;
 import relay.nodes.RelayNode;
 
 public class BlockSymbol extends RelaySymbol {
@@ -40,7 +42,27 @@ public class BlockSymbol extends RelaySymbol {
 		
 		RelayNode[] childNodes = children.toArray(new RelayNode[children.size()]);
 		
-		return new BlockNode(blockName, childNodes);
+		ArrayList<BlockNode> childBlockList = new ArrayList<BlockNode>();
+		ArrayList<CodeBlockNode> codeBlockList = new ArrayList<CodeBlockNode>();
+		ArrayList<BlockPropertyNode> blockPropertyList = new ArrayList<BlockPropertyNode>();
+		
+		for(RelayNode child : childNodes) {
+			if(child instanceof BlockNode) {
+				childBlockList.add((BlockNode) child);
+			} else if(child instanceof CodeBlockNode) {
+				codeBlockList.add((CodeBlockNode) child);
+			} else if(child instanceof BlockPropertyNode) {
+				blockPropertyList.add((BlockPropertyNode) child);
+			} else {
+				throw new RuntimeException("Unknown node: " + child);
+			}
+		}
+		
+		BlockNode[] childBlocks = childBlockList.toArray(new BlockNode[childBlockList.size()]);
+		CodeBlockNode[] childCodeBlocks = codeBlockList.toArray(new CodeBlockNode[codeBlockList.size()]);
+		BlockPropertyNode[] blockProperties = blockPropertyList.toArray(new BlockPropertyNode[blockPropertyList.size()]);
+		
+		return new BlockNode(blockName, childNodes, childBlocks, childCodeBlocks, blockProperties);
 	}
 
 }
