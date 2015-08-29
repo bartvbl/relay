@@ -1,37 +1,34 @@
-package main;
+package demo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import parser.Lexer;
 import parser.RelayParser;
 import parser.symbols.RelaySymbol;
+import relay.UILoader;
+import relay.Window;
 import relay.nodes.RelayNode;
+import relay.nodes.RootNode;
+import relay.symbolTable.SymbolTable;
+import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
 
 public class Main {
 
 	public static void main(String[] args) {
 		try {
+			setSwingSettings();
 			File sourceFile = new File("res/testfile.rl");
-
-			ComplexSymbolFactory factory = new ComplexSymbolFactory();
-			Lexer lexer;
-			//printLexemes(sourceFile, factory);
-			lexer = new Lexer(new FileReader(sourceFile), factory);
-			System.out.println("----- PARSING START -----");
-			RelayParser parser = new RelayParser(lexer, factory);
-			RelaySymbol root = (RelaySymbol)parser.parse().value;
-			//dumpParseTree(root, 0);
-			RelayNode rootNode = root.compact();
-			new TreeVisualiser(rootNode);
-			System.out.println("Complete.");
-		} catch (IOException e) {
-			e.printStackTrace();
+			Window window = UILoader.loadUIFromFile(sourceFile);
+			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,6 +68,20 @@ public class Main {
 			System.out.print(")\n");			
 		} else {
 			System.out.print("\n");
+		}
+	}
+	
+	private static void setSwingSettings() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
 		}
 	}
 
