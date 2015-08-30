@@ -1,11 +1,11 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.ExpressionType;
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.AdditionExpressionNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
 import relay.nodes.SubtractionExpressionNode;
+import relay.parser.symbols.types.ExpressionType;
+import relay.parser.symbols.types.RelaySymbolType;
 
 
 public class SubtractionExpressionSymbol extends ExpressionSymbol {

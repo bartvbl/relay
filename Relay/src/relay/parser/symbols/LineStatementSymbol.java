@@ -1,9 +1,9 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.StatementType;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.LineStatementNode;
+import relay.parser.symbols.types.StatementType;
 
 public class LineStatementSymbol extends CodeStatementSymbol {
 

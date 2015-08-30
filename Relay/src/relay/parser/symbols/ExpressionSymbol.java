@@ -1,7 +1,7 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.ExpressionType;
-import parser.symbols.types.RelaySymbolType;
+import relay.parser.symbols.types.ExpressionType;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public abstract class ExpressionSymbol extends RelaySymbol {
 

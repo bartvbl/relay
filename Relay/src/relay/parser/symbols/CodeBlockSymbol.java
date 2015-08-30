@@ -1,11 +1,11 @@
-package parser.symbols;
+package relay.parser.symbols;
 
 import java.util.ArrayList;
 
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.CodeBlockNode;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public class CodeBlockSymbol extends RelaySymbol {
 

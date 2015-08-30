@@ -1,9 +1,9 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.RelaySymbolType;
-import parser.symbols.types.StatementType;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.RelaySymbolType;
+import relay.parser.symbols.types.StatementType;
 
 public abstract class CodeStatementSymbol extends RelaySymbol {
 

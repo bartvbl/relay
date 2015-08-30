@@ -1,6 +1,6 @@
 package relay.nodes;
 
-import parser.symbols.types.StatementType;
+import relay.parser.symbols.types.StatementType;
 
 public abstract class CodeStatementNode extends RelayNode {
 

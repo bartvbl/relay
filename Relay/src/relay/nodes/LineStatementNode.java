@@ -1,8 +1,8 @@
 package relay.nodes;
 
-import parser.symbols.ExpressionSymbol;
-import parser.symbols.RelaySymbol;
-import parser.symbols.types.StatementType;
+import relay.parser.symbols.ExpressionSymbol;
+import relay.parser.symbols.RelaySymbol;
+import relay.parser.symbols.types.StatementType;
 
 public class LineStatementNode extends CodeStatementNode {
 

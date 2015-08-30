@@ -1,8 +1,8 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.BlockItemType;
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.BlockItemType;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public class BlockContentItemSymbol extends RelaySymbol {
 	public final BlockItemType itemType;

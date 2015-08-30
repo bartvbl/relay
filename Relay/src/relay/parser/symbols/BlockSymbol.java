@@ -1,13 +1,13 @@
-package parser.symbols;
+package relay.parser.symbols;
 
 import java.util.ArrayList;
 
-import parser.symbols.types.BlockItemType;
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.CodeBlockNode;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.BlockItemType;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public class BlockSymbol extends RelaySymbol {
 

@@ -10,13 +10,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
-import parser.Lexer;
-import parser.RelayParser;
-import parser.symbols.RelaySymbol;
 import relay.UILoader;
 import relay.Window;
 import relay.nodes.RelayNode;
 import relay.nodes.RootNode;
+import relay.parser.Lexer;
+import relay.parser.RelayParser;
+import relay.parser.symbols.RelaySymbol;
 import relay.symbolTable.SymbolTable;
 import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;

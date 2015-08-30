@@ -1,7 +1,7 @@
-package parser.symbols;
+package relay.parser.symbols;
 
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public class ParameterListSymbol extends RelaySymbol {
 

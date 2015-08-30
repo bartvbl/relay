@@ -1,12 +1,12 @@
-package parser.symbols;
+package relay.parser.symbols;
 
 import java.util.ArrayList;
 
-import parser.symbols.types.ExpressionType;
-import parser.symbols.types.RelaySymbolType;
 import relay.nodes.ExpressionNode;
 import relay.nodes.FunctionCallNode;
 import relay.nodes.RelayNode;
+import relay.parser.symbols.types.ExpressionType;
+import relay.parser.symbols.types.RelaySymbolType;
 
 public class FunctionCallSymbol extends ExpressionSymbol {
 

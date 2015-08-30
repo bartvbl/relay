@@ -1,7 +1,7 @@
 package relay.nodes;
 
-import parser.symbols.types.ExpressionType;
 import relay.data.Unit;
+import relay.parser.symbols.types.ExpressionType;
 
 public class ValueNode extends ExpressionNode {
 
