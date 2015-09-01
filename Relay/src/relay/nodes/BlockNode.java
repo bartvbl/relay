@@ -25,7 +25,11 @@ public class BlockNode extends RelayNode {
 			propertyMap.put(property.identifyer, property);
 		}
 		
-		this.dimensions = new BlockDimensions(propertyMap);
+		try {
+			this.dimensions = new BlockDimensions(propertyMap);			
+		} catch (RuntimeException e) {
+			throw new RuntimeException("Semantics error in block \"" + name + "\"", e);
+		}
 	}
 	
 	@Override
