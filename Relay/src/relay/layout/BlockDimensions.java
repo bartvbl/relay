@@ -14,12 +14,21 @@ public class BlockDimensions {
 	public final DimensionValue height;
 	
 	public BlockDimensions(HashMap<String, BlockPropertyNode> propertyMap) {
-		this.left = new DimensionValue();
-		this.right = new DimensionValue();
-		this.width = new DimensionValue();
+		this.left = createDimensionValue(DimensionValueType.left, propertyMap);
+		this.right = createDimensionValue(DimensionValueType.right, propertyMap);
+		this.width = createDimensionValue(DimensionValueType.width, propertyMap);
 		
-		this.bottom = new DimensionValue();
-		this.top = new DimensionValue();
-		this.height = new DimensionValue();
+		this.bottom = createDimensionValue(DimensionValueType.bottom, propertyMap);
+		this.top = createDimensionValue(DimensionValueType.top, propertyMap);
+		this.height = createDimensionValue(DimensionValueType.height, propertyMap);
+	}
+
+	private DimensionValue createDimensionValue(DimensionValueType type, HashMap<String, BlockPropertyNode> propertyMap) {
+		BlockPropertyNode blockProperty = propertyMap.get(type.toString());
+		if(blockProperty != null) {
+			return new DimensionValue(blockProperty.expression);
+		} else {
+			return new DimensionValue();
+		}
 	}
 }
