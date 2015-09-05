@@ -1,5 +1,7 @@
 package relay.backends.core;
 
+import relay.layout.LayoutDefinition;
+
 public interface Backend {
-	public void update();
+	public BackendWindow createWindow(LayoutDefinition layout);
 }
