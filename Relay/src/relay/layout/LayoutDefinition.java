@@ -1,5 +1,9 @@
 package relay.layout;
 
-public class LayoutDefinition {
+import relay.nodes.RootNode;
 
+public class LayoutDefinition {
+	public static LayoutDefinition createFromParseTree(RootNode rootNode) {
+		return null;
+	}
 }
