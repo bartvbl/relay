@@ -31,7 +31,6 @@ public class Main implements EventHandler {
 		window.eventDispatcher.addEventListener(this, EventType.WINDOW_MOVED);
 		window.eventDispatcher.addEventListener(this, EventType.WINDOW_OPENED);
 		window.eventDispatcher.addEventListener(this, EventType.WINDOW_RESIZED);
-		
 	}
 	
 	public static void main(String[] args) {

@@ -29,6 +29,7 @@ public class LWJGLBackendThread extends Thread {
 		try {
 			init();
 			mainLoop();
+			window.close();
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 			window.close();
