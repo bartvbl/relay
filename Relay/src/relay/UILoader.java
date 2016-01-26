@@ -34,7 +34,6 @@ public class UILoader {
 		
 		
 		//new TreeVisualiser(rootNode);
-		System.out.println("Complete.");
 		LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode);
 		return defaultBackend.createWindow(layout);
 	}

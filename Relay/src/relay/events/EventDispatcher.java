@@ -7,12 +7,17 @@ public class EventDispatcher {
 	private final HashMap<EventType, ArrayList<EventHandler>> listeners = new HashMap<EventType, ArrayList<EventHandler>>();
 
 	public void dispatchEvent(Event<?> event) {
-		if (!eventTypeExists(event.eventType)) {
+		if(event.hasParameterObject()) {
+			if(!event.type.parameterDataType.isAssignableFrom(event.parameter.getClass())) {
+				throw new RuntimeException("Attempted event dispatch with invalid parameter type. Got " + event.parameter.getClass().getName() + ", required " + event.type.parameterDataType.getName() + ".");
+			}
+		}
+		if(!eventTypeExists(event.type)) {
 			return;
 		}
 
-		ArrayList<EventHandler> eventHandlersList = this.listeners.get(event.eventType);
-		for (EventHandler i : eventHandlersList) {
+		ArrayList<EventHandler> eventHandlersList = this.listeners.get(event.type);
+		for(EventHandler i : eventHandlersList) {
 			i.handleEvent(event);
 		}
 	}
@@ -25,7 +30,7 @@ public class EventDispatcher {
 	}
 
 	private void addEventTypeIfNotExistent(EventType eventType) {
-		if (!eventTypeExists(eventType)) {
+		if(!eventTypeExists(eventType)) {
 			this.listeners.put(eventType, new ArrayList<EventHandler>());
 		}
 	}

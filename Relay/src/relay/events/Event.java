@@ -2,36 +2,22 @@ package relay.events;
 
 public class Event<EventParamsDataType> 
 {
-	private EventParamsDataType eventParameter = null;
-	public final EventType eventType;
+	public final EventParamsDataType parameter;
+	public final EventType type;
 	
 	public Event(EventType eventType)
 	{
-		this.eventType = eventType;
+		this.type = eventType;
+		this.parameter = null;
 	}
 	public Event(EventType type, EventParamsDataType eventParameterObject)
 	{
-		this.eventType = type;
-		this.eventParameter = eventParameterObject;
+		this.type = type;
+		this.parameter = eventParameterObject;
 	}
 	
 	public boolean hasParameterObject()
 	{
-		if(this.getEventParameterObject() != null)
-		{
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public synchronized EventParamsDataType getEventParameterObject()
-	{
-		return this.eventParameter;
-	}
-	
-	public synchronized EventType getEventType()
-	{
-		return this.eventType;
+		return parameter != null;
 	}
 }

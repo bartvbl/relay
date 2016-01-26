@@ -1,8 +1,16 @@
 package relay.events;
 
+import relay.Window;
+
 public enum EventType 
 {
-	WINDOW_OPENED,
-	WINDOW_CLOSED,
+	WINDOW_OPENED(Window.class),
+	WINDOW_CLOSED(Window.class),
+	;
 	
+	public final Class<?> parameterDataType;
+
+	private EventType(Class<?> dataType) {
+		this.parameterDataType = dataType;
+	}
 }
