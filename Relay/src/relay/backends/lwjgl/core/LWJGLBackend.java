@@ -6,7 +6,7 @@ import relay.layout.LayoutDefinition;
 
 public class LWJGLBackend implements Backend {
 
-	private int openedWindows = 0;
+	private static int openedWindows = 0;
 	
 	@Override
 	public Window createWindow(LayoutDefinition layout) {

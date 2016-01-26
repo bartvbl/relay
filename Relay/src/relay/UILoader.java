@@ -33,7 +33,7 @@ public class UILoader {
 		SymbolTable symbolTable = SymbolTableBuilder.buildSymbolTable(rootNode);
 		
 		
-		new TreeVisualiser(rootNode);
+		//new TreeVisualiser(rootNode);
 		System.out.println("Complete.");
 		LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode);
 		return defaultBackend.createWindow(layout);
