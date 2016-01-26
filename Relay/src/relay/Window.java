@@ -5,15 +5,22 @@ import relay.events.EventDispatcher;
 import relay.events.EventType;
 
 public abstract class Window {
+	public final EventDispatcher eventDispatcher = new EventDispatcher();
+	public final String title;
+
 	private boolean isOpen = false;
-	protected final EventDispatcher eventDispatcher = new EventDispatcher();
+
 	
+	public Window(String windowTitle) {
+		this.title = windowTitle;
+	}
+
 	public void open() {
 		if(isOpen) {
 			throw new RuntimeException("This window has already been opened previously.");
 		}
 		openWindow();
-		eventDispatcher.dispatchEvent(new Event<Integer>(EventType.WINDOW_OPENED, 100));
+		eventDispatcher.dispatchEvent(new Event<Window>(EventType.WINDOW_OPENED, this));
 		isOpen = true;
 	}
 	
@@ -22,6 +29,7 @@ public abstract class Window {
 			throw new RuntimeException("This window is not open.");
 		}
 		closeWindow();
+		eventDispatcher.dispatchEvent(new Event<Window>(EventType.WINDOW_CLOSED, this));
 		isOpen = false;
 	}
 	

@@ -4,5 +4,5 @@ import relay.Window;
 import relay.layout.LayoutDefinition;
 
 public interface Backend {
-	public Window createWindow(LayoutDefinition layout);
+	public Window createWindow(LayoutDefinition layout, String windowTitle);
 }

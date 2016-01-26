@@ -17,7 +17,7 @@ import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
 
 public class UILoader {
-	public static Window buildUIFromFile(File source) throws Exception {
+	public static Window buildUIFromFile(File source, String windowTitle) throws Exception {
 		Backend defaultBackend = LWJGLBackend.create();
 		
 		// Set up the parsing process
@@ -35,6 +35,6 @@ public class UILoader {
 		
 		//new TreeVisualiser(rootNode);
 		LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode);
-		return defaultBackend.createWindow(layout);
+		return defaultBackend.createWindow(layout, windowTitle);
 	}
 }

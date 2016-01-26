@@ -9,10 +9,10 @@ public class LWJGLBackend implements Backend {
 	private static int openedWindows = 0;
 	
 	@Override
-	public Window createWindow(LayoutDefinition layout) {
+	public Window createWindow(LayoutDefinition layout, String windowTitle) {
 		if(openedWindows == 0) {
 			openedWindows++;
-			return new LWJGLWindow(layout);			
+			return new LWJGLWindow(layout, windowTitle);			
 		}
 		throw new RuntimeException("LWJGL backend only supports one window.");
 	}

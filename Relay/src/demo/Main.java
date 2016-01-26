@@ -27,7 +27,7 @@ public class Main {
 		try {
 			setSwingSettings();
 			File sourceFile = new File("res/testfile.rl");
-			Window window = UILoader.buildUIFromFile(sourceFile);
+			Window window = UILoader.buildUIFromFile(sourceFile, "Some window");
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
