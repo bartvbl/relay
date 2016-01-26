@@ -12,7 +12,7 @@ public class Point3D {
 	}
 	
 	public String toString() {
-		return "[" + x + ", " + y + ", " + z + "]";
+		return "Point3D [" + x + ", " + y + ", " + z + "]";
 	}
 
 	public double distanceTo(Point3D other) {

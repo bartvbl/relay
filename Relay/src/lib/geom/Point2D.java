@@ -10,6 +10,6 @@ public class Point2D {
 	}
 	
 	public String toString() {
-		return "[" + x + ", " + y + "]";
+		return "Point2D [" + x + ", " + y + "]";
 	}
 }

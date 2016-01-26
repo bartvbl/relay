@@ -27,4 +27,8 @@ public class MutableRectangle2D {
 		this.width = width;
 		this.height = height;
 	}
+	
+	public String toString() {
+		return "MutableRectangle2D located at [" + x + ", " + y + "] of size [" + width + ", " + height + "]";
+	}
 }

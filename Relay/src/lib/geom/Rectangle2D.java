@@ -18,7 +18,7 @@ public class Rectangle2D {
 	}
 	
 	public String toString() {
-		return "Rectangle (" + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ")";
+		return "Rectangle located at [" + x1 + ", " + y1 + "] of size [" + width + ", " + height + "]";
 	}
 
 	public boolean intersects(Rectangle2D other) {

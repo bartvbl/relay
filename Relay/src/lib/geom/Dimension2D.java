@@ -10,4 +10,7 @@ public class Dimension2D {
 		this.height = height;
 	}
 
+	public String toString() {
+		return "Dimension2D of size [" + width + ", " + height + "]";
+	}
 }

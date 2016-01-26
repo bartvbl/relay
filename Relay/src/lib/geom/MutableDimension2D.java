@@ -11,4 +11,7 @@ public class MutableDimension2D {
 	
 	public MutableDimension2D() {}
 
+	public String toString() {
+		return "MutableDimension2D of size [" + width + ", " + height + "]";
+	}
 }
