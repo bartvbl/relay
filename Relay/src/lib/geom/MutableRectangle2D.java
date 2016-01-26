@@ -17,4 +17,14 @@ public class MutableRectangle2D {
 		this.width = width;
 		this.height = height;
 	}
+	
+	public void setLocation(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public void setDimensions(double width, double height) {
+		this.width = width;
+		this.height = height;
+	}
 }

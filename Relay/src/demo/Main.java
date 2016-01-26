@@ -12,6 +12,9 @@ import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import relay.UILoader;
 import relay.Window;
+import relay.events.Event;
+import relay.events.EventHandler;
+import relay.events.EventType;
 import relay.nodes.RelayNode;
 import relay.nodes.RootNode;
 import relay.parser.Lexer;
@@ -21,14 +24,23 @@ import relay.symbolTable.SymbolTable;
 import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
 
-public class Main {
+public class Main implements EventHandler {
 
+	public Main(Window window) {
+		window.eventDispatcher.addEventListener(this, EventType.WINDOW_CLOSED);
+		window.eventDispatcher.addEventListener(this, EventType.WINDOW_MOVED);
+		window.eventDispatcher.addEventListener(this, EventType.WINDOW_OPENED);
+		window.eventDispatcher.addEventListener(this, EventType.WINDOW_RESIZED);
+		
+	}
+	
 	public static void main(String[] args) {
 		try {
 			setSwingSettings();
 			File sourceFile = new File("res/testfile.rl");
 			Window window = UILoader.buildUIFromFile(sourceFile, "Some window");
 			window.open();
+			new Main(window);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,6 +95,11 @@ public class Main {
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void handleEvent(Event<?> event) {
+		System.out.println("Event received: " + event.type + ", attachment: " + event.parameter);
 	}
 
 }
