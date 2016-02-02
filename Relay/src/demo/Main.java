@@ -15,6 +15,7 @@ import relay.Window;
 import relay.events.Event;
 import relay.events.EventHandler;
 import relay.events.EventType;
+import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
 import relay.nodes.RootNode;
 import relay.parser.Lexer;
@@ -24,13 +25,9 @@ import relay.symbolTable.SymbolTable;
 import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
 
-public class Main implements EventHandler {
+public class Main {
 
 	public Main(Window window) {
-		window.eventDispatcher.addEventListener(this, EventType.WINDOW_CLOSED);
-		window.eventDispatcher.addEventListener(this, EventType.WINDOW_MOVED);
-		window.eventDispatcher.addEventListener(this, EventType.WINDOW_OPENED);
-		window.eventDispatcher.addEventListener(this, EventType.WINDOW_RESIZED);
 	}
 	
 	public static void main(String[] args) {
@@ -40,7 +37,7 @@ public class Main implements EventHandler {
 			Window window = UILoader.buildUIFromFile(sourceFile, "Some window");
 			window.open();
 			new Main(window);
-		} catch (Exception e) {
+		} catch (RelayException e) {
 			e.printStackTrace();
 		}
 	}
@@ -94,11 +91,6 @@ public class Main implements EventHandler {
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void handleEvent(Event<?> event) {
-		System.out.println("Event received: " + event.type + ", attachment: " + event.parameter);
 	}
 
 }

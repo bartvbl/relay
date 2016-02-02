@@ -15,6 +15,10 @@ public class SymbolTableBuilder {
 	}
 
 	private static void visit(BlockNode block, HashMap<String, BlockNode> symbols) {
+		if(symbols.containsKey(block.name)) {
+			
+		}
+		
 		symbols.put(block.name, block);
 		for(BlockNode child : block.childBlocks) {
 			visit(child, symbols);
