@@ -2,6 +2,7 @@ package relay.layout;
 
 import java.util.HashMap;
 
+import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
 
 public class BlockDimensions {
@@ -16,7 +17,7 @@ public class BlockDimensions {
 	public final DimensionDefinitionType horizontalDefinition;
 	public final DimensionDefinitionType verticalDefinition;
 	
-	public BlockDimensions(HashMap<String, BlockPropertyNode> propertyMap) {
+	public BlockDimensions(HashMap<String, BlockPropertyNode> propertyMap) throws RelayException {
 		this.left = createDimensionValue(DimensionValueType.left, propertyMap);
 		this.right = createDimensionValue(DimensionValueType.right, propertyMap);
 		this.width = createDimensionValue(DimensionValueType.width, propertyMap);
@@ -29,7 +30,7 @@ public class BlockDimensions {
 		this.verticalDefinition = determineVerticalDefinitionType();
 	}
 
-	private DimensionDefinitionType determineHorizontalDefinitionType() {
+	private DimensionDefinitionType determineHorizontalDefinitionType() throws RelayException {
 		if(left.isDefined && right.isDefined) {
 			return DimensionDefinitionType.LEFT_AND_RIGHT;
 		} else if(left.isDefined && width.isDefined) {
@@ -43,10 +44,10 @@ public class BlockDimensions {
 		} else if(!left.isDefined && !width.isDefined && !height.isDefined) {
 			return DimensionDefinitionType.MATCH_PARENT;
 		}
-		throw new RuntimeException("Semantics error: size definition of width only is not allowed.");
+		throw new RelayException("Semantics error: size definition of width only is not allowed.");
 	}
 	
-	private DimensionDefinitionType determineVerticalDefinitionType() {
+	private DimensionDefinitionType determineVerticalDefinitionType() throws RelayException {
 		if(bottom.isDefined && top.isDefined) {
 			return DimensionDefinitionType.BOTTOM_AND_TOP;
 		} else if(bottom.isDefined && height.isDefined) {
@@ -60,7 +61,7 @@ public class BlockDimensions {
 		} else if(!bottom.isDefined && !top.isDefined && !height.isDefined) {
 			return DimensionDefinitionType.MATCH_PARENT;
 		}
-		throw new RuntimeException("Semantics error: size definition of height only is not allowed.");
+		throw new RelayException("Semantics error: size definition of height only is not allowed.");
 	}
 
 	private DimensionValue createDimensionValue(DimensionValueType type, HashMap<String, BlockPropertyNode> propertyMap) {

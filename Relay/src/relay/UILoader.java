@@ -37,7 +37,7 @@ public class UILoader {
 			SymbolTable symbolTable = SymbolTableBuilder.buildSymbolTable(rootNode);
 			
 			//new TreeVisualiser(rootNode);
-			LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode);
+			LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode, symbolTable);
 			return defaultBackend.createWindow(layout, windowTitle);
 		
 		} catch (FileNotFoundException exception) {

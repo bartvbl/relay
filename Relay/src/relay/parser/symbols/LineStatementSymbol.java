@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.LineStatementNode;
@@ -21,7 +22,7 @@ public class LineStatementSymbol extends CodeStatementSymbol {
 	}
 
 	@Override
-	public CodeStatementNode compactToStatementNode() {
+	public CodeStatementNode compactToStatementNode() throws RelayException {
 		return new LineStatementNode((ExpressionNode) fromX.compact(), (ExpressionNode) fromY.compact(), (ExpressionNode) toX.compact(), (ExpressionNode) toY.compact());
 	}
 }

@@ -2,6 +2,7 @@ package relay.parser.symbols;
 
 import java.util.ArrayList;
 
+import relay.exceptions.RelayException;
 import relay.nodes.CodeBlockNode;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
@@ -17,7 +18,7 @@ public class CodeBlockSymbol extends RelaySymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		ArrayList<CodeStatementNode> statements = new ArrayList<CodeStatementNode>();
 		StatementListSymbol currentListSymbol = statementList;
 		do { //flatten statements list

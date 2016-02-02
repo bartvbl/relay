@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
 import relay.parser.symbols.types.RelaySymbolType;
 
@@ -18,5 +19,5 @@ public abstract class RelaySymbol {
 		this.children = new RelaySymbol[]{};
 	}
 	
-	public abstract RelayNode compact();
+	public abstract RelayNode compact() throws RelayException;
 }

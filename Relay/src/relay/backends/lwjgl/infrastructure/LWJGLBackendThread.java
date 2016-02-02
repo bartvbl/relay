@@ -56,12 +56,12 @@ public class LWJGLBackendThread extends Thread {
 		
 		if(windowDimensions.width != windowWidth || windowDimensions.height != windowHeight) {
 			Dimension2D newWindowDimensions = new Dimension2D(windowWidth, windowHeight);
-			window.eventDispatcher.dispatchEvent(new Event<Dimension2D>(EventType.WINDOW_RESIZED, newWindowDimensions));
+			window.events.dispatchEvent(new Event<Dimension2D>(EventType.WINDOW_RESIZED, newWindowDimensions));
 		}
 		
 		if(windowDimensions.x != windowX || windowDimensions.y != windowY) {
 			Point2D newWindowLocation = new Point2D(windowX, windowY);
-			window.eventDispatcher.dispatchEvent(new Event<Point2D>(EventType.WINDOW_MOVED, newWindowLocation));
+			window.events.dispatchEvent(new Event<Point2D>(EventType.WINDOW_MOVED, newWindowLocation));
 		}
 		
 		this.windowDimensions.setLocation(windowX, windowY);

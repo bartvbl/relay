@@ -1,6 +1,10 @@
 package relay.exceptions;
 
 public class RelayException extends Exception {
+	public RelayException(String message) {
+		super(message);
+	}
+	
 	public RelayException(Throwable cause) {
 		super(cause);
 	}

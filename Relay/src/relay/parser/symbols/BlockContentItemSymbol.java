@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
@@ -49,7 +50,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		switch(itemType) {
 		case BLOCK:
 			return blockNode.compact();

@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
 import relay.parser.symbols.types.RelaySymbolType;
@@ -14,7 +15,7 @@ public abstract class CodeStatementSymbol extends RelaySymbol {
 		this.statementType = type;
 	}
 
-	public abstract CodeStatementNode compactToStatementNode();
+	public abstract CodeStatementNode compactToStatementNode() throws RelayException;
 	
 	@Override
 	public final RelayNode compact() {
