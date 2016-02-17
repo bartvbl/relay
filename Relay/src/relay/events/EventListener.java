@@ -1,5 +1,5 @@
 package relay.events;
 
-public interface EventHandler {
+public interface EventListener {
 	public void handleEvent(Event<?> event);
 }

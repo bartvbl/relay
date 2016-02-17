@@ -13,7 +13,7 @@ import java_cup.runtime.Symbol;
 import relay.UILoader;
 import relay.Window;
 import relay.events.Event;
-import relay.events.EventHandler;
+import relay.events.EventListener;
 import relay.events.EventType;
 import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
