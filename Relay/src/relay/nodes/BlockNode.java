@@ -23,6 +23,7 @@ public class BlockNode extends RelayNode {
 		) {
 		
 		super(RelayNodeType.BLOCK, childNodes);
+		
 		this.name = blockName;
 		this.childBlocks = childBlocks;
 		this.childCodeBlocks = childCodeBlocks;
