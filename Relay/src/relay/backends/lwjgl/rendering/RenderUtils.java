@@ -10,6 +10,8 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
+import lib.geom.IndexRectangle2D;
+
 public class RenderUtils {
 	private static final int DEFAULT_WINDOW_WIDTH = 1024;
 	private static final int DEFAULT_WINDOW_HEIGHT = 768;
@@ -38,11 +40,11 @@ public class RenderUtils {
 		glDisable(GL_CULL_FACE); 
 	}
 	
-	public static void initOpenGL(String windowTitle) throws LWJGLException
+	public static void initOpenGL(String windowTitle, IndexRectangle2D windowDimensions) throws LWJGLException
 	{
 		Display.setTitle(windowTitle);
-		Display.setLocation(100, 100);
-		Display.setDisplayMode(new DisplayMode(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT));
+		Display.setLocation(windowDimensions.x1, windowDimensions.y2); // Because origin of rectangle is bottom left.
+		Display.setDisplayMode(new DisplayMode(windowDimensions.width, windowDimensions.height));
 		Display.setResizable(true);
 		Display.create();
 		

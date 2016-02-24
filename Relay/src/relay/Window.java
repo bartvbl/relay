@@ -1,7 +1,9 @@
 package relay;
 
+import lib.geom.IndexRectangle2D;
 import relay.events.Event;
 import relay.events.EventDispatcher;
+import relay.events.EventHandler;
 import relay.events.EventType;
 
 public abstract class Window {
@@ -9,10 +11,12 @@ public abstract class Window {
 	public final String title;
 
 	private boolean isOpen = false;
+	protected IndexRectangle2D dimensions;
 
 	
-	public Window(String windowTitle) {
+	public Window(String windowTitle, IndexRectangle2D windowDimensions) {
 		this.title = windowTitle;
+		this.dimensions = windowDimensions;
 	}
 
 	public void open() {
@@ -35,4 +39,6 @@ public abstract class Window {
 	
 	protected abstract void openWindow();
 	protected abstract void closeWindow();
+	
+	
 }

@@ -1,9 +1,12 @@
 package relay.backends.lwjgl.infrastructure;
 
 import lib.geom.Dimension2D;
+import lib.geom.IndexRectangle2D;
 import lib.geom.MutableDimension2D;
 import lib.geom.MutableRectangle2D;
 import lib.geom.Point2D;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -17,12 +20,12 @@ public class LWJGLBackendThread extends Thread {
 	
 	private final LWJGLWindow window;
 	private final String windowTitle;
-	private final MutableRectangle2D windowDimensions;
+	private final AtomicReference<IndexRectangle2D> windowDimensions;
 
-	public LWJGLBackendThread(LWJGLWindow window, String windowTitle) {
+	public LWJGLBackendThread(LWJGLWindow window, String windowTitle, IndexRectangle2D dimensions) {
 		this.window = window;
 		this.windowTitle = windowTitle;
-		this.windowDimensions = new MutableRectangle2D();
+		this.windowDimensions = new AtomicReference<IndexRectangle2D>();
 	}
 
 	public void run() {
@@ -37,7 +40,7 @@ public class LWJGLBackendThread extends Thread {
 	}
 
 	private void init() throws LWJGLException {
-		RenderUtils.initOpenGL(windowTitle);
+		RenderUtils.initOpenGL(windowTitle, windowDimensions.get());
 		RenderUtils.set2DMode();
 	}
 
@@ -49,22 +52,23 @@ public class LWJGLBackendThread extends Thread {
 	}
 
 	private void updateWindowDimensions() {
-		double windowWidth = Display.getWidth();
-		double windowHeight = Display.getHeight();
-		double windowX = Display.getX();
-		double windowY = Display.getY();
+		int windowWidth = Display.getWidth();
+		int windowHeight = Display.getHeight();
+		int windowX = Display.getX();
+		int windowY = Display.getY();
 		
-		if(windowDimensions.width != windowWidth || windowDimensions.height != windowHeight) {
+		IndexRectangle2D previousDimensions = windowDimensions.get();
+		
+		if(previousDimensions.width != windowWidth || previousDimensions.height != windowHeight) {
 			Dimension2D newWindowDimensions = new Dimension2D(windowWidth, windowHeight);
 			window.events.dispatchEvent(new Event<Dimension2D>(EventType.WINDOW_RESIZED, newWindowDimensions));
 		}
 		
-		if(windowDimensions.x != windowX || windowDimensions.y != windowY) {
+		if(previousDimensions.x1 != windowX || previousDimensions.y2 != windowY) { // Different because the origin of the rectangle is in the bottom left.
 			Point2D newWindowLocation = new Point2D(windowX, windowY);
 			window.events.dispatchEvent(new Event<Point2D>(EventType.WINDOW_MOVED, newWindowLocation));
 		}
 		
-		this.windowDimensions.setLocation(windowX, windowY);
-		this.windowDimensions.setDimensions(windowWidth, windowHeight);
+		this.windowDimensions.set(new IndexRectangle2D(windowX, windowY, windowWidth, windowHeight));
 	}
 }

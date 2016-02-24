@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java_cup.runtime.ComplexSymbolFactory;
+import lib.geom.IndexRectangle2D;
 import relay.backends.core.Backend;
 import relay.backends.lwjgl.core.LWJGLBackend;
 import relay.exceptions.RelayException;
@@ -19,7 +20,7 @@ import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
 
 public class UILoader {
-	public static Window buildUIFromFile(File source, String windowTitle) throws RelayException {
+	public static Window buildUIFromFile(File source, String windowTitle, IndexRectangle2D windowDimensions) throws RelayException {
 		Backend defaultBackend = LWJGLBackend.create();
 		
 		// Set up the parsing process
@@ -38,7 +39,7 @@ public class UILoader {
 			
 			//new TreeVisualiser(rootNode);
 			LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode, symbolTable);
-			return defaultBackend.createWindow(layout, windowTitle);
+			return defaultBackend.createWindow(layout, windowTitle, windowDimensions);
 		
 		} catch (FileNotFoundException exception) {
 			throw new RelayException("UI source file was not found at " + source, exception);

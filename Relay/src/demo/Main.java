@@ -10,6 +10,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
+import lib.geom.IndexRectangle2D;
 import relay.UILoader;
 import relay.Window;
 import relay.events.Event;
@@ -34,7 +35,7 @@ public class Main {
 		try {
 			setSwingSettings();
 			File sourceFile = new File("res/testfile.rl");
-			Window window = UILoader.buildUIFromFile(sourceFile, "Some window");
+			Window window = UILoader.buildUIFromFile(sourceFile, "Some window", new IndexRectangle2D(100, 100, 1024, 768));
 			window.open();
 			new Main(window);
 		} catch (RelayException e) {
