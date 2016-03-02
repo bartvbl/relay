@@ -3,7 +3,6 @@ package relay;
 import lib.geom.IndexRectangle2D;
 import relay.events.Event;
 import relay.events.EventDispatcher;
-import relay.events.EventHandler;
 import relay.events.EventType;
 
 public abstract class Window {

@@ -1,6 +1,7 @@
 package relay.backends.lwjgl.infrastructure;
 
 import lib.geom.Dimension2D;
+import lib.geom.Index2D;
 import lib.geom.IndexRectangle2D;
 import lib.geom.MutableDimension2D;
 import lib.geom.MutableRectangle2D;
@@ -26,6 +27,7 @@ public class LWJGLBackendThread extends Thread {
 		this.window = window;
 		this.windowTitle = windowTitle;
 		this.windowDimensions = new AtomicReference<IndexRectangle2D>();
+		windowDimensions.set(dimensions);
 	}
 
 	public void run() {
@@ -65,8 +67,8 @@ public class LWJGLBackendThread extends Thread {
 		}
 		
 		if(previousDimensions.x1 != windowX || previousDimensions.y2 != windowY) { // Different because the origin of the rectangle is in the bottom left.
-			Point2D newWindowLocation = new Point2D(windowX, windowY);
-			window.events.dispatchEvent(new Event<Point2D>(EventType.WINDOW_MOVED, newWindowLocation));
+			Index2D newWindowLocation = new Index2D(windowX, windowY);
+			window.events.dispatchEvent(new Event<Index2D>(EventType.WINDOW_MOVED, newWindowLocation));
 		}
 		
 		this.windowDimensions.set(new IndexRectangle2D(windowX, windowY, windowWidth, windowHeight));

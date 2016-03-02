@@ -1,23 +1,26 @@
 import java_cup.runtime.*;
-import parser.symbols.AdditionExpressionSymbol;
-import parser.symbols.BlockContentItemSymbol;
-import parser.symbols.BlockContentListSymbol;
-import parser.symbols.BlockPropertySymbol;
-import parser.symbols.CodeBlockSymbol;
-import parser.symbols.CodeStatementSymbol;
-import parser.symbols.ExpressionSymbol;
-import parser.symbols.FunctionCallSymbol;
-import parser.symbols.IdentifyerSymbol;
-import parser.symbols.LineStatementSymbol;
-import parser.symbols.ParameterListSymbol;
-import parser.symbols.RootSymbol;
-import parser.symbols.BlockSymbol;
-import parser.symbols.StatementListSymbol;
-import parser.symbols.SubtractionExpressionSymbol;
-import parser.symbols.UnitSymbol;
-import parser.symbols.ValueSymbol;
-import parser.symbols.VariableAccessSymbol;
+
+import relay.parser.symbols.AdditionExpressionSymbol;
+import relay.parser.symbols.BlockContentItemSymbol;
+import relay.parser.symbols.BlockContentListSymbol;
+import relay.parser.symbols.BlockPropertySymbol;
+import relay.parser.symbols.CodeBlockSymbol;
+import relay.parser.symbols.CodeStatementSymbol;
+import relay.parser.symbols.ExpressionSymbol;
+import relay.parser.symbols.FunctionCallSymbol;
+import relay.parser.symbols.IdentifyerSymbol;
+import relay.parser.symbols.LineStatementSymbol;
+import relay.parser.symbols.ParameterListSymbol;
+import relay.parser.symbols.RootSymbol;
+import relay.parser.symbols.BlockSymbol;
+import relay.parser.symbols.StatementListSymbol;
+import relay.parser.symbols.SubtractionExpressionSymbol;
+import relay.parser.symbols.UnitSymbol;
+import relay.parser.symbols.ValueSymbol;
+import relay.parser.symbols.VariableAccessSymbol;
+
 import relay.data.Unit;
+import relay.types.BlockType;
 
 /* terminals */
 
@@ -79,8 +82,10 @@ goal ::=
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockSymbol(blockName, blockContent); :}
-	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent); :}
+		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockSymbol(blockName, blockContent, new IdentifyerSymbol(BlockType.Basic.toString())); :}
+	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent, new IdentifyerSymbol(BlockType.Basic.toString())); :}
+	|	BLOCK_OPEN identifyer:blockName COLON identifyer:blockType NEW_LINE block_content_list:blockContent BLOCK_CLOSE		
+																								{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent, blockType); :}
 	;
 
 block_content_list ::=	

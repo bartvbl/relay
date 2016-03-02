@@ -13,18 +13,9 @@ import java_cup.runtime.Symbol;
 import lib.geom.IndexRectangle2D;
 import relay.UILoader;
 import relay.Window;
-import relay.events.Event;
-import relay.events.EventListener;
-import relay.events.EventType;
 import relay.exceptions.RelayException;
-import relay.nodes.RelayNode;
-import relay.nodes.RootNode;
 import relay.parser.Lexer;
-import relay.parser.RelayParser;
 import relay.parser.symbols.RelaySymbol;
-import relay.symbolTable.SymbolTable;
-import relay.symbolTable.SymbolTableBuilder;
-import relay.tools.TreeVisualiser;
 
 public class Main {
 

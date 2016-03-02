@@ -15,11 +15,13 @@ import relay.parser.symbols.types.RelaySymbolType;
 public class BlockSymbol extends RelaySymbol {
 
 	public final IdentifyerSymbol nameNode;
+	public final IdentifyerSymbol blockTypeNode;
 	public final BlockContentListSymbol childList;
 
-	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList) {
+	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
 		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
+		this.blockTypeNode = blockType;
 		this.childList = childList;
 	}
 
