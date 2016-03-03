@@ -6,14 +6,32 @@ import relay.nodes.BlockNode;
 
 public class SymbolTable {
 
-	private final HashMap<String, BlockNode> symbols;
+	private final HashMap<String, BlockNode> blockSymbols;
 
-	public SymbolTable(HashMap<String, BlockNode> symbols) {
-		this.symbols = symbols;
+	public SymbolTable() {
+		this.blockSymbols = new HashMap<String, BlockNode>();
 	}
 	
-	public BlockNode getBlockByName(String name) {
-		return symbols.get(name);
+	private SymbolTable(HashMap<String, BlockNode> symbols) {
+		this.blockSymbols = symbols;
 	}
+	
+	public void putBlockSymbol(String name, BlockNode blockSymbol) {
+		this.blockSymbols.put(blockSymbol.name, blockSymbol);
+	}
+
+	public void putBlockSymbol(BlockNode block) {
+		this.blockSymbols.put(block.name, block);
+	}
+
+	public BlockNode getBlockByName(String name) {
+		return blockSymbols.get(name);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public SymbolTable copyOf() {
+		return new SymbolTable((HashMap<String, BlockNode>)blockSymbols.clone());
+	}
+
 
 }

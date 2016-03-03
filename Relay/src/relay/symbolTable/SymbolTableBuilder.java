@@ -1,27 +1,26 @@
 package relay.symbolTable;
 
-import java.util.HashMap;
-
 import relay.nodes.BlockNode;
 import relay.nodes.RootNode;
+import relay.parser.symbols.types.ReservedKeyword;
 
 public class SymbolTableBuilder {
 
-	public static SymbolTable buildSymbolTable(RootNode rootNode) {
-		HashMap<String, BlockNode> symbols = new HashMap<String, BlockNode>();
-		visit(rootNode.rootBlock, symbols);
-		
-		return new SymbolTable(symbols);
+	public static void buildSymbolTable(RootNode rootNode) {
+		SymbolTable rootTable = new SymbolTable();
+		rootTable.putBlockSymbol(ReservedKeyword.parent.name(), null);
+		visit(rootNode.rootBlock, rootTable);
 	}
 
-	private static void visit(BlockNode block, HashMap<String, BlockNode> symbols) {
-		if(symbols.containsKey(block.name)) {
-			
-		}
+	private static void visit(BlockNode block, SymbolTable symbolTable) {
+		symbolTable.putBlockSymbol(block);
+		block.setSymbolTable(symbolTable);
 		
-		symbols.put(block.name, block);
-		for(BlockNode child : block.childBlocks) {
-			visit(child, symbols);
+		for(BlockNode child : block.childBlocks) {	
+			SymbolTable childTable = symbolTable.copyOf();
+			childTable.putBlockSymbol(ReservedKeyword.parent.name(), block);
+			
+			visit(child, childTable);
 		}
 	}
 

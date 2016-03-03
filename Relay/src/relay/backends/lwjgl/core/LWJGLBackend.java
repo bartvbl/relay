@@ -21,6 +21,8 @@ public class LWJGLBackend implements Backend {
 	public static Backend create() {
 		return new LWJGLBackend();
 	}
-
-
+	
+	public void init() {
+		
+	}
 }

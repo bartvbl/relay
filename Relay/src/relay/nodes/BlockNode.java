@@ -3,6 +3,7 @@ package relay.nodes;
 import java.util.HashMap;
 
 import relay.layout.BlockDimensions;
+import relay.symbolTable.SymbolTable;
 
 public class BlockNode extends RelayNode {
 	public final String name;
@@ -11,7 +12,10 @@ public class BlockNode extends RelayNode {
 	public final CodeBlockNode[] childCodeBlocks;
 	
 	public final BlockDimensions dimensions;
+	
 	private final HashMap<String, BlockPropertyNode> propertyMap;
+
+	private SymbolTable symbolTable;
 
 	public BlockNode(
 			String blockName, 
@@ -35,5 +39,9 @@ public class BlockNode extends RelayNode {
 	@Override
 	public String toString() {
 		return "Block named \"" + name + "\"";
+	}
+
+	public void setSymbolTable(SymbolTable symbolTable) {
+		this.symbolTable = symbolTable;
 	}
 }

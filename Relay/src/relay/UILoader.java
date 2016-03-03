@@ -11,6 +11,7 @@ import relay.backends.core.Backend;
 import relay.backends.lwjgl.core.LWJGLBackend;
 import relay.exceptions.RelayException;
 import relay.layout.LayoutDefinition;
+import relay.layout.LayoutDefinitionBuilder;
 import relay.nodes.RootNode;
 import relay.parser.Lexer;
 import relay.parser.RelayParser;
@@ -21,7 +22,10 @@ import relay.tools.TreeVisualiser;
 
 public class UILoader {
 	public static Window buildUIFromFile(File source, String windowTitle, IndexRectangle2D windowDimensions) throws RelayException {
+		
 		Backend defaultBackend = LWJGLBackend.create();
+		defaultBackend.init();
+		
 		
 		// Set up the parsing process
 		ComplexSymbolFactory factory = new ComplexSymbolFactory();
@@ -35,10 +39,10 @@ public class UILoader {
 			RootNode rootNode = (RootNode) root.compact();
 
 			// Extract relevant information from the document
-			SymbolTable symbolTable = SymbolTableBuilder.buildSymbolTable(rootNode);
+			SymbolTableBuilder.buildSymbolTable(rootNode);
 			
 			//new TreeVisualiser(rootNode);
-			LayoutDefinition layout = LayoutDefinition.createFromParseTree(rootNode, symbolTable);
+			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode);
 			return defaultBackend.createWindow(layout, windowTitle, windowDimensions);
 		
 		} catch (FileNotFoundException exception) {
