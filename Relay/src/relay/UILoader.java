@@ -39,7 +39,7 @@ public class UILoader {
 			RootNode rootNode = (RootNode) root.compact();
 
 			// Extract relevant information from the document
-			SymbolTableBuilder.buildSymbolTable(rootNode);
+			SymbolTableBuilder.createLocalSymbolTables(rootNode);
 			
 			//new TreeVisualiser(rootNode);
 			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode);
