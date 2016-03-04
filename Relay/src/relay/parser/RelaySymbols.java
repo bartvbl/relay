@@ -24,6 +24,7 @@ public class RelaySymbols {
   public static final int error = 1;
   public static final int DOT = 6;
   public static final int CODE_BLOCK_OPEN = 11;
+  public static final int KEYWORD_DEF = 20;
   public static final int OPERATOR_PLUS = 15;
   public static final int OPERATOR_MINUS = 16;
   public static final int KEYWORD_TO = 19;
@@ -48,7 +49,8 @@ public class RelaySymbols {
   "OPERATOR_MINUS",
   "KEYWORD_LINE",
   "KEYWORD_FROM",
-  "KEYWORD_TO"
+  "KEYWORD_TO",
+  "KEYWORD_DEF"
   };
 }
 

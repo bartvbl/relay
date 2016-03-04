@@ -47,6 +47,7 @@ terminal OPERATOR_MINUS;
 terminal KEYWORD_LINE;
 terminal KEYWORD_FROM;
 terminal KEYWORD_TO;
+terminal KEYWORD_DEF;
 
 /* non-terminals */
 
