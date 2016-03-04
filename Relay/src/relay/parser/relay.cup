@@ -18,6 +18,7 @@ import relay.parser.symbols.SubtractionExpressionSymbol;
 import relay.parser.symbols.UnitSymbol;
 import relay.parser.symbols.ValueSymbol;
 import relay.parser.symbols.VariableAccessSymbol;
+import relay.parser.symbols.VariableDefinitionSymbol;
 
 import relay.data.Unit;
 import relay.types.BlockType;
@@ -51,21 +52,22 @@ terminal KEYWORD_DEF;
 
 /* non-terminals */
 
-non terminal RootSymbol				goal;
-non terminal BlockSymbol			block;
-non terminal IdentifyerSymbol		identifyer;
-non terminal BlockContentListSymbol	block_content_list;
-non terminal BlockContentItemSymbol	block_content_line;
-non terminal BlockContentItemSymbol	block_content_item;
-non terminal BlockPropertySymbol	block_property;
-non terminal ExpressionSymbol 		expression;
-non terminal UnitSymbol				unit;
-non terminal VariableAccessSymbol	variable_access;
-non terminal FunctionCallSymbol		function_call;
-non terminal CodeBlockSymbol 		code_block;
-non terminal StatementListSymbol	code_statement_list;
-non terminal CodeStatementSymbol	code_statement;
-non terminal ParameterListSymbol	parameter_list;
+non terminal RootSymbol					goal;
+non terminal BlockSymbol				block;
+non terminal IdentifyerSymbol			identifyer;
+non terminal BlockContentListSymbol		block_content_list;
+non terminal BlockContentItemSymbol		block_content_line;
+non terminal BlockContentItemSymbol		block_content_item;
+non terminal VariableDefinitionSymbol	variable_definition;
+non terminal BlockPropertySymbol		block_property;
+non terminal ExpressionSymbol 			expression;
+non terminal UnitSymbol					unit;
+non terminal VariableAccessSymbol		variable_access;
+non terminal FunctionCallSymbol			function_call;
+non terminal CodeBlockSymbol 			code_block;
+non terminal StatementListSymbol		code_statement_list;
+non terminal CodeStatementSymbol		code_statement;
+non terminal ParameterListSymbol		parameter_list;
 
 /* precedence rules */
 
@@ -103,6 +105,7 @@ block_content_item ::=
 		block:item 																				{: RESULT = new BlockContentItemSymbol(item); :}
 	|	block_property:item 																	{: RESULT = new BlockContentItemSymbol(item); :}
 	|	code_block:item 																		{: RESULT = new BlockContentItemSymbol(item); :}
+	|	variable_definition:item																{: RESULT = new BlockContentItemSymbol(item); :}
 	|	/* empty */																				{: RESULT = new BlockContentItemSymbol(); :}
 	;
 
@@ -129,6 +132,10 @@ expression ::=
 	|	expression:lefthandside OPERATOR_MINUS expression:righthandside							{: RESULT = new SubtractionExpressionSymbol(lefthandside, righthandside); :}
 	|	variable_access:variable_access 														{: RESULT = variable_access; :}
 	|	function_call:call																		{: RESULT = call; :}
+	;
+
+variable_definition ::=
+		KEYWORD_DEF identifyer:identifyer COLON NUMBER:value 												{: RESULT = new VariableDefinitionSymbol(identifyer, value); :}
 	;
 
 function_call ::=

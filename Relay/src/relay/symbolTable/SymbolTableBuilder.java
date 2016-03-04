@@ -11,7 +11,7 @@ public class SymbolTableBuilder {
 		SymbolTable globalTable = buildGlobalSymbolTable(rootNode);
 		
 		// second iteration to include the "parent" keyword into the symbol table. Now any block will have this entry as well as the complete symbol table.
-		globalTable.putBlockSymbol(ReservedKeyword.parent.name(), null);
+		globalTable.put(ReservedKeyword.parent.name(), null);
 		visitLocal(rootNode.rootBlock, globalTable);
 	}
 	
@@ -20,7 +20,7 @@ public class SymbolTableBuilder {
 		
 		for(BlockNode child : block.childBlocks) {	
 			SymbolTable childTable = symbolTable.copyOf();
-			childTable.putBlockSymbol(ReservedKeyword.parent.name(), block);
+			childTable.put(ReservedKeyword.parent.name(), block);
 			
 			visitLocal(child, childTable);
 		}

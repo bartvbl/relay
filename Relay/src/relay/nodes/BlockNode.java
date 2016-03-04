@@ -15,7 +15,7 @@ public class BlockNode extends RelayNode {
 	
 	private final HashMap<String, BlockPropertyNode> propertyMap;
 
-	private SymbolTable symbolTable;
+	public SymbolTable symbolTable;
 
 	public BlockNode(
 			String blockName, 

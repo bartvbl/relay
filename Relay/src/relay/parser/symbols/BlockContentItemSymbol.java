@@ -11,12 +11,14 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	public final BlockSymbol blockNode;
 	public final BlockPropertySymbol propertyNode;
 	public final CodeBlockSymbol codeBlockNode;
+	public final VariableDefinitionSymbol variableDefinitionNode;
 
 	public BlockContentItemSymbol(BlockSymbol item) {
 		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = item;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
+		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.BLOCK;
 	}
 
@@ -25,6 +27,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = item;
 		this.codeBlockNode = null;
+		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.PROPERTY;
 	}
 
@@ -33,6 +36,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = item;
+		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.CODE_BLOCK;
 	}
 	
@@ -41,9 +45,19 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
+		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.EMPTY;
 	}
 	
+	public BlockContentItemSymbol(VariableDefinitionSymbol item) {
+		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
+		this.blockNode = null;
+		this.propertyNode = null;
+		this.codeBlockNode = null;
+		this.variableDefinitionNode = item;
+		this.itemType = BlockItemType.CODE_BLOCK;
+	}
+
 	@Override
 	public String toString() {
 		return "Block content item of type: " + itemType;
@@ -60,6 +74,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 			throw new RuntimeException("An empty node can not be compacted!");
 		case PROPERTY:
 			return propertyNode.compact();
+		case VARIABLE_DEFINITION:
+			return variableDefinitionNode.compact();
 		default:
 			throw new RuntimeException("Forgot to implement another type!");
 		}
