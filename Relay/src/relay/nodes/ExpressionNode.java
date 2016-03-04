@@ -2,7 +2,7 @@ package relay.nodes;
 
 import relay.parser.symbols.types.ExpressionType;
 
-public class ExpressionNode extends RelayNode {
+public abstract class ExpressionNode extends RelayNode {
 	
 	public final ExpressionType expressionType;
 
@@ -15,5 +15,7 @@ public class ExpressionNode extends RelayNode {
 		super(RelayNodeType.EXPRESSION, children);
 		this.expressionType = type;
 	}
+	
+	public abstract double evaluate();
 
 }

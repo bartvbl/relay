@@ -19,4 +19,9 @@ public class ValueNode extends ExpressionNode {
 		return "Value node: " + value + " " + unit;
 	}
 
+	@Override
+	public double evaluate() {
+		return value;
+	}
+
 }

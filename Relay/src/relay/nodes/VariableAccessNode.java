@@ -22,4 +22,9 @@ public class VariableAccessNode extends ExpressionNode {
 		return "Variable access: " + totalAccessString;
 	}
 
+	@Override
+	public double evaluate() {
+		throw new RuntimeException("I don't have a symbol table :(");
+	}
+
 }

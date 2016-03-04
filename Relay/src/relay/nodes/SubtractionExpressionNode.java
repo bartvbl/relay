@@ -18,4 +18,9 @@ public class SubtractionExpressionNode extends ExpressionNode {
 	public String toString() {
 		return "Subtraction expression";
 	}
+
+	@Override
+	public double evaluate() {
+		return leftHandSide.evaluate() - rightHandSide.evaluate();
+	}
 }
