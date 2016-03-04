@@ -17,7 +17,7 @@ public class SymbolTable {
 	}
 	
 	public void putBlockSymbol(String name, BlockNode blockSymbol) {
-		this.blockSymbols.put(blockSymbol.name, blockSymbol);
+		this.blockSymbols.put(name, blockSymbol);
 	}
 
 	public void putBlockSymbol(BlockNode block) {

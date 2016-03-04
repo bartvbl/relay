@@ -9,6 +9,7 @@ import java_cup.runtime.ComplexSymbolFactory;
 import lib.geom.IndexRectangle2D;
 import relay.backends.core.Backend;
 import relay.backends.lwjgl.core.LWJGLBackend;
+import relay.blockLinking.BlockLinker;
 import relay.exceptions.RelayException;
 import relay.layout.LayoutDefinition;
 import relay.layout.LayoutDefinitionBuilder;
@@ -40,6 +41,9 @@ public class UILoader {
 
 			// Extract relevant information from the document
 			SymbolTableBuilder.createLocalSymbolTables(rootNode);
+			
+			// Perform the linking phase: figure out which expressions depend on which other values
+			BlockLinker.linkBlockExpressions(rootNode);
 			
 			//new TreeVisualiser(rootNode);
 			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode);
