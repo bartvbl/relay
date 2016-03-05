@@ -5,6 +5,7 @@ import relay.nodes.BlockPropertyNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
 import relay.parser.symbols.types.RelaySymbolType;
+import relay.types.RelayBlockPropertyType;
 
 public class BlockPropertySymbol extends RelaySymbol {
 
@@ -24,6 +25,12 @@ public class BlockPropertySymbol extends RelaySymbol {
 
 	@Override
 	public RelayNode compact() throws RelayException {
-		return new BlockPropertyNode(identifyer.value, (ExpressionNode)expression.compact());
+		RelayBlockPropertyType type;
+		try {
+			type = RelayBlockPropertyType.valueOf(identifyer.value);			
+		} catch (Exception e) {
+			throw new RelayException("Unknown property type \"" + identifyer.value + "\"");
+		}
+		return new BlockPropertyNode(type, (ExpressionNode)expression.compact());
 	}
 }

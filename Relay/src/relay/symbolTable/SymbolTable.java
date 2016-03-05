@@ -21,11 +21,11 @@ public class SymbolTable {
 	}
 	
 	public void put(String[] identifyers, MutableDependentValue value) {
-		String completeIdentifyer = toSingleStringVariableAccess(identifyers);
+		String completeIdentifyer = mergeVariableAccessStrings(identifyers);
 		symbols.put(completeIdentifyer, value);
 	}
 
-	private String toSingleStringVariableAccess(String[] identifyers) {
+	private String mergeVariableAccessStrings(String[] identifyers) {
 		StringBuilder completeIdentifyer = new StringBuilder();
 		
 		for(int i = 0; i < identifyers.length - 1; i++) {
@@ -44,7 +44,7 @@ public class SymbolTable {
 	}
 
 	public MutableDependentValue get(String[] identifyers) {
-		return symbols.get(toSingleStringVariableAccess(identifyers));
+		return symbols.get(mergeVariableAccessStrings(identifyers));
 	}
 
 	public MutableDependentValue get(String identifyer) {

@@ -2,7 +2,7 @@ package relay.layout;
 
 import relay.nodes.ExpressionNode;
 
-public class DimensionValue {
+public class DimensionValue implements MutableDependentValue {
 	public final ExpressionNode expression;
 	public final boolean isDefined;
 	

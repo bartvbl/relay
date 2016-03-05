@@ -1,8 +1,10 @@
 package relay.symbolTable;
 
+import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.RootNode;
 import relay.parser.symbols.types.ReservedKeyword;
+import relay.types.RelayBlockPropertyType;
 
 public class SymbolTableBuilder {
 
@@ -11,7 +13,7 @@ public class SymbolTableBuilder {
 		SymbolTable globalTable = buildGlobalSymbolTable(rootNode);
 		
 		// second iteration to include the "parent" keyword into the symbol table. Now any block will have this entry as well as the complete symbol table.
-		globalTable.put(ReservedKeyword.parent.name(), null);
+		putBlockSymbols(ReservedKeyword.parent.name(), rootNode.windowDimensions, globalTable);
 		visitLocal(rootNode.rootBlock, globalTable);
 	}
 	
@@ -20,7 +22,7 @@ public class SymbolTableBuilder {
 		
 		for(BlockNode child : block.childBlocks) {	
 			SymbolTable childTable = symbolTable.copyOf();
-			childTable.put(ReservedKeyword.parent.name(), block);
+			putBlockSymbols(ReservedKeyword.parent.name(), block.dimensions, symbolTable);
 			
 			visitLocal(child, childTable);
 		}
@@ -33,11 +35,21 @@ public class SymbolTableBuilder {
 	}
 
 	private static void visitGlobal(BlockNode block, SymbolTable table) {
-		table.putBlockSymbol(block);
+		putBlockSymbols(block.name, block.dimensions, table);
 		
 		for(BlockNode child : block.childBlocks) {	
 			visitLocal(child, table);
 		}
+	}
+
+	private static void putBlockSymbols(String baseName, BlockDimensions dimensions, SymbolTable table) {
+		table.put(new String[]{baseName, RelayBlockPropertyType.left.name()}, dimensions.left);
+		table.put(new String[]{baseName, RelayBlockPropertyType.right.name()}, dimensions.right);
+		table.put(new String[]{baseName, RelayBlockPropertyType.width.name()}, dimensions.width);
+		
+		table.put(new String[]{baseName, RelayBlockPropertyType.top.name()}, dimensions.top);
+		table.put(new String[]{baseName, RelayBlockPropertyType.bottom.name()}, dimensions.bottom);
+		table.put(new String[]{baseName, RelayBlockPropertyType.width.name()}, dimensions.width);
 	}
 
 }

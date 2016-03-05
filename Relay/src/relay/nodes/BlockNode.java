@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import relay.layout.BlockDimensions;
 import relay.symbolTable.SymbolTable;
+import relay.types.RelayBlockPropertyType;
 
 public class BlockNode extends RelayNode {
 	public final String name;
@@ -13,7 +14,7 @@ public class BlockNode extends RelayNode {
 	
 	public final BlockDimensions dimensions;
 	
-	private final HashMap<String, BlockPropertyNode> propertyMap;
+	private final HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap;
 
 	public SymbolTable symbolTable;
 
@@ -22,7 +23,7 @@ public class BlockNode extends RelayNode {
 			RelayNode[] childNodes, 
 			BlockNode[] childBlocks, 
 			CodeBlockNode[] childCodeBlocks, 
-			HashMap<String, BlockPropertyNode> propertyMap,
+			HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap,
 			BlockDimensions dimensions
 		) {
 		

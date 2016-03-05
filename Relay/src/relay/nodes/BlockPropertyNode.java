@@ -1,19 +1,21 @@
 package relay.nodes;
 
+import relay.types.RelayBlockPropertyType;
+
 public class BlockPropertyNode extends RelayNode {
 
-	public final String identifyer;
+	public final RelayBlockPropertyType type;
 	public final ExpressionNode expression;
 
-	public BlockPropertyNode(String identifyer, ExpressionNode expression) {
+	public BlockPropertyNode(RelayBlockPropertyType type, ExpressionNode expression) {
 		super(RelayNodeType.BLOCK_PROPERTY, new RelayNode[]{expression});
-		this.identifyer = identifyer;
+		this.type = type;
 		this.expression = expression;
 	}
 	
 	@Override
 	public String toString() {
-		return "Block property of type \"" + identifyer + "\"";
+		return "Block property of type \"" + type + "\"";
 	}
 
 }

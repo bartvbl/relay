@@ -7,7 +7,6 @@ import relay.nodes.ExpressionNode;
 import relay.nodes.RootNode;
 import relay.nodes.VariableAccessNode;
 import relay.symbolTable.SymbolTable;
-import relay.types.VariableAccessType;
 
 public class BlockLinker {
 

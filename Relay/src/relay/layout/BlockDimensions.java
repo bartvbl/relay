@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
+import relay.types.RelayBlockPropertyType;
 
 public class BlockDimensions {
 	public final DimensionValue left;
@@ -17,7 +18,7 @@ public class BlockDimensions {
 	public final DimensionDefinitionType horizontalDefinition;
 	public final DimensionDefinitionType verticalDefinition;
 	
-	public BlockDimensions(HashMap<String, BlockPropertyNode> propertyMap) throws RelayException {
+	public BlockDimensions(HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
 		this.left = createDimensionValue(DimensionValueType.left, propertyMap);
 		this.right = createDimensionValue(DimensionValueType.right, propertyMap);
 		this.width = createDimensionValue(DimensionValueType.width, propertyMap);
@@ -64,7 +65,7 @@ public class BlockDimensions {
 		throw new RelayException("Semantics error: size definition of height only is not allowed.");
 	}
 
-	private DimensionValue createDimensionValue(DimensionValueType type, HashMap<String, BlockPropertyNode> propertyMap) {
+	private DimensionValue createDimensionValue(DimensionValueType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
 		BlockPropertyNode blockProperty = propertyMap.get(type.toString());
 		if(blockProperty != null) {
 			return new DimensionValue(blockProperty.expression);

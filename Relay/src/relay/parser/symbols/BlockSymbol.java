@@ -11,6 +11,7 @@ import relay.nodes.CodeBlockNode;
 import relay.nodes.RelayNode;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
+import relay.types.RelayBlockPropertyType;
 
 public class BlockSymbol extends RelaySymbol {
 
@@ -67,9 +68,9 @@ public class BlockSymbol extends RelaySymbol {
 		CodeBlockNode[] childCodeBlocks = codeBlockList.toArray(new CodeBlockNode[codeBlockList.size()]);
 		BlockPropertyNode[] blockProperties = blockPropertyList.toArray(new BlockPropertyNode[blockPropertyList.size()]);
 		
-		HashMap<String, BlockPropertyNode> propertyMap = new HashMap<String, BlockPropertyNode>();
+		HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap = new HashMap<RelayBlockPropertyType, BlockPropertyNode>();
 		for(BlockPropertyNode property : blockProperties) {
-			propertyMap.put(property.identifyer, property);
+			propertyMap.put(property.type, property);
 		}
 		
 		BlockDimensions dimensions = new BlockDimensions(propertyMap);	
