@@ -19,4 +19,9 @@ public class AdditionExpressionNode extends ExpressionNode {
 		return "Addition expression";
 	}
 
+	@Override
+	public double evaluate() {
+		return leftHandSide.evaluate() + rightHandSide.evaluate();
+	}
+
 }

@@ -1,7 +1,10 @@
 package relay.parser.symbols;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import relay.exceptions.RelayException;
+import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.CodeBlockNode;
@@ -12,11 +15,13 @@ import relay.parser.symbols.types.RelaySymbolType;
 public class BlockSymbol extends RelaySymbol {
 
 	public final IdentifyerSymbol nameNode;
+	public final IdentifyerSymbol blockTypeNode;
 	public final BlockContentListSymbol childList;
 
-	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList) {
+	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
 		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
+		this.blockTypeNode = blockType;
 		this.childList = childList;
 	}
 
@@ -26,7 +31,7 @@ public class BlockSymbol extends RelaySymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		String blockName = nameNode.value;
 		ArrayList<RelayNode> children = new ArrayList<RelayNode>();
 		BlockContentListSymbol currentListNode = childList;
@@ -62,7 +67,14 @@ public class BlockSymbol extends RelaySymbol {
 		CodeBlockNode[] childCodeBlocks = codeBlockList.toArray(new CodeBlockNode[codeBlockList.size()]);
 		BlockPropertyNode[] blockProperties = blockPropertyList.toArray(new BlockPropertyNode[blockPropertyList.size()]);
 		
-		return new BlockNode(blockName, childNodes, childBlocks, childCodeBlocks, blockProperties);
+		HashMap<String, BlockPropertyNode> propertyMap = new HashMap<String, BlockPropertyNode>();
+		for(BlockPropertyNode property : blockProperties) {
+			propertyMap.put(property.identifyer, property);
+		}
+		
+		BlockDimensions dimensions = new BlockDimensions(propertyMap);	
+		
+		return new BlockNode(blockName, childNodes, childBlocks, childCodeBlocks, propertyMap, dimensions);
 	}
 
 }

@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.AdditionExpressionNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
@@ -25,7 +26,7 @@ public class SubtractionExpressionSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
 		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();
 		return new SubtractionExpressionNode(leftHand, rightHand);

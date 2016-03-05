@@ -4,5 +4,6 @@ public enum BlockItemType {
 	BLOCK,
 	PROPERTY,
 	CODE_BLOCK,
-	EMPTY
+	VARIABLE_DEFINITION,
+	EMPTY, 
 }

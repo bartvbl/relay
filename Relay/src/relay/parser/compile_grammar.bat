@@ -1,2 +1,2 @@
-java -jar cup.jar -package parser -parser RelayParser -symbols RelaySymbols relay.cup
+java -jar cup.jar -package relay.parser -parser RelayParser -symbols RelaySymbols relay.cup
 pause

@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
@@ -22,7 +23,7 @@ public class BlockPropertySymbol extends RelaySymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		return new BlockPropertyNode(identifyer.value, (ExpressionNode)expression.compact());
 	}
 }

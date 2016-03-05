@@ -1,23 +1,42 @@
 package relay.symbolTable;
 
-import java.util.HashMap;
-
 import relay.nodes.BlockNode;
 import relay.nodes.RootNode;
+import relay.parser.symbols.types.ReservedKeyword;
 
 public class SymbolTableBuilder {
 
-	public static SymbolTable buildSymbolTable(RootNode rootNode) {
-		HashMap<String, BlockNode> symbols = new HashMap<String, BlockNode>();
-		visit(rootNode.rootBlock, symbols);
+	public static void createLocalSymbolTables(RootNode rootNode) {
+		// As all blocks are in global scope, we first collect all of them in a single table
+		SymbolTable globalTable = buildGlobalSymbolTable(rootNode);
 		
-		return new SymbolTable(symbols);
+		// second iteration to include the "parent" keyword into the symbol table. Now any block will have this entry as well as the complete symbol table.
+		globalTable.put(ReservedKeyword.parent.name(), null);
+		visitLocal(rootNode.rootBlock, globalTable);
+	}
+	
+	private static void visitLocal(BlockNode block, SymbolTable symbolTable) {
+		block.setSymbolTable(symbolTable);
+		
+		for(BlockNode child : block.childBlocks) {	
+			SymbolTable childTable = symbolTable.copyOf();
+			childTable.put(ReservedKeyword.parent.name(), block);
+			
+			visitLocal(child, childTable);
+		}
+	}
+	
+	public static SymbolTable buildGlobalSymbolTable(RootNode rootNode) {
+		SymbolTable table = new SymbolTable();
+		visitGlobal(rootNode.rootBlock, table);
+		return table;
 	}
 
-	private static void visit(BlockNode block, HashMap<String, BlockNode> symbols) {
-		symbols.put(block.name, block);
-		for(BlockNode child : block.childBlocks) {
-			visit(child, symbols);
+	private static void visitGlobal(BlockNode block, SymbolTable table) {
+		table.putBlockSymbol(block);
+		
+		for(BlockNode child : block.childBlocks) {	
+			visitLocal(child, table);
 		}
 	}
 

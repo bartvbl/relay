@@ -48,8 +48,4 @@
 		right: parent.right
 	)
 
-	left: 0px
-	right: 0px
-	width: screen.width
-	height: screen.height
 )

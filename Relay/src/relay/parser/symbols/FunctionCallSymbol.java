@@ -2,6 +2,7 @@ package relay.parser.symbols;
 
 import java.util.ArrayList;
 
+import relay.exceptions.RelayException;
 import relay.nodes.ExpressionNode;
 import relay.nodes.FunctionCallNode;
 import relay.nodes.RelayNode;
@@ -25,7 +26,7 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		ArrayList<ExpressionNode> functionParameters = new ArrayList<ExpressionNode>();
 		ParameterListSymbol currentParameterList = parameters;
 		

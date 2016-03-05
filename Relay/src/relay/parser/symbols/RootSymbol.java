@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import relay.exceptions.RelayException;
 import relay.nodes.BlockNode;
 import relay.nodes.RelayNode;
 import relay.nodes.RootNode;
@@ -19,7 +20,7 @@ public class RootSymbol extends RelaySymbol {
 	}
 
 	@Override
-	public RelayNode compact() {
+	public RelayNode compact() throws RelayException {
 		BlockNode mainBlock = (BlockNode) rootBlock.compact();
 		return new RootNode(mainBlock);
 	}
