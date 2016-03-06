@@ -1,7 +1,9 @@
 package relay.parser.symbols;
 
+import java_cup.runtime.ComplexSymbolFactory.Location;
 import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
 
@@ -13,8 +15,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	public final CodeBlockSymbol codeBlockNode;
 	public final VariableDefinitionSymbol variableDefinitionNode;
 
-	public BlockContentItemSymbol(BlockSymbol item) {
-		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
+	public BlockContentItemSymbol(LocationRange locationRange, BlockSymbol item) {
+		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = item;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
@@ -22,8 +24,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.itemType = BlockItemType.BLOCK;
 	}
 
-	public BlockContentItemSymbol(BlockPropertySymbol item) {
-		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
+	public BlockContentItemSymbol(LocationRange locationRange, BlockPropertySymbol item) {
+		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = item;
 		this.codeBlockNode = null;
@@ -31,8 +33,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.itemType = BlockItemType.PROPERTY;
 	}
 
-	public BlockContentItemSymbol(CodeBlockSymbol item) {
-		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
+	public BlockContentItemSymbol(LocationRange locationRange, CodeBlockSymbol item) {
+		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = item;
@@ -40,8 +42,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.itemType = BlockItemType.CODE_BLOCK;
 	}
 	
-	public BlockContentItemSymbol() {
-		super(RelaySymbolType.BLOCK_CONTENT_ITEM);
+	public BlockContentItemSymbol(LocationRange locationRange) {
+		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM);
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = null;
@@ -49,8 +51,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.itemType = BlockItemType.EMPTY;
 	}
 	
-	public BlockContentItemSymbol(VariableDefinitionSymbol item) {
-		super(RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
+	public BlockContentItemSymbol(LocationRange locationRange, VariableDefinitionSymbol item) {
+		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.codeBlockNode = null;

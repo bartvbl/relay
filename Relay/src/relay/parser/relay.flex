@@ -22,26 +22,23 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 %{
 	StringBuffer string = new StringBuffer();
 
-    public Lexer(java.io.Reader in, ComplexSymbolFactory sf) {
+	public Lexer(java.io.Reader in, ComplexSymbolFactory sf) {
 		this(in);
 		symbolFactory = sf;
-    }
-    ComplexSymbolFactory symbolFactory;
+	}
+	ComplexSymbolFactory symbolFactory;
 
-  private Symbol symbol(String name, int sym) {
-      return symbolFactory.newSymbol(name, sym, new Location(yyline+1,yycolumn+1,yychar), new Location(yyline+1,yycolumn+yylength(),yychar+yylength()));
-  }
+	private Symbol symbol(String name, int sym) {
+		Location left = new Location(yyline + 1, yycolumn + 1, yychar);
+		Location right = new Location(yyline + 1, yycolumn + yylength(), yychar + yylength());
+		return symbolFactory.newSymbol(name, sym, left, right);
+	}
 
-  private Symbol symbol(String name, int sym, Object val) {
-      Location left = new Location(yyline+1,yycolumn+1,yychar);
-      Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
-      return symbolFactory.newSymbol(name, sym, left, right,val);
-  }
-  private Symbol symbol(String name, int sym, Object val, int buflength) {
-      Location left = new Location(yyline+1,yycolumn+yylength()-buflength,yychar+yylength()-buflength);
-      Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
-      return symbolFactory.newSymbol(name, sym, left, right,val);
-  }
+	private Symbol symbol(String name, int sym, Object val) {
+		Location left = new Location(yyline + 1, yycolumn + 1, yychar);
+		Location right = new Location(yyline + 1, yycolumn + yylength(), yychar + yylength());
+		return symbolFactory.newSymbol(name, sym, left, right, val);
+	}
 %}
 
 /* main character classes */

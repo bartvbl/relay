@@ -4,6 +4,7 @@ import relay.exceptions.RelayException;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.LineStatementNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.StatementType;
 
 public class LineStatementSymbol extends CodeStatementSymbol {
@@ -13,8 +14,8 @@ public class LineStatementSymbol extends CodeStatementSymbol {
 	public final ExpressionSymbol toX;
 	public final ExpressionSymbol toY;
 
-	public LineStatementSymbol(ExpressionSymbol fromX, ExpressionSymbol fromY, ExpressionSymbol toX, ExpressionSymbol toY) {
-		super(StatementType.LINE, new RelaySymbol[]{fromX, fromY, toX, toY});
+	public LineStatementSymbol(LocationRange locationRange, ExpressionSymbol fromX, ExpressionSymbol fromY, ExpressionSymbol toX, ExpressionSymbol toY) {
+		super(locationRange, StatementType.LINE, new RelaySymbol[]{fromX, fromY, toX, toY});
 		this.fromX = fromX;
 		this.fromY = fromY;
 		this.toX = toX;

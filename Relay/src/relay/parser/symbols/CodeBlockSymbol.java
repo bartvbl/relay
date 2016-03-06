@@ -6,14 +6,15 @@ import relay.exceptions.RelayException;
 import relay.nodes.CodeBlockNode;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 
 public class CodeBlockSymbol extends RelaySymbol {
 
 	public final StatementListSymbol statementList;
 
-	public CodeBlockSymbol(StatementListSymbol statementList) {
-		super(RelaySymbolType.CODE_BLOCK, new RelaySymbol[]{statementList});
+	public CodeBlockSymbol(LocationRange locationRange, StatementListSymbol statementList) {
+		super(locationRange, RelaySymbolType.CODE_BLOCK, new RelaySymbol[]{statementList});
 		this.statementList = statementList;
 	}
 

@@ -4,13 +4,14 @@ import relay.exceptions.RelayException;
 import relay.nodes.BlockNode;
 import relay.nodes.RelayNode;
 import relay.nodes.RootNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 
 public class RootSymbol extends RelaySymbol {
 	public final BlockSymbol rootBlock;
 
-	public RootSymbol(BlockSymbol blockSymbol) {
-		super(RelaySymbolType.ROOT, new RelaySymbol[]{blockSymbol});
+	public RootSymbol(LocationRange locationRange, BlockSymbol blockSymbol) {
+		super(locationRange, RelaySymbolType.ROOT, new RelaySymbol[]{blockSymbol});
 		this.rootBlock = blockSymbol;
 	}
 	

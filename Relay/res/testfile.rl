@@ -11,19 +11,17 @@
 			top: previous.top
 			height: 20% + 20px
 
-			( icon
+			( icon : Image
 				left: parent.left
 				width: parent.height
 				top: parent.top
 				height: parent.height
-				content: link.icon_src
 			)
-			( link
+			( link : Text
 				left: icon.right
 				right: parent.right
 				top: parent.top
 				height: parent.height
-				content: link.title
 			)
 		) //repeat-for link in sidebar_links
 	)
@@ -33,8 +31,6 @@
 		right: parent.right
 		top: parent.top
 		height: content.height
-
-		origin: bottom-left
 
 		/*{
 			line from (left, top) to (right, top)

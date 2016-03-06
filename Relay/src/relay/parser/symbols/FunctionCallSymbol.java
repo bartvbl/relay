@@ -6,6 +6,7 @@ import relay.exceptions.RelayException;
 import relay.nodes.ExpressionNode;
 import relay.nodes.FunctionCallNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;
 
@@ -14,8 +15,8 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 	public final String functionName;
 	public final ParameterListSymbol parameters;
 
-	public FunctionCallSymbol(String identifyer, ParameterListSymbol parameters) {
-		super(RelaySymbolType.EXPRESSION, ExpressionType.FUNCTION_CALL, new RelaySymbol[]{parameters});
+	public FunctionCallSymbol(LocationRange locationRange, String identifyer, ParameterListSymbol parameters) {
+		super(locationRange, ExpressionType.FUNCTION_CALL, new RelaySymbol[]{parameters});
 		this.functionName = identifyer;
 		this.parameters = parameters;
 	}

@@ -4,6 +4,7 @@ import relay.parser.symbols.AdditionExpressionSymbol;
 import relay.parser.symbols.BlockContentItemSymbol;
 import relay.parser.symbols.BlockContentListSymbol;
 import relay.parser.symbols.BlockPropertySymbol;
+import relay.parser.symbols.BracketExpressionSymbol;
 import relay.parser.symbols.CodeBlockSymbol;
 import relay.parser.symbols.CodeStatementSymbol;
 import relay.parser.symbols.ExpressionSymbol;
@@ -13,6 +14,7 @@ import relay.parser.symbols.LineStatementSymbol;
 import relay.parser.symbols.ParameterListSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
+import relay.parser.symbols.RelaySimpleSymbol;
 import relay.parser.symbols.StatementListSymbol;
 import relay.parser.symbols.SubtractionExpressionSymbol;
 import relay.parser.symbols.UnitSymbol;
@@ -25,30 +27,32 @@ import relay.types.BlockType;
 
 /* terminals */
 
-terminal NEW_LINE;
+terminal RelaySimpleSymbol NEW_LINE;
+terminal RelaySimpleSymbol COLON;
+terminal RelaySimpleSymbol SEMICOLON;
+terminal RelaySimpleSymbol DOT;
+terminal RelaySimpleSymbol COMMA;
+
 terminal Double NUMBER;
-terminal COLON;
-terminal SEMICOLON;
-terminal DOT;
+
 terminal String IDENTIFYER;
-terminal COMMA;
 
-terminal BLOCK_OPEN;
-terminal BLOCK_CLOSE;
+terminal RelaySimpleSymbol BLOCK_OPEN;
+terminal RelaySimpleSymbol BLOCK_CLOSE;
 
-terminal CODE_BLOCK_OPEN;
-terminal CODE_BLOCK_CLOSE;
+terminal RelaySimpleSymbol CODE_BLOCK_OPEN;
+terminal RelaySimpleSymbol CODE_BLOCK_CLOSE;
 
 terminal UnitSymbol UNIT_PIXELS;
 terminal UnitSymbol UNIT_PERCENT;
 
-terminal OPERATOR_PLUS;
-terminal OPERATOR_MINUS;
+terminal RelaySimpleSymbol OPERATOR_PLUS;
+terminal RelaySimpleSymbol OPERATOR_MINUS;
 
-terminal KEYWORD_LINE;
-terminal KEYWORD_FROM;
-terminal KEYWORD_TO;
-terminal KEYWORD_DEF;
+terminal RelaySimpleSymbol KEYWORD_LINE;
+terminal RelaySimpleSymbol KEYWORD_FROM;
+terminal RelaySimpleSymbol KEYWORD_TO;
+terminal RelaySimpleSymbol KEYWORD_DEF;
 
 /* non-terminals */
 
@@ -81,19 +85,23 @@ start with goal;
 /* grammar definition */
 
 goal ::=	
-		block:block 																			{: RESULT = new RootSymbol(block); :}
+		block:block
+																								{: RESULT = new RootSymbol(new LocationRange(block.location.start, block.location.end), block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE 	{: RESULT = new BlockSymbol(blockName, blockContent, new IdentifyerSymbol(BlockType.Basic.toString())); :}
-	|	BLOCK_OPEN NEW_LINE block_content_list:blockContent BLOCK_CLOSE							{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent, new IdentifyerSymbol(BlockType.Basic.toString())); :}
-	|	BLOCK_OPEN identifyer:blockName COLON identifyer:blockType NEW_LINE block_content_list:blockContent BLOCK_CLOSE		
-																								{: RESULT = new BlockSymbol(new IdentifyerSymbol("[untitled block]"), blockContent, blockType); :}
+		BLOCK_OPEN:openToken identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockName, blockContent, new IdentifyerSymbol(null, BlockType.Basic.toString())); :}
+	|	BLOCK_OPEN:openToken NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockContent, new IdentifyerSymbol(null, BlockType.Basic.name())); :}
+	|	BLOCK_OPEN:openToken identifyer:blockName COLON identifyer:blockType NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockContent, blockType); :}
 	;
 
 block_content_list ::=	
 		/* empty */																				{: RESULT = null; :}
-	|	block_content_list:remainingSymbols block_content_line:listSymbol						{: RESULT = new BlockContentListSymbol(listSymbol, remainingSymbols); :}
+	|	block_content_list:remainingSymbols block_content_line:listSymbol						
+																								{: RESULT = new BlockContentListSymbol(new LocationRange(listSymbolxleft, listSymbolxright), listSymbol, remainingSymbols); :}
 	;
 
 block_content_line ::=
@@ -102,61 +110,83 @@ block_content_line ::=
 	;
 
 block_content_item ::=
-		block:item 																				{: RESULT = new BlockContentItemSymbol(item); :}
-	|	block_property:item 																	{: RESULT = new BlockContentItemSymbol(item); :}
-	|	code_block:item 																		{: RESULT = new BlockContentItemSymbol(item); :}
-	|	variable_definition:item																{: RESULT = new BlockContentItemSymbol(item); :}
-	|	/* empty */																				{: RESULT = new BlockContentItemSymbol(); :}
+		block:item 
+																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
+	|	block_property:item
+																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
+	|	code_block:item
+																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
+	|	variable_definition:item
+																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
+	|	/* empty */																				{: RESULT = null; :}
 	;
 
 code_block ::=
-		CODE_BLOCK_OPEN code_statement_list:statementList CODE_BLOCK_CLOSE 						{: RESULT = new CodeBlockSymbol(statementList); :}
+		CODE_BLOCK_OPEN:openToken code_statement_list:statementList CODE_BLOCK_CLOSE:closeToken	
+																								{: RESULT = new CodeBlockSymbol(new LocationRange(openToken.location.start, closeToken.location.end), statementList); :}
 	;
 
 code_statement_list ::=
-		code_statement:statement code_statement_list:remainingSymbols 							{: RESULT = new StatementListSymbol(statement, remainingSymbols); :}
-	|	code_statement:statement 																{: RESULT = new StatementListSymbol(statement); :}
+		code_statement:statement code_statement_list:remainingSymbols
+																								{: RESULT = new StatementListSymbol(new LocationRange(statement.location.start, statement.location.end), statement, remainingSymbols); :}
+	|	code_statement:statement
+																								{: RESULT = new StatementListSymbol(new LocationRange(statement.location.start, statement.location.end), statement); :}
 	;
 
 code_statement ::=
-		KEYWORD_LINE KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE 																{: RESULT = new LineStatementSymbol(fromX, fromY, toX, toY); :}
+		KEYWORD_LINE:firstToken KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE:endToken
+																								{: RESULT = new LineStatementSymbol(new LocationRange(firstToken.location.start, endToken.location.end), fromX, fromY, toX, toY); :}
 	;
 
 block_property ::=
-		identifyer:identifyer COLON expression:expression										{: RESULT = new BlockPropertySymbol(identifyer, expression); :}
+		identifyer:identifyer COLON expression:expression
+																								{: RESULT = new BlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, expression); :}
 	;
 
 expression ::=
-		NUMBER:value unit:unit 																	{: RESULT = new ValueSymbol(value, unit); :}
-	|	expression:lefthandside OPERATOR_PLUS expression:righthandside							{: RESULT = new AdditionExpressionSymbol(lefthandside, righthandside); :}
-	|	expression:lefthandside OPERATOR_MINUS expression:righthandside							{: RESULT = new SubtractionExpressionSymbol(lefthandside, righthandside); :}
+		NUMBER:value unit:unit 
+																								{: RESULT = new ValueSymbol(new LocationRange(unit.location.start, unit.location.end), value, unit); :}
+	|	expression:leftHandSide OPERATOR_PLUS expression:rightHandSide
+																								{: RESULT = new AdditionExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	BLOCK_OPEN:openToken expression:expression BLOCK_CLOSE:closeToken 
+																								{: RESULT = new BracketExpressionSymbol(new LocationRange(openToken.location.start, openToken.location.end), expression); :}
+	|	expression:leftHandSide OPERATOR_MINUS expression:rightHandSide							
+																								{: RESULT = new SubtractionExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
 	|	variable_access:variable_access 														{: RESULT = variable_access; :}
 	|	function_call:call																		{: RESULT = call; :}
 	;
 
 variable_definition ::=
-		KEYWORD_DEF identifyer:identifyer COLON NUMBER:value 												{: RESULT = new VariableDefinitionSymbol(identifyer, value); :}
+		KEYWORD_DEF:openToken identifyer:identifyer COLON NUMBER:value 
+																								{: RESULT = new VariableDefinitionSymbol(new LocationRange(openToken.location.start, valuexright), identifyer, value); :}
 	;
 
 function_call ::=
-		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE 					{: RESULT = new FunctionCallSymbol(identifyer, parameters); :}
+		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE:closeToken
+																								{: RESULT = new FunctionCallSymbol(new LocationRange(identifyerxleft, closeToken.location.end), identifyer, parameters); :}
 	;
 
 parameter_list ::=
-		expression:expression COMMA parameter_list:remainingSymbols 							{: RESULT = new ParameterListSymbol(expression, remainingSymbols); :}
+		expression:expression COMMA parameter_list:remainingSymbols
+																								{: RESULT = new ParameterListSymbol(new LocationRange(expression.location.start, remainingSymbols.location.end), expression, remainingSymbols); :}
 	|	/* empty */ 																			{: RESULT = null; :}
 	;
 
 variable_access ::=
-		identifyer:identifyer DOT variable_access:remainingAccess								{: RESULT = new VariableAccessSymbol(identifyer, remainingAccess); :}
-	|	identifyer:identifyer 																	{: RESULT = new VariableAccessSymbol(identifyer); :}
+		identifyer:identifyer DOT variable_access:remainingAccess								
+																								{: RESULT = new VariableAccessSymbol(new LocationRange(identifyerxleft, identifyerxright), identifyer, remainingAccess); :}
+	|	identifyer:identifyer
+																								{: RESULT = new VariableAccessSymbol(new LocationRange(identifyerxleft, identifyerxright), identifyer); :}
 	;
 
 unit ::=
-		UNIT_PIXELS 																			{: RESULT = new UnitSymbol(Unit.PIXELS); :}
-	|	UNIT_PERCENT 																			{: RESULT = new UnitSymbol(Unit.PERCENT); :}
+		UNIT_PIXELS:unitToken
+																								{: RESULT = new UnitSymbol(new LocationRange(unitTokenxleft, unitTokenxright), Unit.PIXELS); :}
+	|	UNIT_PERCENT:unitToken
+																								{: RESULT = new UnitSymbol(new LocationRange(unitTokenxleft, unitTokenxright), Unit.PERCENT); :}
 	;
 
 identifyer ::=
-		IDENTIFYER:identifyer 																	{: RESULT = new IdentifyerSymbol(identifyer); :}
+		IDENTIFYER:identifyer
+																								{: RESULT = new IdentifyerSymbol(new LocationRange(identifyerxleft, identifyerxright), identifyer); :}
 	;

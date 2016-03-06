@@ -14,4 +14,5 @@ public enum RelaySymbolType {
 	CODE_STATEMENT, 
 	EXPRESSION, 
 	PARAMETER_LIST, 
+	TOKEN, 
 }

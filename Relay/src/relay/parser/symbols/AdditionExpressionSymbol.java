@@ -4,6 +4,7 @@ import relay.exceptions.RelayException;
 import relay.nodes.AdditionExpressionNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;
 
@@ -12,8 +13,8 @@ public class AdditionExpressionSymbol extends ExpressionSymbol {
 	private final ExpressionSymbol leftHandSide;
 	private final ExpressionSymbol rightHandSide;
 
-	public AdditionExpressionSymbol(ExpressionSymbol leftHandSide, ExpressionSymbol rightHandSide) {
-		super(RelaySymbolType.EXPRESSION, ExpressionType.ADDITION, new RelaySymbol[]{leftHandSide, rightHandSide});
+	public AdditionExpressionSymbol(LocationRange locationRange, ExpressionSymbol leftHandSide, ExpressionSymbol rightHandSide) {
+		super(locationRange, ExpressionType.ADDITION, new RelaySymbol[]{leftHandSide, rightHandSide});
 		this.leftHandSide = leftHandSide;
 		this.rightHandSide = rightHandSide;
 	}

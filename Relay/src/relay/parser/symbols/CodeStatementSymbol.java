@@ -3,6 +3,7 @@ package relay.parser.symbols;
 import relay.exceptions.RelayException;
 import relay.nodes.CodeStatementNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 import relay.parser.symbols.types.StatementType;
 
@@ -10,8 +11,8 @@ public abstract class CodeStatementSymbol extends RelaySymbol {
 
 	public final StatementType statementType;
 
-	public CodeStatementSymbol(StatementType type, RelaySymbol[] children) {
-		super(RelaySymbolType.CODE_STATEMENT, children);
+	public CodeStatementSymbol(LocationRange locationRange, StatementType type, RelaySymbol[] children) {
+		super(locationRange, RelaySymbolType.CODE_STATEMENT, children);
 		this.statementType = type;
 	}
 

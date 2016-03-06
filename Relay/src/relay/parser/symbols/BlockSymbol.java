@@ -9,6 +9,7 @@ import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.CodeBlockNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
 import relay.types.RelayBlockPropertyType;
@@ -19,9 +20,16 @@ public class BlockSymbol extends RelaySymbol {
 	public final IdentifyerSymbol blockTypeNode;
 	public final BlockContentListSymbol childList;
 
-	public BlockSymbol(IdentifyerSymbol blockName, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
-		super(RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
+	public BlockSymbol(LocationRange locationRange, IdentifyerSymbol blockName, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
+		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
+		this.blockTypeNode = blockType;
+		this.childList = childList;
+	}
+
+	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
+		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
+		this.nameNode = null;
 		this.blockTypeNode = blockType;
 		this.childList = childList;
 	}

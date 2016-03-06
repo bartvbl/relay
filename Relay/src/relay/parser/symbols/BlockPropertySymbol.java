@@ -4,6 +4,7 @@ import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 import relay.types.RelayBlockPropertyType;
 
@@ -12,8 +13,8 @@ public class BlockPropertySymbol extends RelaySymbol {
 	public final IdentifyerSymbol identifyer;
 	public final ExpressionSymbol expression;
 
-	public BlockPropertySymbol(IdentifyerSymbol identifyer, ExpressionSymbol expression) {
-		super(RelaySymbolType.BLOCK_PROPERTY, new RelaySymbol[]{identifyer, expression});
+	public BlockPropertySymbol(LocationRange locationRange, IdentifyerSymbol identifyer, ExpressionSymbol expression) {
+		super(locationRange, RelaySymbolType.BLOCK_PROPERTY, new RelaySymbol[]{identifyer, expression});
 		this.identifyer = identifyer;
 		this.expression = expression;
 	}

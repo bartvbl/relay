@@ -407,17 +407,12 @@ public class Lexer implements java_cup.runtime.Scanner {
     }
     ComplexSymbolFactory symbolFactory;
 
-  private Symbol symbol(String name, int sym) {
+  private Symbol symbol(int line, int column, String name, int sym) {
       return symbolFactory.newSymbol(name, sym, new Location(yyline+1,yycolumn+1,yychar), new Location(yyline+1,yycolumn+yylength(),yychar+yylength()));
   }
 
-  private Symbol symbol(String name, int sym, Object val) {
+  private Symbol symbol(int line, int column, String name, int sym, Object val) {
       Location left = new Location(yyline+1,yycolumn+1,yychar);
-      Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
-      return symbolFactory.newSymbol(name, sym, left, right,val);
-  }
-  private Symbol symbol(String name, int sym, Object val, int buflength) {
-      Location left = new Location(yyline+1,yycolumn+yylength()-buflength,yychar+yylength()-buflength);
       Location right= new Location(yyline+1,yycolumn+yylength(), yychar+yylength());
       return symbolFactory.newSymbol(name, sym, left, right,val);
   }
@@ -803,7 +798,7 @@ public class Lexer implements java_cup.runtime.Scanner {
         zzAtEOF = true;
             zzDoEOF();
               {
-                return symbol("end_of_file", EOF);
+                return symbol(yyline, yycolumn, "end_of_file", EOF);
               }
       }
       else {
@@ -813,7 +808,7 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 23: break;
           case 2: 
-            { return symbol("newline", NEW_LINE);
+            { return symbol(yyline, yycolumn, "newline", NEW_LINE);
             }
           case 24: break;
           case 3: 
@@ -821,79 +816,79 @@ public class Lexer implements java_cup.runtime.Scanner {
             }
           case 25: break;
           case 4: 
-            { return symbol("identifyer", IDENTIFYER, yytext());
+            { return symbol(yyline, yycolumn, "identifyer", IDENTIFYER, yytext());
             }
           case 26: break;
           case 5: 
-            { return symbol("operator_minus", OPERATOR_MINUS);
+            { return symbol(yyline, yycolumn, "operator_minus", OPERATOR_MINUS);
             }
           case 27: break;
           case 6: 
-            { return symbol("number", NUMBER, new Double(Double.parseDouble(yytext())));
+            { return symbol(yyline, yycolumn, "number", NUMBER, new Double(Double.parseDouble(yytext())));
             }
           case 28: break;
           case 7: 
-            { return symbol(".", DOT);
+            { return symbol(yyline, yycolumn, ".", DOT);
             }
           case 29: break;
           case 8: 
-            { return symbol("operator_plus", OPERATOR_PLUS);
+            { return symbol(yyline, yycolumn, "operator_plus", OPERATOR_PLUS);
             }
           case 30: break;
           case 9: 
-            { return symbol(":", COLON);
+            { return symbol(yyline, yycolumn, ":", COLON);
             }
           case 31: break;
           case 10: 
-            { return symbol(";", SEMICOLON);
+            { return symbol(yyline, yycolumn, ";", SEMICOLON);
             }
           case 32: break;
           case 11: 
-            { return symbol(",", COMMA);
+            { return symbol(yyline, yycolumn, ",", COMMA);
             }
           case 33: break;
           case 12: 
-            { return symbol("block_open", BLOCK_OPEN);
+            { return symbol(yyline, yycolumn, "block_open", BLOCK_OPEN);
             }
           case 34: break;
           case 13: 
-            { return symbol("block_close", BLOCK_CLOSE);
+            { return symbol(yyline, yycolumn, "block_close", BLOCK_CLOSE);
             }
           case 35: break;
           case 14: 
-            { return symbol("code_block_open", CODE_BLOCK_OPEN);
+            { return symbol(yyline, yycolumn, "code_block_open", CODE_BLOCK_OPEN);
             }
           case 36: break;
           case 15: 
-            { return symbol("code_block_close", CODE_BLOCK_CLOSE);
+            { return symbol(yyline, yycolumn, "code_block_close", CODE_BLOCK_CLOSE);
             }
           case 37: break;
           case 16: 
-            { return symbol("unit_percent", UNIT_PERCENT);
+            { return symbol(yyline, yycolumn, "unit_percent", UNIT_PERCENT);
             }
           case 38: break;
           case 17: 
-            { return symbol("comment", NEW_LINE);
+            { return symbol(yyline, yycolumn, "comment", NEW_LINE);
             }
           case 39: break;
           case 18: 
-            { return symbol("unit_pixels", UNIT_PIXELS);
+            { return symbol(yyline, yycolumn, "unit_pixels", UNIT_PIXELS);
             }
           case 40: break;
           case 19: 
-            { return symbol("keyword_to", KEYWORD_TO);
+            { return symbol(yyline, yycolumn, "keyword_to", KEYWORD_TO);
             }
           case 41: break;
           case 20: 
-            { return symbol("keyword_def", KEYWORD_DEF);
+            { return symbol(yyline, yycolumn, "keyword_def", KEYWORD_DEF);
             }
           case 42: break;
           case 21: 
-            { return symbol("keyword_line", KEYWORD_LINE);
+            { return symbol(yyline, yycolumn, "keyword_line", KEYWORD_LINE);
             }
           case 43: break;
           case 22: 
-            { return symbol("keyword_from", KEYWORD_FROM);
+            { return symbol(yyline, yycolumn, "keyword_from", KEYWORD_FROM);
             }
           case 44: break;
           default:

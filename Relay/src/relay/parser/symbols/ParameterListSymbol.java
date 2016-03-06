@@ -1,6 +1,7 @@
 package relay.parser.symbols;
 
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 
 public class ParameterListSymbol extends RelaySymbol {
@@ -9,8 +10,8 @@ public class ParameterListSymbol extends RelaySymbol {
 	public final ParameterListSymbol remainingNodes;
 	public final boolean hasRemainingNodes;
 
-	public ParameterListSymbol(ExpressionSymbol expression, ParameterListSymbol remainingNodes) {
-		super(RelaySymbolType.PARAMETER_LIST, new RelaySymbol[]{expression, remainingNodes});
+	public ParameterListSymbol(LocationRange locationRange, ExpressionSymbol expression, ParameterListSymbol remainingNodes) {
+		super(locationRange, RelaySymbolType.PARAMETER_LIST, new RelaySymbol[]{expression, remainingNodes});
 		this.parameterExpression = expression;
 		this.remainingNodes = remainingNodes;
 		this.hasRemainingNodes = remainingNodes != null;

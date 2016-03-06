@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import relay.nodes.RelayNode;
 import relay.nodes.VariableAccessNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;
 
@@ -13,15 +14,15 @@ public class VariableAccessSymbol extends ExpressionSymbol {
 	public final boolean furtherAccessRemains;
 	public final VariableAccessSymbol remainingAccess;
 
-	public VariableAccessSymbol(IdentifyerSymbol identifyer) {
-		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer});
+	public VariableAccessSymbol(LocationRange locationRange, IdentifyerSymbol identifyer) {
+		super(locationRange, RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer});
 		this.identifyer = identifyer;
 		this.remainingAccess = null;
 		this.furtherAccessRemains = false;
 	}
 
-	public VariableAccessSymbol(IdentifyerSymbol identifyer, VariableAccessSymbol remainingAccess) {
-		super(RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer, remainingAccess});
+	public VariableAccessSymbol(LocationRange locationRange, IdentifyerSymbol identifyer, VariableAccessSymbol remainingAccess) {
+		super(locationRange, RelaySymbolType.VARIABLE_ACCESS, ExpressionType.VARIABLE_ACCESS, new RelaySymbol[]{identifyer, remainingAccess});
 		this.identifyer = identifyer;
 		this.remainingAccess = remainingAccess;
 		this.furtherAccessRemains = true;

@@ -1,14 +1,15 @@
 package relay.parser.symbols;
 
 import relay.nodes.RelayNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 
 public class IdentifyerSymbol extends RelaySymbol {
 
 	public final String value;
 
-	public IdentifyerSymbol(String identifyer) {
-		super(RelaySymbolType.IDENTIFYER);
+	public IdentifyerSymbol(LocationRange locationRange, String identifyer) {
+		super(locationRange, RelaySymbolType.IDENTIFYER);
 		this.value = identifyer;
 	}
 	
