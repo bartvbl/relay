@@ -1,10 +1,10 @@
 package relay.parser.symbols;
 
 import relay.exceptions.RelayException;
-import relay.nodes.AdditionExpressionNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RelayNode;
-import relay.nodes.SubtractionExpressionNode;
+import relay.nodes.expressions.AdditionExpressionNode;
+import relay.nodes.expressions.SubtractionExpressionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;

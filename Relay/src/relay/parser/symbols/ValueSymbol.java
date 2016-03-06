@@ -1,7 +1,7 @@
 package relay.parser.symbols;
 
 import relay.nodes.RelayNode;
-import relay.nodes.ValueNode;
+import relay.nodes.expressions.ValueNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;

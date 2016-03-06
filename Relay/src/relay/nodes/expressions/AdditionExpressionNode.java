@@ -1,5 +1,7 @@
-package relay.nodes;
+package relay.nodes.expressions;
 
+import relay.nodes.ExpressionNode;
+import relay.nodes.RelayNode;
 import relay.parser.symbols.types.ExpressionType;
 
 public class AdditionExpressionNode extends ExpressionNode {

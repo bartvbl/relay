@@ -5,7 +5,7 @@ import relay.layout.MutableDependentValue;
 import relay.nodes.BlockNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RootNode;
-import relay.nodes.VariableAccessNode;
+import relay.nodes.expressions.VariableAccessNode;
 import relay.symbolTable.SymbolTable;
 
 public class BlockLinker {

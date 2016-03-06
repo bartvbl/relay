@@ -13,6 +13,7 @@ import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
 import relay.types.RelayBlockPropertyType;
+import relay.util.RelayUtil;
 
 public class BlockSymbol extends RelaySymbol {
 
@@ -41,12 +42,16 @@ public class BlockSymbol extends RelaySymbol {
 
 	@Override
 	public RelayNode compact() throws RelayException {
-		String blockName = nameNode.value;
+		String blockName = (nameNode == null) ? "block_" + RelayUtil.generateUUID() : nameNode.value;
 		ArrayList<RelayNode> children = new ArrayList<RelayNode>();
 		BlockContentListSymbol currentListNode = childList;
 		
 		do {
 			BlockContentItemSymbol currentChild = (BlockContentItemSymbol) currentListNode.listItem;
+			if(currentChild == null) {
+				currentListNode = currentListNode.remainingItems;
+				continue;
+			}
 			if(currentChild.itemType != BlockItemType.EMPTY) { // ensure empty block items are filtered out. Side effect of newlines having meaning in the grammar				
 				children.add(currentListNode.listItem.compact());
 			}

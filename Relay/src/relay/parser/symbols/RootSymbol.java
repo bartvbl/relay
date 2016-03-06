@@ -1,5 +1,6 @@
 package relay.parser.symbols;
 
+import lib.geom.IndexRectangle2D;
 import relay.exceptions.RelayException;
 import relay.nodes.BlockNode;
 import relay.nodes.RelayNode;
@@ -19,10 +20,14 @@ public class RootSymbol extends RelaySymbol {
 	public String toString() {
 		return "Parse tree root node";
 	}
-
+	
 	@Override
 	public RelayNode compact() throws RelayException {
+		throw new RuntimeException("Please use compactRoot() on the root node.");
+	}
+
+	public RootNode compactRoot(IndexRectangle2D windowDimensions) throws RelayException {
 		BlockNode mainBlock = (BlockNode) rootBlock.compact();
-		return new RootNode(mainBlock);
+		return new RootNode(mainBlock, windowDimensions);
 	}
 }

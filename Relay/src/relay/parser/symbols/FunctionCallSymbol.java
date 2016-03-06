@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import relay.exceptions.RelayException;
 import relay.nodes.ExpressionNode;
-import relay.nodes.FunctionCallNode;
 import relay.nodes.RelayNode;
+import relay.nodes.expressions.FunctionCallNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;

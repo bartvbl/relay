@@ -1,5 +1,6 @@
-package relay.nodes;
+package relay.nodes.expressions;
 
+import relay.nodes.ExpressionNode;
 import relay.parser.symbols.types.ExpressionType;
 
 public class SubtractionExpressionNode extends ExpressionNode {

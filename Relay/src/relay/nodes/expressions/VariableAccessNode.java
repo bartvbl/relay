@@ -1,7 +1,8 @@
-package relay.nodes;
+package relay.nodes.expressions;
 
 import java.util.Arrays;
 
+import relay.nodes.ExpressionNode;
 import relay.parser.symbols.types.ExpressionType;
 
 public class VariableAccessNode extends ExpressionNode {

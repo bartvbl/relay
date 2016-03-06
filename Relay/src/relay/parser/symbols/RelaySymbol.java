@@ -1,8 +1,10 @@
 package relay.parser.symbols;
 
 import java_cup.runtime.ComplexSymbolFactory.Location;
+import lib.geom.IndexRectangle2D;
 import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
+import relay.nodes.RootNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.RelaySymbolType;
 

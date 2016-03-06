@@ -17,6 +17,7 @@ import relay.nodes.RootNode;
 import relay.parser.Lexer;
 import relay.parser.RelayParser;
 import relay.parser.symbols.RelaySymbol;
+import relay.parser.symbols.RootSymbol;
 import relay.symbolTable.SymbolTable;
 import relay.symbolTable.SymbolTableBuilder;
 import relay.tools.TreeVisualiser;
@@ -37,7 +38,7 @@ public class UILoader {
 
 			// Parse the document, get a representative AST
 			RelaySymbol root = (RelaySymbol)parser.parse().value;
-			RootNode rootNode = (RootNode) root.compact();
+			RootNode rootNode = (RootNode) ((RootSymbol) root).compactRoot(windowDimensions);
 
 			// Extract relevant information from the document
 			SymbolTableBuilder.createLocalSymbolTables(rootNode);

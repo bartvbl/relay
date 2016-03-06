@@ -3,7 +3,7 @@ package relay.parser.symbols;
 import java.util.ArrayList;
 
 import relay.nodes.RelayNode;
-import relay.nodes.VariableAccessNode;
+import relay.nodes.expressions.VariableAccessNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;
