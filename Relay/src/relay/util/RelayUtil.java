@@ -11,6 +11,10 @@ public class RelayUtil {
 	}
 	
 	public static String mergeVariableAccessStrings(String[] identifyers) {
+		if(identifyers.length == 1) {
+			return identifyers[0];
+		}
+		
 		StringBuilder completeIdentifyer = new StringBuilder();
 		
 		for(int i = 0; i < identifyers.length - 1; i++) {

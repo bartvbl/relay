@@ -3,6 +3,7 @@ package relay.symbolTable;
 import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.RootNode;
+import relay.nodes.VariableDefinitionNode;
 import relay.parser.symbols.types.ReservedKeyword;
 import relay.types.RelayBlockPropertyType;
 
@@ -24,11 +25,12 @@ public class SymbolTableBuilder {
 			SymbolTable childTable = symbolTable.copyOf();
 			
 			putBlockSymbols(ReservedKeyword.parent.name(), block.dimensions, childTable);
+			putVariableDefintiions(block.variableDefinitions, childTable);
 			
 			visitLocal(child, childTable);
 		}
 	}
-	
+
 	public static SymbolTable buildGlobalSymbolTable(RootNode rootNode) {
 		SymbolTable table = new SymbolTable();
 		visitGlobal(rootNode.rootBlock, table);
@@ -51,6 +53,12 @@ public class SymbolTableBuilder {
 		table.put(new String[]{baseName, RelayBlockPropertyType.top.name()}, dimensions.top);
 		table.put(new String[]{baseName, RelayBlockPropertyType.bottom.name()}, dimensions.bottom);
 		table.put(new String[]{baseName, RelayBlockPropertyType.height.name()}, dimensions.height);
+	}
+	
+	private static void putVariableDefintiions(VariableDefinitionNode[] variableDefinitions, SymbolTable childTable) {
+		for(VariableDefinitionNode definition : variableDefinitions) {
+			childTable.put(definition.identifier, definition);
+		}
 	}
 
 }
