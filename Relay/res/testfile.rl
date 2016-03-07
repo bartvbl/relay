@@ -56,7 +56,7 @@
 	)
 
 	( footer
-		top: content.bottom
+		top: parent.bottom
 		left: parent.left
 		height: 30px
 		right: parent.right

@@ -38,7 +38,7 @@ public class SymbolTableBuilder {
 		putBlockSymbols(block.name, block.dimensions, table);
 		
 		for(BlockNode child : block.childBlocks) {	
-			visitLocal(child, table);
+			visitGlobal(child, table);
 		}
 	}
 
