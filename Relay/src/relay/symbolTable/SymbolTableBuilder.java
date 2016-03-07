@@ -22,7 +22,8 @@ public class SymbolTableBuilder {
 		
 		for(BlockNode child : block.childBlocks) {	
 			SymbolTable childTable = symbolTable.copyOf();
-			putBlockSymbols(ReservedKeyword.parent.name(), block.dimensions, symbolTable);
+			
+			putBlockSymbols(ReservedKeyword.parent.name(), block.dimensions, childTable);
 			
 			visitLocal(child, childTable);
 		}
@@ -49,7 +50,7 @@ public class SymbolTableBuilder {
 		
 		table.put(new String[]{baseName, RelayBlockPropertyType.top.name()}, dimensions.top);
 		table.put(new String[]{baseName, RelayBlockPropertyType.bottom.name()}, dimensions.bottom);
-		table.put(new String[]{baseName, RelayBlockPropertyType.width.name()}, dimensions.width);
+		table.put(new String[]{baseName, RelayBlockPropertyType.height.name()}, dimensions.height);
 	}
 
 }

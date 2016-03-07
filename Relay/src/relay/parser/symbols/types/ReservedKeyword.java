@@ -3,5 +3,5 @@ package relay.parser.symbols.types;
 public enum ReservedKeyword {
 	parent,
 	content,
-	
+	def,
 }
