@@ -7,6 +7,7 @@ import relay.layout.MutableDependentValue;
 import relay.nodes.BlockNode;
 import relay.nodes.ExpressionNode;
 import relay.nodes.RootNode;
+import relay.nodes.VariableDefinitionNode;
 import relay.nodes.expressions.VariableAccessNode;
 import relay.symbolTable.SymbolTable;
 import relay.util.RelayUtil;
@@ -25,6 +26,10 @@ public class BlockLinker {
 		findAndLinkDependencies(block.dimensions.bottom, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.top, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.height, block.symbolTable);
+		
+		for(VariableDefinitionNode definition : block.variableDefinitions) {
+			visitExpressionNode(definition.expression, block.symbolTable);
+		}
 		
 		for(BlockNode childBlock : block.childBlocks) {
 			visit(childBlock);
