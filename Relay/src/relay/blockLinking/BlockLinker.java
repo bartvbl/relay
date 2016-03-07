@@ -18,6 +18,8 @@ public class BlockLinker {
 	}
 
 	private static void visit(BlockNode block) throws RelayException {
+		System.out.println("Visiting block with name " + block.name);
+		
 		findAndLinkDependencies(block.dimensions.left, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.right, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.width, block.symbolTable);
@@ -25,11 +27,15 @@ public class BlockLinker {
 		findAndLinkDependencies(block.dimensions.bottom, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.top, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.height, block.symbolTable);
+		
+		for(BlockNode childBlock : block.childBlocks) {
+			visit(childBlock);
+		}
 	}
 
-	private static void findAndLinkDependencies(DimensionValue bottom, SymbolTable symbolTable) throws RelayException {
-		if(bottom.isDefined) {
-			visitExpressionNode(bottom.expression, symbolTable);
+	private static void findAndLinkDependencies(DimensionValue dimensions, SymbolTable symbolTable) throws RelayException {
+		if(dimensions.isDefined) {
+			visitExpressionNode(dimensions.expression, symbolTable);
 		}
 	}
 

@@ -23,13 +23,13 @@ public class BlockDimensions {
 	public BlockDimensions(LocationRange blockNodeLocation, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
 		this.blockNodeLocation = blockNodeLocation;
 		
-		this.left = createDimensionValue(DimensionValueType.left, propertyMap);
-		this.right = createDimensionValue(DimensionValueType.right, propertyMap);
-		this.width = createDimensionValue(DimensionValueType.width, propertyMap);
+		this.left = createDimensionValue(RelayBlockPropertyType.left, propertyMap);
+		this.right = createDimensionValue(RelayBlockPropertyType.right, propertyMap);
+		this.width = createDimensionValue(RelayBlockPropertyType.width, propertyMap);
 		
-		this.bottom = createDimensionValue(DimensionValueType.bottom, propertyMap);
-		this.top = createDimensionValue(DimensionValueType.top, propertyMap);
-		this.height = createDimensionValue(DimensionValueType.height, propertyMap);
+		this.bottom = createDimensionValue(RelayBlockPropertyType.bottom, propertyMap);
+		this.top = createDimensionValue(RelayBlockPropertyType.top, propertyMap);
+		this.height = createDimensionValue(RelayBlockPropertyType.height, propertyMap);
 		
 		this.horizontalDefinition = determineHorizontalDefinitionType();
 		this.verticalDefinition = determineVerticalDefinitionType();
@@ -69,8 +69,8 @@ public class BlockDimensions {
 		throw new RelayException("Semantics error: size definition of height only is not allowed.", blockNodeLocation);
 	}
 
-	private DimensionValue createDimensionValue(DimensionValueType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
-		BlockPropertyNode blockProperty = propertyMap.get(type.toString());
+	private DimensionValue createDimensionValue(RelayBlockPropertyType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
+		BlockPropertyNode blockProperty = propertyMap.get(type);
 		if(blockProperty != null) {
 			return new DimensionValue(blockProperty.expression);
 		} else {
