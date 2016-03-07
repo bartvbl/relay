@@ -157,13 +157,13 @@ expression ::=
 	;
 
 variable_definition ::=
-		KEYWORD_DEF:openToken identifyer:identifyer COLON NUMBER:value 
-																								{: RESULT = new VariableDefinitionSymbol(new LocationRange(openToken.location.start, valuexright), identifyer, value); :}
+		KEYWORD_DEF:openToken identifyer:identifyer COLON expression:expression 
+																								{: RESULT = new VariableDefinitionSymbol(new LocationRange(openToken.location.start, expressionxright), identifyer, expression); :}
 	;
 
 function_call ::=
 		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE:closeToken
-																								{: RESULT = new FunctionCallSymbol(new LocationRange(identifyerxleft, closeToken.location.end), identifyer, parameters); :}
+																								{: RESULT = new FunctionCallSymbol(new LocationRange(openTokenxleft, expressionxright), identifyer, parameters); :}
 	;
 
 parameter_list ::=

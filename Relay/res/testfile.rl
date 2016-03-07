@@ -5,7 +5,7 @@
 		top: parent.top
 		height: 100px
 
-		( sidebar-element
+		/*( sidebar-element
 			left: parent.left
 			right: parent.right
 			top: previous.top
@@ -23,14 +23,32 @@
 				top: parent.top
 				height: parent.height
 			)
-		) //repeat-for link in sidebar_links
+		) //repeat-for link in sidebar_links */
+
 	)
 
 	( maincontent
+		def itemHeight: 100px
+
 		left: footer.left
 		right: parent.right
 		top: parent.top
-		height: content.height
+		height: parent.height
+
+		( item1
+			top: parent.top
+			height: itemHeight
+		)
+
+		( item2
+			top: item1.bottom
+			height: itemHeight
+		)
+
+		( item3
+			top: item2.bottom
+			height: itemHeight
+		)
 
 		/*{
 			line from (left, top) to (right, top)

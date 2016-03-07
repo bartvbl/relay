@@ -46,7 +46,7 @@ public class BlockDimensions {
 			return DimensionDefinitionType.LEFT_ONLY;
 		} else if(right.isDefined) {
 			return DimensionDefinitionType.RIGHT_ONLY;
-		} else if(!left.isDefined && !width.isDefined && !height.isDefined) {
+		} else if(!left.isDefined && !width.isDefined && !right.isDefined) {
 			return DimensionDefinitionType.MATCH_PARENT;
 		}
 		throw new RelayException("Semantics error: size definition of width only is not allowed.", blockNodeLocation);
