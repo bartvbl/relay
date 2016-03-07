@@ -57,7 +57,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.propertyNode = null;
 		this.codeBlockNode = null;
 		this.variableDefinitionNode = item;
-		this.itemType = BlockItemType.CODE_BLOCK;
+		this.itemType = BlockItemType.VARIABLE_DEFINITION;
 	}
 
 	@Override

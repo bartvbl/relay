@@ -18,8 +18,6 @@ public class BlockLinker {
 	}
 
 	private static void visit(BlockNode block) throws RelayException {
-		System.out.println("Visiting block with name " + block.name);
-		
 		findAndLinkDependencies(block.dimensions.left, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.right, block.symbolTable);
 		findAndLinkDependencies(block.dimensions.width, block.symbolTable);
