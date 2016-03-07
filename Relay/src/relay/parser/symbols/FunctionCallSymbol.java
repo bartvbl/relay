@@ -37,7 +37,7 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 		} while (currentParameterList.hasRemainingNodes);
 		
 		ExpressionNode[] allParameters = functionParameters.toArray(new ExpressionNode[functionParameters.size()]);
-		return new FunctionCallNode(functionName, allParameters);
+		return new FunctionCallNode(this.location, functionName, allParameters);
 	}
 
 }

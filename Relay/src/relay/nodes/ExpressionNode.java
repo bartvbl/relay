@@ -1,5 +1,6 @@
 package relay.nodes;
 
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
 public abstract class ExpressionNode extends RelayNode {
@@ -7,14 +8,14 @@ public abstract class ExpressionNode extends RelayNode {
 	public final ExpressionType expressionType;
 	public final ExpressionNode[] expressionChildren;
 
-	public ExpressionNode(ExpressionType type) {
-		super(RelayNodeType.EXPRESSION);
+	public ExpressionNode(LocationRange locationRange, ExpressionType type) {
+		super(locationRange, RelayNodeType.EXPRESSION);
 		this.expressionType = type;
 		this.expressionChildren = new ExpressionNode[0];
 	}
 
-	public ExpressionNode(ExpressionType type, RelayNode[] children) {
-		super(RelayNodeType.EXPRESSION, children);
+	public ExpressionNode(LocationRange locationRange, ExpressionType type, RelayNode[] children) {
+		super(locationRange, RelayNodeType.EXPRESSION, children);
 		this.expressionType = type;
 		this.expressionChildren = new ExpressionNode[children.length];
 		

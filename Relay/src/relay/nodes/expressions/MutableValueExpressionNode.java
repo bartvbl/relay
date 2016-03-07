@@ -2,6 +2,7 @@ package relay.nodes.expressions;
 
 import relay.data.Unit;
 import relay.nodes.ExpressionNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
 public class MutableValueExpressionNode extends ExpressionNode {
@@ -9,8 +10,8 @@ public class MutableValueExpressionNode extends ExpressionNode {
 	public double value;
 	public final Unit unit;
 
-	public MutableValueExpressionNode(double value, Unit unit) {
-		super(ExpressionType.VALUE);
+	public MutableValueExpressionNode(LocationRange locationRange, double value, Unit unit) {
+		super(locationRange, ExpressionType.VALUE);
 		this.value = value;
 		this.unit = unit;
 	}

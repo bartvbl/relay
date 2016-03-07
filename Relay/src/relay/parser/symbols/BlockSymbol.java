@@ -86,9 +86,9 @@ public class BlockSymbol extends RelaySymbol {
 			propertyMap.put(property.type, property);
 		}
 		
-		BlockDimensions dimensions = new BlockDimensions(propertyMap);	
+		BlockDimensions dimensions = new BlockDimensions(this.location, propertyMap);	
 		
-		return new BlockNode(blockName, childNodes, childBlocks, childCodeBlocks, propertyMap, dimensions);
+		return new BlockNode(this.location, blockName, childNodes, childBlocks, childCodeBlocks, propertyMap, dimensions);
 	}
 
 }

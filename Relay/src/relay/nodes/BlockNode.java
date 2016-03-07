@@ -3,6 +3,7 @@ package relay.nodes;
 import java.util.HashMap;
 
 import relay.layout.BlockDimensions;
+import relay.parser.LocationRange;
 import relay.symbolTable.SymbolTable;
 import relay.types.RelayBlockPropertyType;
 
@@ -19,6 +20,7 @@ public class BlockNode extends RelayNode {
 	public SymbolTable symbolTable;
 
 	public BlockNode(
+			LocationRange locationRange,
 			String blockName, 
 			RelayNode[] childNodes, 
 			BlockNode[] childBlocks, 
@@ -27,7 +29,7 @@ public class BlockNode extends RelayNode {
 			BlockDimensions dimensions
 		) {
 		
-		super(RelayNodeType.BLOCK, childNodes);
+		super(locationRange, RelayNodeType.BLOCK, childNodes);
 		
 		this.name = blockName;
 		this.childBlocks = childBlocks;

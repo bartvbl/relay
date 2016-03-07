@@ -30,7 +30,7 @@ public class SubtractionExpressionSymbol extends ExpressionSymbol {
 	public RelayNode compact() throws RelayException {
 		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
 		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();
-		return new SubtractionExpressionNode(leftHand, rightHand);
+		return new SubtractionExpressionNode(new LocationRange(leftHand.location.start, rightHand.location.end), leftHand, rightHand);
 	}
 
 }

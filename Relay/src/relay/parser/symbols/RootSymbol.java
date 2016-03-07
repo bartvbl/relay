@@ -28,6 +28,6 @@ public class RootSymbol extends RelaySymbol {
 
 	public RootNode compactRoot(IndexRectangle2D windowDimensions) throws RelayException {
 		BlockNode mainBlock = (BlockNode) rootBlock.compact();
-		return new RootNode(mainBlock, windowDimensions);
+		return new RootNode(this.location, mainBlock, windowDimensions);
 	}
 }

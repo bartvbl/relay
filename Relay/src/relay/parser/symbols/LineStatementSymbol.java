@@ -24,6 +24,6 @@ public class LineStatementSymbol extends CodeStatementSymbol {
 
 	@Override
 	public CodeStatementNode compactToStatementNode() throws RelayException {
-		return new LineStatementNode((ExpressionNode) fromX.compact(), (ExpressionNode) fromY.compact(), (ExpressionNode) toX.compact(), (ExpressionNode) toY.compact());
+		return new LineStatementNode(this.location, (ExpressionNode) fromX.compact(), (ExpressionNode) fromY.compact(), (ExpressionNode) toX.compact(), (ExpressionNode) toY.compact());
 	}
 }

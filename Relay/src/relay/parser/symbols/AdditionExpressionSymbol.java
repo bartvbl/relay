@@ -33,7 +33,7 @@ public class AdditionExpressionSymbol extends ExpressionSymbol {
 	public RelayNode compact() throws RelayException {
 		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
 		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();
-		return new AdditionExpressionNode(leftHand, rightHand);
+		return new AdditionExpressionNode(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHand, rightHand);
 	}
 
 }

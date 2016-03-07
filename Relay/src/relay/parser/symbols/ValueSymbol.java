@@ -33,7 +33,7 @@ public class ValueSymbol extends ExpressionSymbol {
 
 	@Override
 	public RelayNode compact() {
-		return new ValueNode(value, unit.value);
+		return new ValueNode(this.location, value, unit.value);
 	}
 
 }

@@ -1,5 +1,7 @@
 package relay.blockLinking;
 
+import relay.exceptions.RelayException;
+import relay.layout.BlockDimensions;
 import relay.layout.DimensionValue;
 import relay.layout.MutableDependentValue;
 import relay.nodes.BlockNode;
@@ -7,27 +9,41 @@ import relay.nodes.ExpressionNode;
 import relay.nodes.RootNode;
 import relay.nodes.expressions.VariableAccessNode;
 import relay.symbolTable.SymbolTable;
+import relay.util.RelayUtil;
 
 public class BlockLinker {
 
-	public static void linkBlockExpressions(RootNode rootNode) {
+	public static void linkBlockExpressions(RootNode rootNode) throws RelayException {
 		visit(rootNode.rootBlock);
 	}
 
-	private static void visit(BlockNode block) {
-		SymbolTable blockSymbolTable = block.symbolTable;
+	private static void visit(BlockNode block) throws RelayException {
+		findAndLinkDependencies(block.dimensions.left, block.symbolTable);
+		findAndLinkDependencies(block.dimensions.right, block.symbolTable);
+		findAndLinkDependencies(block.dimensions.width, block.symbolTable);
 		
-		findAndLinkDependencies(block.dimensions.bottom.expression, block.symbolTable);
+		findAndLinkDependencies(block.dimensions.bottom, block.symbolTable);
+		findAndLinkDependencies(block.dimensions.top, block.symbolTable);
+		findAndLinkDependencies(block.dimensions.height, block.symbolTable);
 	}
 
-	private static void findAndLinkDependencies(ExpressionNode expression, SymbolTable symbolTable) {
+	private static void findAndLinkDependencies(DimensionValue bottom, SymbolTable symbolTable) throws RelayException {
+		if(bottom.isDefined) {
+			visitExpressionNode(bottom.expression, symbolTable);
+		}
+	}
+
+	private static void visitExpressionNode(ExpressionNode expression, SymbolTable symbolTable) throws RelayException {
 		if(expression instanceof VariableAccessNode) {
 			VariableAccessNode variableAccessNode = (VariableAccessNode) expression;
 			MutableDependentValue value = symbolTable.get(variableAccessNode.identifyers);
+			if(value == null) {
+				throw new RelayException("No block, property or variable named \"" + RelayUtil.mergeVariableAccessStrings(variableAccessNode.identifyers) + "\" was found.", expression.location);
+			}
 		}
 		
 		for(ExpressionNode childNode : expression.expressionChildren) {
-			findAndLinkDependencies(childNode, symbolTable);
+			visitExpressionNode(childNode, symbolTable);
 		}
 	}
 

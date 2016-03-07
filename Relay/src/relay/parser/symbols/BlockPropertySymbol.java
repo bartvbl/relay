@@ -30,8 +30,8 @@ public class BlockPropertySymbol extends RelaySymbol {
 		try {
 			type = RelayBlockPropertyType.valueOf(identifyer.value);			
 		} catch (Exception e) {
-			throw new RelayException("Unknown property type \"" + identifyer.value + "\"");
+			throw new RelayException("Unknown property type \"" + identifyer.value + "\"", identifyer.location);
 		}
-		return new BlockPropertyNode(type, (ExpressionNode)expression.compact());
+		return new BlockPropertyNode(identifyer.location, type, (ExpressionNode)expression.compact());
 	}
 }

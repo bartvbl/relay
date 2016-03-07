@@ -29,7 +29,7 @@ public class CodeBlockSymbol extends RelaySymbol {
 			currentListSymbol = currentListSymbol.remainingItems;
 		} while(currentListSymbol.hasItemsRemaining);
 		
-		return new CodeBlockNode(statements.toArray(new CodeStatementNode[statements.size()]));
+		return new CodeBlockNode(this.location, statements.toArray(new CodeStatementNode[statements.size()]));
 	}
 
 }

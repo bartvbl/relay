@@ -49,7 +49,7 @@ public class VariableAccessSymbol extends ExpressionSymbol {
 		}
 		identifyers.add(currentVariable.identifyer.value); // add the final one
 		
-		return new VariableAccessNode(identifyers.toArray(new String[identifyers.size()]));
+		return new VariableAccessNode(new LocationRange(this.location.start, currentVariable.location.end), identifyers.toArray(new String[identifyers.size()]));
 	}
 
 }

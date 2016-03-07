@@ -1,6 +1,7 @@
 package relay.nodes.expressions;
 
 import relay.nodes.ExpressionNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
 public class SubtractionExpressionNode extends ExpressionNode {
@@ -8,8 +9,8 @@ public class SubtractionExpressionNode extends ExpressionNode {
 	public final ExpressionNode leftHandSide;
 	public final ExpressionNode rightHandSide;
 
-	public SubtractionExpressionNode(ExpressionNode leftHand, ExpressionNode rightHand) {
-		super(ExpressionType.SUBTRACTION);
+	public SubtractionExpressionNode(LocationRange locationRange, ExpressionNode leftHand, ExpressionNode rightHand) {
+		super(locationRange, ExpressionType.SUBTRACTION);
 		
 		this.leftHandSide = leftHand;
 		this.rightHandSide = rightHand;

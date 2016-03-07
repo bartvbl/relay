@@ -3,14 +3,15 @@ package relay.nodes.expressions;
 import java.util.Arrays;
 
 import relay.nodes.ExpressionNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
 public class VariableAccessNode extends ExpressionNode {
 
 	public final String[] identifyers;
 
-	public VariableAccessNode(String[] identifyers) {
-		super(ExpressionType.VARIABLE_ACCESS);
+	public VariableAccessNode(LocationRange locationRange, String[] identifyers) {
+		super(locationRange, ExpressionType.VARIABLE_ACCESS);
 		this.identifyers = identifyers;
 	}
 	
