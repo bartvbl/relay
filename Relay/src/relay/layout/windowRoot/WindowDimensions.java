@@ -19,7 +19,7 @@ public class WindowDimensions extends BlockDimensions {
 	private static final LocationRange defaultLocationRange = new LocationRange(defaultLocation, defaultLocation);
 	
 	public WindowDimensions(IndexRectangle2D windowDimensions) throws RelayException {
-		super(null, createPropertyMap(windowDimensions));
+		super(defaultLocationRange, createPropertyMap(windowDimensions));
 	}
 
 	private static HashMap<RelayBlockPropertyType, BlockPropertyNode> createPropertyMap(IndexRectangle2D windowDimensions) {
