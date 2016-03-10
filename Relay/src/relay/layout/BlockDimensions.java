@@ -4,7 +4,10 @@ import java.util.HashMap;
 
 import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
+import relay.nodes.expressions.SubtractionExpressionNode;
+import relay.nodes.expressions.VariableAccessNode;
 import relay.parser.LocationRange;
+import relay.parser.symbols.types.ReservedKeyword;
 import relay.types.RelayBlockPropertyType;
 
 public class BlockDimensions {
@@ -23,6 +26,11 @@ public class BlockDimensions {
 	public BlockDimensions(LocationRange blockNodeLocation, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
 		this.blockNodeLocation = blockNodeLocation;
 		
+		this.horizontalDefinition = determineHorizontalDefinitionType(propertyMap);
+		this.verticalDefinition = determineVerticalDefinitionType(propertyMap);
+		
+		createMissingDefinitions(propertyMap);
+
 		this.left = createDimensionValue(RelayBlockPropertyType.left, propertyMap);
 		this.right = createDimensionValue(RelayBlockPropertyType.right, propertyMap);
 		this.width = createDimensionValue(RelayBlockPropertyType.width, propertyMap);
@@ -30,51 +38,116 @@ public class BlockDimensions {
 		this.bottom = createDimensionValue(RelayBlockPropertyType.bottom, propertyMap);
 		this.top = createDimensionValue(RelayBlockPropertyType.top, propertyMap);
 		this.height = createDimensionValue(RelayBlockPropertyType.height, propertyMap);
-		
-		this.horizontalDefinition = determineHorizontalDefinitionType();
-		this.verticalDefinition = determineVerticalDefinitionType();
 	}
 
-	private DimensionDefinitionType determineHorizontalDefinitionType() throws RelayException {
-		if(left.isDefined && right.isDefined) {
+	private void createMissingDefinitions(HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
+		VariableAccessNode leftParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "left"});
+		VariableAccessNode rightParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "right"});
+		VariableAccessNode widthParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "width"});
+		
+		VariableAccessNode topParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "top"});
+		VariableAccessNode bottomParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "bottom"});
+		VariableAccessNode heightParentAccessNode = new VariableAccessNode(blockNodeLocation, new String []{"parent", "height"});
+		
+		VariableAccessNode leftAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "left"});
+		VariableAccessNode rightAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "right"});
+		VariableAccessNode widthAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "width"});
+		
+		VariableAccessNode topAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "top"});
+		VariableAccessNode bottomAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "bottom"});
+		VariableAccessNode heightAccessNode = new VariableAccessNode(blockNodeLocation, new String []{ReservedKeyword.keyword_this.name, "height"});
+
+		switch(horizontalDefinition) {
+		case MATCH_PARENT:
+			propertyMap.put(RelayBlockPropertyType.left, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.left, leftParentAccessNode));
+			propertyMap.put(RelayBlockPropertyType.right, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.right, rightParentAccessNode));
+			propertyMap.put(RelayBlockPropertyType.width, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.width, widthParentAccessNode));
+			break;
+		case LEFT_AND_RIGHT:
+			SubtractionExpressionNode widthExpression = new SubtractionExpressionNode(blockNodeLocation, rightAccessNode, leftAccessNode);
+			propertyMap.put(RelayBlockPropertyType.width, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.width, widthExpression));
+			break;
+		case LEFT_AND_WIDTH:
+			SubtractionExpressionNode rightExpression = new SubtractionExpressionNode(blockNodeLocation, leftAccessNode, widthAccessNode);
+			propertyMap.put(RelayBlockPropertyType.right, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.right, rightExpression));
+			break;
+		case RIGHT_AND_WIDTH:
+			SubtractionExpressionNode leftExpression = new SubtractionExpressionNode(blockNodeLocation, rightAccessNode, widthAccessNode);
+			propertyMap.put(RelayBlockPropertyType.left, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.left, leftExpression));
+			break;
+		case LEFT_ONLY:
+			break;
+		case RIGHT_ONLY:
+			break;
+		default:
+			throw new RelayException("Internal error occurred. Is a dimension type missing?", blockNodeLocation);
+		}
+		
+		switch(horizontalDefinition) {
+		case MATCH_PARENT:
+			break;
+		case BOTTOM_AND_HEIGHT:
+			break;
+		case BOTTOM_AND_TOP:
+			break;
+		case BOTTOM_ONLY:
+			break;
+		case TOP_AND_HEIGHT:
+			break;
+		case TOP_ONLY:
+			break;
+		default:
+			throw new RelayException("Internal error occurred. Is a dimension type missing?", blockNodeLocation);
+		}
+	}
+
+	private DimensionDefinitionType determineHorizontalDefinitionType(HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
+		boolean leftIsDefined = isDefined(RelayBlockPropertyType.left, propertyMap);
+		boolean rightIsDefined = isDefined(RelayBlockPropertyType.right, propertyMap);
+		boolean widthIsDefined = isDefined(RelayBlockPropertyType.width, propertyMap);
+		
+		if(leftIsDefined && rightIsDefined) {
 			return DimensionDefinitionType.LEFT_AND_RIGHT;
-		} else if(left.isDefined && width.isDefined) {
+		} else if(leftIsDefined && widthIsDefined) {
 			return DimensionDefinitionType.LEFT_AND_WIDTH;
-		} else if(right.isDefined && width.isDefined) {
+		} else if(rightIsDefined && widthIsDefined) {
 			return DimensionDefinitionType.RIGHT_AND_WIDTH;
-		} else if(left.isDefined) {
+		} else if(leftIsDefined) {
 			return DimensionDefinitionType.LEFT_ONLY;
-		} else if(right.isDefined) {
+		} else if(rightIsDefined) {
 			return DimensionDefinitionType.RIGHT_ONLY;
-		} else if(!left.isDefined && !width.isDefined && !right.isDefined) {
+		} else if(!leftIsDefined && !widthIsDefined && !rightIsDefined) {
 			return DimensionDefinitionType.MATCH_PARENT;
 		}
 		throw new RelayException("Semantics error: size definition of width only is not allowed.", blockNodeLocation);
 	}
 	
-	private DimensionDefinitionType determineVerticalDefinitionType() throws RelayException {
-		if(bottom.isDefined && top.isDefined) {
+	private DimensionDefinitionType determineVerticalDefinitionType(HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) throws RelayException {
+		boolean topIsDefined = isDefined(RelayBlockPropertyType.top, propertyMap);
+		boolean bottomIsDefined = isDefined(RelayBlockPropertyType.bottom, propertyMap);
+		boolean heightIsDefined = isDefined(RelayBlockPropertyType.height, propertyMap);
+		
+		if(bottomIsDefined && topIsDefined) {
 			return DimensionDefinitionType.BOTTOM_AND_TOP;
-		} else if(bottom.isDefined && height.isDefined) {
+		} else if(bottomIsDefined && heightIsDefined) {
 			return DimensionDefinitionType.BOTTOM_AND_HEIGHT;
-		} else if(top.isDefined && height.isDefined) {
+		} else if(topIsDefined && heightIsDefined) {
 			return DimensionDefinitionType.TOP_AND_HEIGHT;
-		} else if(bottom.isDefined) {
+		} else if(bottomIsDefined) {
 			return DimensionDefinitionType.BOTTOM_ONLY;
-		} else if(top.isDefined) {
+		} else if(topIsDefined) {
 			return DimensionDefinitionType.TOP_ONLY;
-		} else if(!bottom.isDefined && !top.isDefined && !height.isDefined) {
+		} else if(!bottomIsDefined && !topIsDefined && !heightIsDefined) {
 			return DimensionDefinitionType.MATCH_PARENT;
 		}
 		throw new RelayException("Semantics error: size definition of height only is not allowed.", blockNodeLocation);
 	}
+	
+	private static boolean isDefined(RelayBlockPropertyType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
+		return propertyMap.containsKey(type);
+	}
 
-	private DimensionValue createDimensionValue(RelayBlockPropertyType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
-		BlockPropertyNode blockProperty = propertyMap.get(type);
-		if(blockProperty != null) {
-			return new DimensionValue(blockProperty.expression);
-		} else {
-			return new DimensionValue();
-		}
+	private static DimensionValue createDimensionValue(RelayBlockPropertyType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
+		return new DimensionValue(propertyMap.get(type).expression);
 	}
 }
