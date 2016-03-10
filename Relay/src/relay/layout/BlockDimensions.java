@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
+import relay.nodes.expressions.AdditionExpressionNode;
 import relay.nodes.expressions.SubtractionExpressionNode;
 import relay.nodes.expressions.VariableAccessNode;
 import relay.parser.LocationRange;
@@ -68,7 +69,7 @@ public class BlockDimensions {
 			propertyMap.put(RelayBlockPropertyType.width, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.width, widthExpression));
 			break;
 		case LEFT_AND_WIDTH:
-			SubtractionExpressionNode rightExpression = new SubtractionExpressionNode(blockNodeLocation, leftAccessNode, widthAccessNode);
+			AdditionExpressionNode rightExpression = new AdditionExpressionNode(blockNodeLocation, leftAccessNode, widthAccessNode);
 			propertyMap.put(RelayBlockPropertyType.right, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.right, rightExpression));
 			break;
 		case RIGHT_AND_WIDTH:
@@ -76,25 +77,46 @@ public class BlockDimensions {
 			propertyMap.put(RelayBlockPropertyType.left, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.left, leftExpression));
 			break;
 		case LEFT_ONLY:
+			propertyMap.put(RelayBlockPropertyType.right, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.right, rightParentAccessNode));
+			widthExpression = new SubtractionExpressionNode(blockNodeLocation, rightAccessNode, leftAccessNode);
+			propertyMap.put(RelayBlockPropertyType.width, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.width, widthExpression));
 			break;
 		case RIGHT_ONLY:
+			propertyMap.put(RelayBlockPropertyType.left, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.left, leftParentAccessNode));
+			widthExpression = new SubtractionExpressionNode(blockNodeLocation, rightAccessNode, leftAccessNode);
+			propertyMap.put(RelayBlockPropertyType.width, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.width, widthExpression));
 			break;
 		default:
 			throw new RelayException("Internal error occurred. Is a dimension type missing?", blockNodeLocation);
 		}
 		
-		switch(horizontalDefinition) {
+		switch(verticalDefinition) {
 		case MATCH_PARENT:
-			break;
-		case BOTTOM_AND_HEIGHT:
+			propertyMap.put(RelayBlockPropertyType.bottom, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.bottom, bottomParentAccessNode));
+			propertyMap.put(RelayBlockPropertyType.top, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.top, topParentAccessNode));
+			propertyMap.put(RelayBlockPropertyType.height, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.height, heightParentAccessNode));
 			break;
 		case BOTTOM_AND_TOP:
+			SubtractionExpressionNode heightExpression = new SubtractionExpressionNode(blockNodeLocation, topAccessNode, bottomAccessNode);
+			propertyMap.put(RelayBlockPropertyType.height, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.height, heightExpression));
 			break;
-		case BOTTOM_ONLY:
+		case BOTTOM_AND_HEIGHT:
+			AdditionExpressionNode topExpression = new AdditionExpressionNode(blockNodeLocation, bottomAccessNode, heightAccessNode);
+			propertyMap.put(RelayBlockPropertyType.top, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.top, topExpression));
 			break;
 		case TOP_AND_HEIGHT:
+			SubtractionExpressionNode bottomExpression = new SubtractionExpressionNode(blockNodeLocation, topAccessNode, heightAccessNode);
+			propertyMap.put(RelayBlockPropertyType.bottom, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.bottom, bottomExpression));
+			break;
+		case BOTTOM_ONLY:
+			propertyMap.put(RelayBlockPropertyType.top, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.top, topParentAccessNode));
+			heightExpression = new SubtractionExpressionNode(blockNodeLocation, topAccessNode, bottomAccessNode);
+			propertyMap.put(RelayBlockPropertyType.height, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.height, heightExpression));
 			break;
 		case TOP_ONLY:
+			propertyMap.put(RelayBlockPropertyType.bottom, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.bottom, bottomParentAccessNode));
+			heightExpression = new SubtractionExpressionNode(blockNodeLocation, topAccessNode, bottomAccessNode);
+			propertyMap.put(RelayBlockPropertyType.height, new BlockPropertyNode(blockNodeLocation, RelayBlockPropertyType.height, heightExpression));
 			break;
 		default:
 			throw new RelayException("Internal error occurred. Is a dimension type missing?", blockNodeLocation);
