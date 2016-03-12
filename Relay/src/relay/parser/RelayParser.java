@@ -31,6 +31,7 @@ import relay.parser.symbols.VariableDefinitionSymbol;
 import relay.data.Unit;
 import relay.types.BlockType;
 import java_cup.runtime.ComplexSymbolFactory.Location;
+import java_cup.runtime.XMLElement;
 import relay.data.Unit;
 import relay.types.BlockType;
 import java_cup.runtime.ComplexSymbolFactory.Location;
@@ -60,7 +61,7 @@ public class RelayParser extends java_cup.runtime.lr_parser {
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
     "\000\042\000\002\002\004\000\002\002\003\000\002\003" +
-    "\007\000\002\003\006\000\002\003\011\000\002\005\002" +
+    "\006\000\002\003\007\000\002\003\011\000\002\005\002" +
     "\000\002\005\004\000\002\006\004\000\002\006\004\000" +
     "\002\007\003\000\002\007\003\000\002\007\003\000\002" +
     "\007\003\000\002\007\002\000\002\015\005\000\002\016" +
@@ -88,7 +89,7 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     "\001\002\000\006\004\103\006\102\001\002\000\020\004" +
     "\ufffb\006\ufffb\012\ufffb\013\ufffb\014\ufffb\015\ufffb\027\ufffb" +
     "\001\002\000\006\004\ufff8\006\ufff8\001\002\000\010\002" +
-    "\ufffe\004\ufffe\006\ufffe\001\002\000\004\024\063\001\002" +
+    "\uffff\004\uffff\006\uffff\001\002\000\004\024\063\001\002" +
     "\000\004\012\010\001\002\000\006\004\ufff7\006\ufff7\001" +
     "\002\000\006\004\ufff6\006\ufff6\001\002\000\004\005\026" +
     "\001\002\000\010\011\032\012\033\013\030\001\002\000" +
@@ -135,7 +136,7 @@ public class RelayParser extends java_cup.runtime.lr_parser {
     "\004\012\010\001\002\000\020\004\ufffc\006\ufffc\012\ufffc" +
     "\013\ufffc\014\ufffc\015\ufffc\027\ufffc\001\002\000\020\004" +
     "\ufff4\006\ufff4\012\010\013\005\014\111\015\021\027\022" +
-    "\001\002\000\010\002\uffff\004\uffff\006\uffff\001\002\000" +
+    "\001\002\000\010\002\ufffe\004\ufffe\006\ufffe\001\002\000" +
     "\004\004\113\001\002\000\020\004\ufffc\006\ufffc\012\ufffc" +
     "\013\ufffc\014\ufffc\015\ufffc\027\ufffc\001\002\000\020\004" +
     "\ufff4\006\ufff4\012\010\013\005\014\115\015\021\027\022" +
@@ -273,7 +274,25 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // block ::= BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE 
+          case 2: // block ::= BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE 
+            {
+              BlockSymbol RESULT =null;
+		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
+		Location openTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xright;
+		RelaySimpleSymbol openToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
+		Location blockContentxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
+		Location blockContentxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xright;
+		BlockContentListSymbol blockContent = (BlockContentListSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
+		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
+		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
+		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent); 
+              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
+            }
+          return CUP$RelayParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // block ::= BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE 
             {
               BlockSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)).xleft;
@@ -288,26 +307,8 @@ class CUP$RelayParser$actions {
 		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockName, blockContent, new IdentifyerSymbol(null, BlockType.Basic.toString())); 
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
-            }
-          return CUP$RelayParser$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // block ::= BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE 
-            {
-              BlockSymbol RESULT =null;
-		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
-		Location openTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xright;
-		RelaySimpleSymbol openToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
-		Location blockContentxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
-		Location blockContentxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xright;
-		BlockContentListSymbol blockContent = (BlockContentListSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).value;
-		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
-		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
-		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, new IdentifyerSymbol(null, BlockType.Basic.name())); 
-              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
 
@@ -330,7 +331,7 @@ class CUP$RelayParser$actions {
 		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType); 
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType);  
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;

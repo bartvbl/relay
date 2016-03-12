@@ -13,6 +13,7 @@ import relay.parser.symbols.FunctionCallSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
 import relay.parser.symbols.LineStatementSymbol;
 import relay.parser.symbols.ParameterListSymbol;
+import relay.parser.symbols.PercentValueSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
 import relay.parser.symbols.RelaySimpleSymbol;
@@ -24,6 +25,7 @@ import relay.parser.symbols.VariableDefinitionSymbol;
 import relay.data.Unit;
 import relay.types.BlockType;
 import java_cup.runtime.ComplexSymbolFactory.Location;
+import java_cup.runtime.XMLElement;
 
 import relay.data.Unit;
 import relay.types.BlockType;
@@ -94,12 +96,12 @@ goal ::=
 	;
 
 block ::=	
-		BLOCK_OPEN:openToken identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
-																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockName, blockContent, new IdentifyerSymbol(null, BlockType.Basic.toString())); :}
-	|	BLOCK_OPEN:openToken NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
-																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, new IdentifyerSymbol(null, BlockType.Basic.name())); :}
+		BLOCK_OPEN:openToken NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent); :}
+	|	BLOCK_OPEN:openToken identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName); :}
 	|	BLOCK_OPEN:openToken identifyer:blockName COLON identifyer:blockType NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
-																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType); :}
+																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType);  :}
 	;
 
 block_content_list ::=	

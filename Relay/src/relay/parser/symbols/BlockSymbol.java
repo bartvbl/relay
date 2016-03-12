@@ -13,6 +13,7 @@ import relay.nodes.VariableDefinitionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
+import relay.types.BlockType;
 import relay.types.RelayBlockPropertyType;
 import relay.util.RelayUtil;
 
@@ -22,24 +23,24 @@ public class BlockSymbol extends RelaySymbol {
 	public final IdentifyerSymbol blockTypeNode;
 	public final BlockContentListSymbol childList;
 
-	public BlockSymbol(LocationRange locationRange, IdentifyerSymbol blockName, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
-		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.nameNode = blockName;
-		this.blockTypeNode = blockType;
-		this.childList = childList;
-	}
-
-	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockType) {
-		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.nameNode = null;
-		this.blockTypeNode = blockType;
-		this.childList = childList;
-	}
-
 	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockName, IdentifyerSymbol blockType) {
 		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
 		this.nameNode = blockName;
 		this.blockTypeNode = blockType;
+		this.childList = childList;
+	}
+	
+	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockName) {
+		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
+		this.nameNode = blockName;
+		this.blockTypeNode = null;
+		this.childList = childList;
+	}
+	
+	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList) {
+		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
+		this.nameNode = null;
+		this.blockTypeNode = null;
 		this.childList = childList;
 	}
 
@@ -51,6 +52,12 @@ public class BlockSymbol extends RelaySymbol {
 	@Override
 	public RelayNode compact() throws RelayException {
 		String blockName = (nameNode == null) ? "block_" + RelayUtil.generateUUID() : nameNode.value;
+		BlockType blockType;
+		try {
+			blockType = (blockTypeNode == null) ? BlockType.Basic : BlockType.valueOf(this.blockTypeNode.value);
+		} catch(Exception e) {
+			throw new RelayException("The block type \"" + this.blockTypeNode.value + "\" is not known. Did you mistype it?", location);
+		}
 		ArrayList<RelayNode> children = new ArrayList<RelayNode>();
 		BlockContentListSymbol currentListNode = childList;
 		
@@ -100,7 +107,7 @@ public class BlockSymbol extends RelaySymbol {
 		
 		BlockDimensions dimensions = new BlockDimensions(this.location, propertyMap);	
 		
-		return new BlockNode(this.location, blockName, childNodes, childBlocks, childCodeBlocks, variableDefinitions, propertyMap, dimensions);
+		return new BlockNode(this.location, blockName, blockType, childNodes, childBlocks, childCodeBlocks, variableDefinitions, propertyMap, dimensions);
 	}
 
 }
