@@ -4,7 +4,7 @@ public enum ReservedKeyword {
 	parent("parent"),
 	content("content"),
 	def("def"), 
-	keyword_this("this");
+	keyword_this("__RELAY_INTERNAL_KEYWORD_THIS_NODE");
 	
 	public final String name;
 

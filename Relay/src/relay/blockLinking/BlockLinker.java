@@ -44,9 +44,12 @@ public class BlockLinker {
 		if(expression instanceof VariableAccessNode) {
 			VariableAccessNode variableAccessNode = (VariableAccessNode) expression;
 			MutableDependentValue value = symbolTable.get(variableAccessNode.identifyers);
+			
 			if(value == null) {
 				throw new RelayException("No block, property or variable named \"" + RelayUtil.mergeVariableAccessStrings(variableAccessNode.identifyers) + "\" was found.", expression.location);
 			}
+			
+			variableAccessNode.linkTo(value);
 		}
 		
 		for(ExpressionNode childNode : expression.expressionChildren) {

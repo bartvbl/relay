@@ -14,17 +14,19 @@ public class SymbolTableBuilder {
 		SymbolTable globalTable = buildGlobalSymbolTable(rootNode);
 		
 		// second iteration to include the "parent" keyword into the symbol table. Now any block will have this entry as well as the complete symbol table.
-		putBlockSymbols(ReservedKeyword.parent.name(), rootNode.windowDimensions, globalTable);
+		putBlockSymbols(ReservedKeyword.parent.name, rootNode.windowDimensions, globalTable);
 		visitLocal(rootNode.rootBlock, globalTable);
 	}
 	
 	private static void visitLocal(BlockNode block, SymbolTable symbolTable) {
+		putBlockSymbols(ReservedKeyword.keyword_this.name, block.dimensions, symbolTable);
+		
 		block.setSymbolTable(symbolTable);
 		
 		for(BlockNode child : block.childBlocks) {	
 			SymbolTable childTable = symbolTable.copyOf();
 			
-			putBlockSymbols(ReservedKeyword.parent.name(), block.dimensions, childTable);
+			putBlockSymbols(ReservedKeyword.parent.name, block.dimensions, childTable);
 			putVariableDefintiions(block.variableDefinitions, childTable);
 			
 			visitLocal(child, childTable);
