@@ -27,11 +27,6 @@ public class VariableAccessSymbol extends ExpressionSymbol {
 		this.remainingAccess = remainingAccess;
 		this.furtherAccessRemains = true;
 	}
-
-	@Override
-	public double evaluate() {
-		return 0;
-	}
 	
 	@Override
 	public String toString() {

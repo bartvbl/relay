@@ -15,11 +15,6 @@ public class BracketExpressionSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public double evaluate() {
-		return expression.evaluate();
-	}
-
-	@Override
 	public RelayNode compact() throws RelayException {
 		return expression.compact();
 	}

@@ -22,11 +22,6 @@ public class SubtractionExpressionSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public double evaluate() {
-		return leftHandSide.evaluate() - rightHandSide.evaluate();
-	}
-
-	@Override
 	public RelayNode compact() throws RelayException {
 		ExpressionNode leftHand = (ExpressionNode) leftHandSide.compact();
 		ExpressionNode rightHand = (ExpressionNode) rightHandSide.compact();

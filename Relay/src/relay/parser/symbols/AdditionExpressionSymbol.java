@@ -18,11 +18,6 @@ public class AdditionExpressionSymbol extends ExpressionSymbol {
 		this.leftHandSide = leftHandSide;
 		this.rightHandSide = rightHandSide;
 	}
-
-	@Override
-	public double evaluate() {
-		return leftHandSide.evaluate() + rightHandSide.evaluate();
-	}
 	
 	@Override
 	public String toString() {

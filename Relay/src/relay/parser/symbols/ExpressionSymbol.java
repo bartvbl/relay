@@ -22,7 +22,4 @@ public abstract class ExpressionSymbol extends RelaySymbol {
 		super(locationRange, relaySymbolType, children);
 		this.expressionType = expressionType;
 	}
-
-	public abstract double evaluate();
-
 }

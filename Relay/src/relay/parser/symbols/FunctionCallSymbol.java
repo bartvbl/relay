@@ -22,11 +22,6 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public double evaluate() {
-		return 0;
-	}
-
-	@Override
 	public RelayNode compact() throws RelayException {
 		ArrayList<ExpressionNode> functionParameters = new ArrayList<ExpressionNode>();
 		ParameterListSymbol currentParameterList = parameters;

@@ -19,11 +19,6 @@ public class PercentValueSymbol extends ExpressionSymbol {
 	}
 
 	@Override
-	public double evaluate() {
-		throw new RuntimeException("Symbols should not be evaluated.");
-	}
-
-	@Override
 	public RelayNode compact() throws RelayException {
 		VariableAccessNode accessNode = (VariableAccessNode) property.compact();
 		return new PercentValueNode(this.location, value, accessNode);
