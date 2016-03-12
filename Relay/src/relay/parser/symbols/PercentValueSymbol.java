@@ -1,26 +1,32 @@
-package relay.parser;
+package relay.parser.symbols;
 
 import relay.exceptions.RelayException;
+import relay.nodes.PercentValueNode;
 import relay.nodes.RelayNode;
-import relay.parser.symbols.ExpressionSymbol;
-import relay.parser.symbols.RelaySymbol;
-import relay.parser.symbols.VariableAccessSymbol;
+import relay.nodes.expressions.VariableAccessNode;
+import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
 public class PercentValueSymbol extends ExpressionSymbol {
 
+	private final VariableAccessSymbol property;
+	private final Double value;
+
 	public PercentValueSymbol(LocationRange locationRange, Double value, VariableAccessSymbol property) {
 		super(locationRange, ExpressionType.PERCENTAGE_VALUE, new RelaySymbol[]{property});
+		this.property = property;
+		this.value = value;
 	}
 
 	@Override
 	public double evaluate() {
-		return 0;
+		throw new RuntimeException("Symbols should not be evaluated.");
 	}
 
 	@Override
 	public RelayNode compact() throws RelayException {
-		return null;
+		VariableAccessNode accessNode = (VariableAccessNode) property.compact();
+		return new PercentValueNode(this.location, value, accessNode);
 	}
 
 }

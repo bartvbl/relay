@@ -5,12 +5,12 @@ import relay.nodes.ExpressionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
-public class ValueNode extends ExpressionNode {
+public class ConstantValueNode extends ExpressionNode {
 
 	public final double value;
 	public final Unit unit;
 
-	public ValueNode(LocationRange locationRange, double value, Unit unit) {
+	public ConstantValueNode(LocationRange locationRange, double value, Unit unit) {
 		super(locationRange, ExpressionType.CONSTANT_VALUE);
 		this.value = value;
 		this.unit = unit;

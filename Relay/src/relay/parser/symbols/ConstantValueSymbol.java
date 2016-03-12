@@ -1,7 +1,7 @@
 package relay.parser.symbols;
 
 import relay.nodes.RelayNode;
-import relay.nodes.expressions.ValueNode;
+import relay.nodes.expressions.ConstantValueNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
@@ -32,7 +32,7 @@ public class ConstantValueSymbol extends ExpressionSymbol {
 
 	@Override
 	public RelayNode compact() {
-		return new ValueNode(this.location, value, unit.value);
+		return new ConstantValueNode(this.location, value, unit.value);
 	}
 
 }

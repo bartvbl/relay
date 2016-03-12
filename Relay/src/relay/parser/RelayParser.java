@@ -19,6 +19,7 @@ import relay.parser.symbols.FunctionCallSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
 import relay.parser.symbols.LineStatementSymbol;
 import relay.parser.symbols.ParameterListSymbol;
+import relay.parser.symbols.PercentValueSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
 import relay.parser.symbols.RelaySimpleSymbol;
