@@ -1,8 +1,8 @@
 package relay.parser.symbols;
 
 import relay.exceptions.RelayException;
-import relay.nodes.PercentValueNode;
 import relay.nodes.RelayNode;
+import relay.nodes.expressions.PercentValueNode;
 import relay.nodes.expressions.VariableAccessNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;

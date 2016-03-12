@@ -3,7 +3,6 @@ package relay;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 import java_cup.runtime.ComplexSymbolFactory;
 import lib.geom.IndexRectangle2D;
@@ -13,14 +12,13 @@ import relay.blockLinking.BlockLinker;
 import relay.exceptions.RelayException;
 import relay.layout.LayoutDefinition;
 import relay.layout.LayoutDefinitionBuilder;
+import relay.layout.MutableDependentValue;
 import relay.nodes.RootNode;
 import relay.parser.Lexer;
 import relay.parser.RelayParser;
 import relay.parser.symbols.RelaySymbol;
 import relay.parser.symbols.RootSymbol;
-import relay.symbolTable.SymbolTable;
 import relay.symbolTable.SymbolTableBuilder;
-import relay.tools.TreeVisualiser;
 
 public class UILoader {
 	public static Window buildUIFromFile(File source, String windowTitle, IndexRectangle2D windowDimensions) throws RelayException {
@@ -44,10 +42,12 @@ public class UILoader {
 			SymbolTableBuilder.createLocalSymbolTables(rootNode);
 			
 			// Perform the linking phase: figure out which expressions depend on which other values
-			BlockLinker.linkBlockExpressions(rootNode);
+			MutableDependentValue[] linkedValues = BlockLinker.linkBlockExpressions(rootNode);
+			
+			System.out.println("Linked " + linkedValues.length + " values.");
 			
 			//new TreeVisualiser(rootNode);
-			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode);
+			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode, linkedValues);
 			return defaultBackend.createWindow(layout, windowTitle, windowDimensions);
 		
 		} catch (FileNotFoundException exception) {

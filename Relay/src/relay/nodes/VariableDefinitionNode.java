@@ -1,5 +1,7 @@
 package relay.nodes;
 
+import java.util.ArrayList;
+
 import relay.layout.MutableDependentValue;
 import relay.parser.LocationRange;
 
@@ -8,6 +10,7 @@ public class VariableDefinitionNode extends RelayNode implements MutableDependen
 	public final String identifier;
 	public final ExpressionNode expression;
 	private double value = 0;
+	private final ArrayList<MutableDependentValue> dependencies = new ArrayList<MutableDependentValue>();
 
 	public VariableDefinitionNode(LocationRange locationRange, String identifier, ExpressionNode expressionNode) {
 		super(locationRange, RelayNodeType.VARIABLE_DEFINITION, new RelayNode[]{expressionNode});
@@ -25,4 +28,11 @@ public class VariableDefinitionNode extends RelayNode implements MutableDependen
 		return value;
 	}
 
+	public MutableDependentValue[] getDependencies() {
+		return dependencies.toArray(new MutableDependentValue[dependencies.size()]);
+	}
+
+	public void registerDependency(MutableDependentValue dependency) {
+		this.dependencies.add(dependency);
+	}
 }

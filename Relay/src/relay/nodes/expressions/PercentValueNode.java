@@ -1,6 +1,7 @@
-package relay.nodes;
+package relay.nodes.expressions;
 
-import relay.nodes.expressions.VariableAccessNode;
+import relay.nodes.ExpressionNode;
+import relay.nodes.RelayNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 
@@ -17,7 +18,7 @@ public class PercentValueNode extends ExpressionNode {
 
 	@Override
 	public double evaluate() {
-		return percentValue * accessNode.evaluate();
+		return (percentValue / 100d) * accessNode.evaluate();
 	}
 
 }
