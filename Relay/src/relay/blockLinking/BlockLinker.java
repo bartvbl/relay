@@ -37,9 +37,7 @@ public class BlockLinker {
 	}
 
 	private static void findAndLinkDependencies(DimensionValue dimensions, SymbolTable symbolTable) throws RelayException {
-		if(dimensions.isDefined) {
-			visitExpressionNode(dimensions.expression, symbolTable);
-		}
+		visitExpressionNode(dimensions.expression, symbolTable);
 	}
 
 	private static void visitExpressionNode(ExpressionNode expression, SymbolTable symbolTable) throws RelayException {
