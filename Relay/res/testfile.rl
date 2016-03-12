@@ -9,7 +9,7 @@
 			left: parent.left
 			right: parent.right
 			top: previous.top
-			height: 20% + 20px
+			height: 20% of parent.height + 20px
 
 			( icon : Image
 				left: parent.left

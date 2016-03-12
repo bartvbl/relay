@@ -85,6 +85,7 @@ Exponent = [eE] [+-]? [0-9]+
 	"px"						{ return symbol("unit_pixels", UNIT_PIXELS); }
 	"%"							{ return symbol("unit_percent", UNIT_PERCENT); }
 
+	"of"						{ return symbol("operator_of", OPERATOR_OF); }
 	"+"							{ return symbol("operator_plus", OPERATOR_PLUS); }
 	"-"							{ return symbol("operator_minus", OPERATOR_MINUS); }
 

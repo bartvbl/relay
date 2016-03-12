@@ -11,7 +11,7 @@ public class ValueNode extends ExpressionNode {
 	public final Unit unit;
 
 	public ValueNode(LocationRange locationRange, double value, Unit unit) {
-		super(locationRange, ExpressionType.VALUE);
+		super(locationRange, ExpressionType.CONSTANT_VALUE);
 		this.value = value;
 		this.unit = unit;
 	}

@@ -417,6 +417,7 @@ public class Lexer implements java_cup.runtime.Scanner {
       return symbolFactory.newSymbol(name, sym, left, right,val);
   }
 
+
   /**
    * Creates a new scanner
    *

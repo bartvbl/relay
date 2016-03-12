@@ -1,7 +1,5 @@
 package relay.nodes.expressions;
 
-import java.util.Arrays;
-
 import relay.exceptions.RelayRuntimeException;
 import relay.layout.MutableDependentValue;
 import relay.nodes.ExpressionNode;

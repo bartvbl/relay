@@ -7,6 +7,7 @@ import relay.parser.symbols.BlockPropertySymbol;
 import relay.parser.symbols.BracketExpressionSymbol;
 import relay.parser.symbols.CodeBlockSymbol;
 import relay.parser.symbols.CodeStatementSymbol;
+import relay.parser.symbols.ConstantValueSymbol;
 import relay.parser.symbols.ExpressionSymbol;
 import relay.parser.symbols.FunctionCallSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
@@ -18,9 +19,11 @@ import relay.parser.symbols.RelaySimpleSymbol;
 import relay.parser.symbols.StatementListSymbol;
 import relay.parser.symbols.SubtractionExpressionSymbol;
 import relay.parser.symbols.UnitSymbol;
-import relay.parser.symbols.ValueSymbol;
 import relay.parser.symbols.VariableAccessSymbol;
 import relay.parser.symbols.VariableDefinitionSymbol;
+import relay.data.Unit;
+import relay.types.BlockType;
+import java_cup.runtime.ComplexSymbolFactory.Location;
 
 import relay.data.Unit;
 import relay.types.BlockType;
@@ -48,6 +51,7 @@ terminal UnitSymbol UNIT_PERCENT;
 
 terminal RelaySimpleSymbol OPERATOR_PLUS;
 terminal RelaySimpleSymbol OPERATOR_MINUS;
+terminal RelaySimpleSynbol OPERATOR_OF;
 
 terminal RelaySimpleSymbol KEYWORD_LINE;
 terminal RelaySimpleSymbol KEYWORD_FROM;
@@ -65,13 +69,13 @@ non terminal BlockContentItemSymbol		block_content_item;
 non terminal VariableDefinitionSymbol	variable_definition;
 non terminal BlockPropertySymbol		block_property;
 non terminal ExpressionSymbol 			expression;
-non terminal UnitSymbol					unit;
 non terminal VariableAccessSymbol		variable_access;
 non terminal FunctionCallSymbol			function_call;
 non terminal CodeBlockSymbol 			code_block;
 non terminal StatementListSymbol		code_statement_list;
 non terminal CodeStatementSymbol		code_statement;
 non terminal ParameterListSymbol		parameter_list;
+non terminal UnitSymbol					unit;
 
 /* precedence rules */
 
@@ -144,8 +148,10 @@ block_property ::=
 	;
 
 expression ::=
-		NUMBER:value unit:unit 
-																								{: RESULT = new ValueSymbol(new LocationRange(unit.location.start, unit.location.end), value, unit); :}
+		NUMBER:value unit:unit
+																								{: RESULT = new ConstantValueSymbol(new LocationRange(valuexleft, unit.location.end), value, unit); :}
+	|	NUMBER:value UNIT_PERCENT:percent OPERATOR_OF variable_access:variable_access													
+																								{: RESULT = new PercentValueSymbol(new LocationRange(valuexleft, variable_accessxright), value, variable_access); :}
 	|	expression:leftHandSide OPERATOR_PLUS expression:rightHandSide
 																								{: RESULT = new AdditionExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
 	|	BLOCK_OPEN:openToken expression:expression BLOCK_CLOSE:closeToken 
@@ -156,14 +162,19 @@ expression ::=
 	|	function_call:call																		{: RESULT = call; :}
 	;
 
+unit ::=
+		UNIT_PIXELS:pixels
+																								{: RESULT = new UnitSymbol(new LocationRange(pixelsxleft, pixelsxright), Unit.PIXELS); :}
+	;
+
 variable_definition ::=
 		KEYWORD_DEF:openToken identifyer:identifyer COLON expression:expression 
-																								{: RESULT = new VariableDefinitionSymbol(new LocationRange(openToken.location.start, expressionxright), identifyer, expression); :}
+																								{: RESULT = new VariableDefinitionSymbol(new LocationRange(openTokenxleft, expressionxright), identifyer, expression); :}
 	;
 
 function_call ::=
 		IDENTIFYER:identifyer BLOCK_OPEN parameter_list:parameters BLOCK_CLOSE:closeToken
-																								{: RESULT = new FunctionCallSymbol(new LocationRange(openTokenxleft, expressionxright), identifyer, parameters); :}
+																								{: RESULT = new FunctionCallSymbol(new LocationRange(identifyerxleft, closeTokenxright), identifyer, parameters); :}
 	;
 
 parameter_list ::=
@@ -177,13 +188,6 @@ variable_access ::=
 																								{: RESULT = new VariableAccessSymbol(new LocationRange(identifyerxleft, identifyerxright), identifyer, remainingAccess); :}
 	|	identifyer:identifyer
 																								{: RESULT = new VariableAccessSymbol(new LocationRange(identifyerxleft, identifyerxright), identifyer); :}
-	;
-
-unit ::=
-		UNIT_PIXELS:unitToken
-																								{: RESULT = new UnitSymbol(new LocationRange(unitTokenxleft, unitTokenxright), Unit.PIXELS); :}
-	|	UNIT_PERCENT:unitToken
-																								{: RESULT = new UnitSymbol(new LocationRange(unitTokenxleft, unitTokenxright), Unit.PERCENT); :}
 	;
 
 identifyer ::=

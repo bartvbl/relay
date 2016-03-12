@@ -4,15 +4,14 @@ import relay.nodes.RelayNode;
 import relay.nodes.expressions.ValueNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
-import relay.parser.symbols.types.RelaySymbolType;
 
-public class ValueSymbol extends ExpressionSymbol {
+public class ConstantValueSymbol extends ExpressionSymbol {
 
 	public final double value;
 	public final UnitSymbol unit;
 
-	public ValueSymbol(LocationRange locationRange, Double value, UnitSymbol unit) {
-		super(locationRange, ExpressionType.VALUE);
+	public ConstantValueSymbol(LocationRange locationRange, Double value, UnitSymbol unit) {
+		super(locationRange, ExpressionType.CONSTANT_VALUE);
 		if(value == null) {
 			this.value = 0;
 		} else  {
