@@ -6,7 +6,6 @@ import relay.nodes.RelayNode;
 import relay.nodes.expressions.AdditionExpressionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
-import relay.parser.symbols.types.RelaySymbolType;
 
 public class AdditionExpressionSymbol extends ExpressionSymbol {
 

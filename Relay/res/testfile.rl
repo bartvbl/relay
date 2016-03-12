@@ -5,10 +5,10 @@
 		top: parent.top
 		height: 100px
 
-		/*( sidebar-element
+		( sidebar-element
 			left: parent.left
 			right: parent.right
-			top: previous.top
+			top: parent.top //previous.top
 			height: 20% of parent.height + 20px
 
 			( icon : Image
@@ -23,7 +23,7 @@
 				top: parent.top
 				height: parent.height
 			)
-		) //repeat-for link in sidebar_links */
+		) //repeat-for link in sidebar_links 
 
 	)
 

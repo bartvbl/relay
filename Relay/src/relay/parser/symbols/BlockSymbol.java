@@ -36,6 +36,13 @@ public class BlockSymbol extends RelaySymbol {
 		this.childList = childList;
 	}
 
+	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockName, IdentifyerSymbol blockType) {
+		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
+		this.nameNode = blockName;
+		this.blockTypeNode = blockType;
+		this.childList = childList;
+	}
+
 	@Override
 	public String toString() {
 		return "Block named \"" + nameNode.value + "\"";

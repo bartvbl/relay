@@ -6,6 +6,7 @@ import relay.layout.DimensionValue;
 import relay.layout.MutableDependentValue;
 import relay.nodes.BlockNode;
 import relay.nodes.ExpressionNode;
+import relay.nodes.PercentValueNode;
 import relay.nodes.RootNode;
 import relay.nodes.VariableDefinitionNode;
 import relay.nodes.expressions.VariableAccessNode;
@@ -43,18 +44,22 @@ public class BlockLinker {
 	private static void visitExpressionNode(ExpressionNode expression, SymbolTable symbolTable) throws RelayException {
 		if(expression instanceof VariableAccessNode) {
 			VariableAccessNode variableAccessNode = (VariableAccessNode) expression;
-			MutableDependentValue value = symbolTable.get(variableAccessNode.identifyers);
-			
-			if(value == null) {
-				throw new RelayException("No block, property or variable named \"" + RelayUtil.mergeVariableAccessStrings(variableAccessNode.identifyers) + "\" was found.", expression.location);
-			}
-			
-			variableAccessNode.linkTo(value);
+			linkVariableAccessNode(variableAccessNode, symbolTable);
 		}
 		
 		for(ExpressionNode childNode : expression.expressionChildren) {
 			visitExpressionNode(childNode, symbolTable);
 		}
+	}
+
+	private static void linkVariableAccessNode(VariableAccessNode variableAccessNode, SymbolTable symbolTable) throws RelayException {
+		MutableDependentValue value = symbolTable.get(variableAccessNode.identifyers);
+		
+		if(value == null) {
+			throw new RelayException("No block, property or variable named \"" + RelayUtil.mergeVariableAccessStrings(variableAccessNode.identifyers) + "\" was found.", variableAccessNode.location);
+		}
+		
+		variableAccessNode.linkTo(value);
 	}
 
 }

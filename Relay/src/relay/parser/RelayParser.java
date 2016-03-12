@@ -288,7 +288,7 @@ class CUP$RelayParser$actions {
 		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockName, blockContent, new IdentifyerSymbol(null, BlockType.Basic.toString())); 
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockName, blockContent, new IdentifyerSymbol(null, BlockType.Basic.toString())); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -306,7 +306,7 @@ class CUP$RelayParser$actions {
 		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockContent, new IdentifyerSymbol(null, BlockType.Basic.name())); 
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, new IdentifyerSymbol(null, BlockType.Basic.name())); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
@@ -330,7 +330,7 @@ class CUP$RelayParser$actions {
 		Location closeTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location closeTokenxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		RelaySimpleSymbol closeToken = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
-		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, openTokenxright), blockContent, blockType); 
+		 RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType); 
               CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("block",1, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
