@@ -16,6 +16,11 @@ public class SymbolTableBuilder {
 		// second iteration to include the "parent" keyword into the symbol table. Now any block will have this entry as well as the complete symbol table.
 		putBlockSymbols(ReservedKeyword.parent.name, rootNode.windowDimensions, globalTable);
 		visitLocal(rootNode.rootBlock, globalTable);
+		
+		// We finally have to build the symbol table of the window dimensions.
+		SymbolTable windowTable = new SymbolTable();
+		putBlockSymbols(ReservedKeyword.keyword_this.name, rootNode.windowDimensions, windowTable);
+		rootNode.windowSymbolTable = windowTable;
 	}
 	
 	private static void visitLocal(BlockNode block, SymbolTable symbolTable) {
@@ -27,7 +32,7 @@ public class SymbolTableBuilder {
 			SymbolTable childTable = symbolTable.copyOf();
 			
 			putBlockSymbols(ReservedKeyword.parent.name, block.dimensions, childTable);
-			putVariableDefintiions(block.variableDefinitions, childTable);
+			putVariableDefinitions(block.variableDefinitions, childTable);
 			
 			visitLocal(child, childTable);
 		}
@@ -57,7 +62,7 @@ public class SymbolTableBuilder {
 		table.put(new String[]{baseName, RelayBlockPropertyType.height.name()}, dimensions.height);
 	}
 	
-	private static void putVariableDefintiions(VariableDefinitionNode[] variableDefinitions, SymbolTable childTable) {
+	private static void putVariableDefinitions(VariableDefinitionNode[] variableDefinitions, SymbolTable childTable) {
 		for(VariableDefinitionNode definition : variableDefinitions) {
 			childTable.put(definition.identifier, definition);
 		}

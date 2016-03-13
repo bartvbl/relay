@@ -3,6 +3,7 @@ package relay.blockLinking;
 import java.util.ArrayList;
 
 import relay.exceptions.RelayException;
+import relay.layout.BlockDimensions;
 import relay.layout.MutableDependentValue;
 import relay.nodes.BlockNode;
 import relay.nodes.ExpressionNode;
@@ -16,18 +17,13 @@ public class BlockLinker {
 
 	public static MutableDependentValue[] linkBlockExpressions(RootNode rootNode) throws RelayException {
 		ArrayList<MutableDependentValue> linkedValues = new ArrayList<MutableDependentValue>();
+		visitBlockDimensions(rootNode.windowDimensions, rootNode.windowSymbolTable, linkedValues);
 		visit(rootNode.rootBlock, linkedValues);
 		return linkedValues.toArray(new MutableDependentValue[linkedValues.size()]);
 	}
 
 	private static void visit(BlockNode block, ArrayList<MutableDependentValue> linkedValues) throws RelayException {
-		visitExpressionNode(block.dimensions.left, block.dimensions.left.expression, block.symbolTable, linkedValues);
-		visitExpressionNode(block.dimensions.right, block.dimensions.right.expression, block.symbolTable, linkedValues);
-		visitExpressionNode(block.dimensions.width, block.dimensions.width.expression, block.symbolTable, linkedValues);
-		
-		visitExpressionNode(block.dimensions.bottom, block.dimensions.bottom.expression, block.symbolTable, linkedValues);
-		visitExpressionNode(block.dimensions.top, block.dimensions.top.expression, block.symbolTable, linkedValues);
-		visitExpressionNode(block.dimensions.height, block.dimensions.height.expression, block.symbolTable, linkedValues);
+		visitBlockDimensions(block.dimensions, block.symbolTable, linkedValues);
 		
 		for(VariableDefinitionNode definition : block.variableDefinitions) {
 			visitExpressionNode(definition, definition.expression, block.symbolTable, linkedValues);
@@ -36,6 +32,16 @@ public class BlockLinker {
 		for(BlockNode childBlock : block.childBlocks) {
 			visit(childBlock, linkedValues);
 		}
+	}
+
+	private static void visitBlockDimensions(BlockDimensions dimensions, SymbolTable symbolTable, ArrayList<MutableDependentValue> linkedValues) throws RelayException {
+		visitExpressionNode(dimensions.left, dimensions.left.expression, symbolTable, linkedValues);
+		visitExpressionNode(dimensions.right, dimensions.right.expression, symbolTable, linkedValues);
+		visitExpressionNode(dimensions.width, dimensions.width.expression, symbolTable, linkedValues);
+		
+		visitExpressionNode(dimensions.bottom, dimensions.bottom.expression, symbolTable, linkedValues);
+		visitExpressionNode(dimensions.top, dimensions.top.expression, symbolTable, linkedValues);
+		visitExpressionNode(dimensions.height, dimensions.height.expression, symbolTable, linkedValues);
 	}
 
 	private static void visitExpressionNode(MutableDependentValue currentValue, ExpressionNode expression, SymbolTable symbolTable, ArrayList<MutableDependentValue> linkedValues) throws RelayException {
