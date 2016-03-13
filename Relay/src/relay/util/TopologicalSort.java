@@ -23,10 +23,7 @@ public class TopologicalSort {
 			visit(currentNode, unlabelledNodes, tempLabelledNodes, permanentLabelledNodes, sortedNodes);
 		}
 		
-		// Write back in reverse
-		for(int i = 0; i < linkedValues.length; i++) {
-			linkedValues[i] = sortedNodes.get(linkedValues.length - 1 - i);
-		}
+		System.out.println(sortedNodes.size() + " vs " + linkedValues.length);
 	}
 
 	private static void visit(MutableDependentValue currentNode, ArrayList<MutableDependentValue> unlabelledNodes, HashSet<MutableDependentValue> tempLabelledNodes, HashSet<MutableDependentValue> permanentLabelledNodes, ArrayList<MutableDependentValue> sortedNodes) {
@@ -36,7 +33,8 @@ public class TopologicalSort {
 		}
 		if(!permanentLabelledNodes.contains(currentNode)) {
 			System.out.println("\t\tNode has not yet been marked. Adding temporary label.");
-			unlabelledNodes.remove(currentNode);
+			//boolean result = unlabelledNodes.remove(currentNode);
+			//System.out.println(result ? "\t\tNode was found." : "\t\tNode was not found.");
 			tempLabelledNodes.add(currentNode);
 			
 			MutableDependentValue[] dependencies = currentNode.getDependencies();
@@ -50,7 +48,7 @@ public class TopologicalSort {
 			System.out.println("\t\tMarking " + currentNode + " permanently.");
 			permanentLabelledNodes.add(currentNode);
 			tempLabelledNodes.remove(currentNode);
-			sortedNodes.add(currentNode);
+			sortedNodes.add(0, currentNode);
 		} else {
 			System.out.println("\t\tNode has already been marked.");
 		}
