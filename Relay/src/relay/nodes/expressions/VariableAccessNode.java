@@ -22,7 +22,7 @@ public class VariableAccessNode extends ExpressionNode {
 		for(int i = 1; i < identifyers.length; i++) {
 			totalAccessString += "." + identifyers[i];
 		}
-		return "Variable access: " + totalAccessString;
+		return totalAccessString;
 	}
 
 	@Override

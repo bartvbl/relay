@@ -29,7 +29,7 @@ public class TopologicalSort {
 	}
 
 	private static void visit(MutableDependentValue currentNode, ArrayList<MutableDependentValue> unlabelledNodes, HashSet<MutableDependentValue> tempLabelledNodes, HashSet<MutableDependentValue> permanentLabelledNodes, ArrayList<MutableDependentValue> sortedNodes) {
-		
+		System.out.println("Visiting: " + currentNode);
 		if(tempLabelledNodes.contains(currentNode)) {
 			throw new RuntimeException("Cycle detected in layout definition!");
 		}

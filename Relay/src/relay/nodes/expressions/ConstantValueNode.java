@@ -18,7 +18,7 @@ public class ConstantValueNode extends ExpressionNode {
 	
 	@Override
 	public String toString() {
-		return "Value node: " + value + " " + unit;
+		return value + " " + unit;
 	}
 
 	@Override

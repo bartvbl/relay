@@ -33,4 +33,8 @@ public class DimensionValue implements MutableDependentValue {
 		this.dependencies.add(dependency);
 	}
 	
+	public String toString() {
+		return "DimensionValue: " + expression;
+	}
+	
 }

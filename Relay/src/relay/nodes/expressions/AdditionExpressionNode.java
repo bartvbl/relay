@@ -19,7 +19,7 @@ public class AdditionExpressionNode extends ExpressionNode {
 	
 	@Override
 	public String toString() {
-		return "Addition expression";
+		return leftHandSide + " + " + rightHandSide;
 	}
 
 	@Override

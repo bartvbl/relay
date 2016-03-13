@@ -20,5 +20,9 @@ public class PercentValueNode extends ExpressionNode {
 	public double evaluate() {
 		return (percentValue / 100d) * accessNode.evaluate();
 	}
+	
+	public String toString() {
+		return percentValue + "% of " + accessNode.toString();
+	}
 
 }
