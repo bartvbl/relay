@@ -16,11 +16,8 @@ public class TopologicalSort {
 		
 		HashSet<MutableDependentValue> labelledNodes = new HashSet<MutableDependentValue>();
 		
-		int iterations = 0;
-		
 		while(unsortedNodes.size() > 0) {
 			for(int i = 0; i < unsortedNodes.size(); i++) {
-				iterations++;
 				MutableDependentValue currentNode = unsortedNodes.get(i);
 				MutableDependentValue[] dependencies = currentNode.getDependencies();
 				
@@ -34,11 +31,8 @@ public class TopologicalSort {
 			}
 		}
 		
-//		System.out.println("Finished in " + iterations + " iterations.");
-		
 		for(int i = 0; i < linkedValues.length; i++) {
 			linkedValues[i] = sortedNodes.get(i);
-//			System.out.println(linkedValues[i]);
 		}
 		
 		

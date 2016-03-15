@@ -26,6 +26,7 @@ public class BlockLinker {
 		visitBlockDimensions(block.dimensions, block.symbolTable, linkedValues);
 		
 		for(VariableDefinitionNode definition : block.variableDefinitions) {
+			linkedValues.add(definition);
 			visitExpressionNode(definition, definition.expression, block.symbolTable, linkedValues);
 		}
 		
@@ -42,6 +43,14 @@ public class BlockLinker {
 		visitExpressionNode(dimensions.bottom, dimensions.bottom.expression, symbolTable, linkedValues);
 		visitExpressionNode(dimensions.top, dimensions.top.expression, symbolTable, linkedValues);
 		visitExpressionNode(dimensions.height, dimensions.height.expression, symbolTable, linkedValues);
+		
+		linkedValues.add(dimensions.left);
+		linkedValues.add(dimensions.right);
+		linkedValues.add(dimensions.width);
+		
+		linkedValues.add(dimensions.bottom);
+		linkedValues.add(dimensions.top);
+		linkedValues.add(dimensions.height);
 	}
 
 	private static void visitExpressionNode(MutableDependentValue currentValue, ExpressionNode expression, SymbolTable symbolTable, ArrayList<MutableDependentValue> linkedValues) throws RelayException {
@@ -63,7 +72,6 @@ public class BlockLinker {
 		}
 		
 		variableAccessNode.linkTo(value);
-		linkedValues.add(value);
 		currentValue.registerDependency(value);
 	}
 

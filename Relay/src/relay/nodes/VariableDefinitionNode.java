@@ -35,4 +35,8 @@ public class VariableDefinitionNode extends RelayNode implements MutableDependen
 	public void registerDependency(MutableDependentValue dependency) {
 		this.dependencies.add(dependency);
 	}
+	
+	public String toString() {
+		return "VariableDefinitionNode: " + expression;
+	}
 }
