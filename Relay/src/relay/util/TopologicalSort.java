@@ -10,48 +10,47 @@ public class TopologicalSort {
 
 	public static void sort(MutableDependentValue[] linkedValues) {
 		ArrayList<MutableDependentValue> sortedNodes = new ArrayList<MutableDependentValue>();
+		ArrayList<MutableDependentValue> unsortedNodes = new ArrayList<MutableDependentValue>();
 		
-		ArrayList<MutableDependentValue> unlabelledNodes = new ArrayList<MutableDependentValue>();
-		HashSet<MutableDependentValue> tempLabelledNodes = new HashSet<MutableDependentValue>();
-		HashSet<MutableDependentValue> permanentLabelledNodes = new HashSet<MutableDependentValue>();
+		unsortedNodes.addAll(Arrays.asList(linkedValues));
 		
-		unlabelledNodes.addAll(Arrays.asList(linkedValues));
+		HashSet<MutableDependentValue> labelledNodes = new HashSet<MutableDependentValue>();
 		
-		while(!unlabelledNodes.isEmpty()) {
-			MutableDependentValue currentNode = unlabelledNodes.remove(0);
-			System.out.println("Analysing unlabelled node " + currentNode + ". " + unlabelledNodes.size() + " remain.");
-			visit(currentNode, unlabelledNodes, tempLabelledNodes, permanentLabelledNodes, sortedNodes);
+		int iterations = 0;
+		
+		while(unsortedNodes.size() > 0) {
+			for(int i = 0; i < unsortedNodes.size(); i++) {
+				iterations++;
+				MutableDependentValue currentNode = unsortedNodes.get(i);
+				MutableDependentValue[] dependencies = currentNode.getDependencies();
+				
+				if(dependencies.length == 0 || allDependenciesMarked(dependencies, labelledNodes)) {
+					unsortedNodes.remove(i);
+					labelledNodes.add(currentNode);
+					sortedNodes.add(currentNode);
+					
+					i--;
+				}
+			}
 		}
 		
-		System.out.println(sortedNodes.size() + " vs " + linkedValues.length);
+//		System.out.println("Finished in " + iterations + " iterations.");
+		
+		for(int i = 0; i < linkedValues.length; i++) {
+			linkedValues[i] = sortedNodes.get(i);
+//			System.out.println(linkedValues[i]);
+		}
+		
+		
 	}
 
-	private static void visit(MutableDependentValue currentNode, ArrayList<MutableDependentValue> unlabelledNodes, HashSet<MutableDependentValue> tempLabelledNodes, HashSet<MutableDependentValue> permanentLabelledNodes, ArrayList<MutableDependentValue> sortedNodes) {
-		System.out.println("\tVisiting: " + currentNode);
-		if(tempLabelledNodes.contains(currentNode)) {
-			throw new RuntimeException("Cycle detected in layout definition!");
-		}
-		if(!permanentLabelledNodes.contains(currentNode)) {
-			System.out.println("\t\tNode has not yet been marked. Adding temporary label.");
-			//boolean result = unlabelledNodes.remove(currentNode);
-			//System.out.println(result ? "\t\tNode was found." : "\t\tNode was not found.");
-			tempLabelledNodes.add(currentNode);
-			
-			MutableDependentValue[] dependencies = currentNode.getDependencies();
-			for(MutableDependentValue dependency : dependencies) {
-				visit(dependency, unlabelledNodes, tempLabelledNodes, permanentLabelledNodes, sortedNodes);
+	private static boolean allDependenciesMarked(MutableDependentValue[] dependencies, HashSet<MutableDependentValue> labelledNodes) {
+		for(MutableDependentValue dependency : dependencies) {
+			if(!labelledNodes.contains(dependency)) {
+				return false;
 			}
-			if(dependencies.length == 0) {
-				System.out.println("\t\tNo dependencies found.");
-			}
-			
-			System.out.println("\t\tMarking " + currentNode + " permanently.");
-			permanentLabelledNodes.add(currentNode);
-			tempLabelledNodes.remove(currentNode);
-			sortedNodes.add(0, currentNode);
-		} else {
-			System.out.println("\t\tNode has already been marked.");
 		}
+		return true;
 	}
 
 }
