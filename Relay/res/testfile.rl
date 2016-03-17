@@ -30,7 +30,7 @@
 	( maincontent
 		def itemHeight: 100px
 
-		left: footer.left
+		left: sidebar.right
 		right: parent.right
 		top: parent.top
 		height: parent.height

@@ -1,6 +1,5 @@
 package relay.layout.windowRoot;
 
-import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
 
 import lib.geom.IndexRectangle2D;
