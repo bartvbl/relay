@@ -16,6 +16,7 @@ import relay.backends.lwjgl.core.LWJGLWindow;
 import relay.backends.lwjgl.rendering.RenderUtils;
 import relay.events.Event;
 import relay.events.EventType;
+import relay.layout.RelayDimensionNode;
 
 public class LWJGLBackendThread extends Thread {
 	
@@ -48,7 +49,13 @@ public class LWJGLBackendThread extends Thread {
 			RenderUtils.newFrame();
 			window.updateDimensions();
 			window.layout.update();
+			RelayDimensionNode dimensions = window.layout.getDimensionsTree();
+			renderRectangle(dimensions, 0);
 		}
+	}
+
+	private void renderRectangle(RelayDimensionNode dimensions, int id) {
+		
 	}
 
 	

@@ -1,8 +1,11 @@
 package relay.layout;
 
+import lib.geom.IndexRectangle2D;
 import lib.geom.Rectangle2D;
+import relay.layout.windowRoot.WindowDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.RootNode;
+import relay.nodes.expressions.MutableValueExpressionNode;
 import relay.symbolTable.SymbolTable;
 import relay.util.TopologicalSort;
 
@@ -40,6 +43,18 @@ public class LayoutDefinition {
 
 	public RelayDimensionNode getDimensionsTree() {
 		return dimensionsTreeRoot;
+	}
+
+	public void updateWindowDimensions(IndexRectangle2D indexRectangle2D) {
+		MutableValueExpressionNode leftNode = (MutableValueExpressionNode) rootNode.windowDimensions.left.expression;
+		MutableValueExpressionNode rightNode = (MutableValueExpressionNode) rootNode.windowDimensions.right.expression;
+		MutableValueExpressionNode bottomNode = (MutableValueExpressionNode) rootNode.windowDimensions.bottom.expression;
+		MutableValueExpressionNode topNode = (MutableValueExpressionNode) rootNode.windowDimensions.top.expression;
+		
+		leftNode.set(0);
+		rightNode.set(indexRectangle2D.width);
+		bottomNode.set(0);
+		topNode.set(indexRectangle2D.height);
 	}
 	
 	

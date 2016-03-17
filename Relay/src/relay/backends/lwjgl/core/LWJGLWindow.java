@@ -56,6 +56,8 @@ public class LWJGLWindow extends Window {
 		}
 		
 		this.windowDimensions.set(new IndexRectangle2D(windowX, windowY, windowWidth, windowHeight));
+		
+		layout.updateWindowDimensions(windowDimensions.get());
 	}
 
 	public IndexRectangle2D getDimensions() {
