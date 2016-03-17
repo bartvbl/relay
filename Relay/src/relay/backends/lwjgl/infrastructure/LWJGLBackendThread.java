@@ -18,6 +18,8 @@ import relay.events.Event;
 import relay.events.EventType;
 import relay.layout.RelayDimensionNode;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class LWJGLBackendThread extends Thread {
 	
 	private final LWJGLWindow window;
@@ -54,8 +56,20 @@ public class LWJGLBackendThread extends Thread {
 		}
 	}
 
-	private void renderRectangle(RelayDimensionNode dimensions, int id) {
+	private int renderRectangle(RelayDimensionNode dimensions, int id) {
+		double colour = ((double) ((70 * id) % 255)) / 255d;
+		glColor4d(colour, colour, colour, 1);
+		glBegin(GL_QUADS);
+		glVertex2d(dimensions.size.x1, dimensions.size.y1);
+		glVertex2d(dimensions.size.x2, dimensions.size.y1);
+		glVertex2d(dimensions.size.x2, dimensions.size.y2);
+		glVertex2d(dimensions.size.x1, dimensions.size.y2);
+		glEnd();
 		
+		for(RelayDimensionNode child : dimensions.children) {
+			id = renderRectangle(child, id + 1);
+		}
+		return id;
 	}
 
 	

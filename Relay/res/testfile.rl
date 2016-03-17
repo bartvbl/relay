@@ -1,14 +1,14 @@
 ( root
 	( sidebar
 		left: parent.left
-		right: parent.right
+		width: 100px
 		top: parent.top
-		height: 100px
+		bottom: parent.bottom
 
 		( sidebar-element
 			left: parent.left
 			right: parent.right
-			top: parent.top //previous.top
+			top: parent.top - 20px //previous.top
 			height: 20% of parent.height + 20px
 
 			( icon : Image
@@ -36,17 +36,23 @@
 		height: parent.height
 
 		( item1
-			top: parent.top
+			left: parent.left + 10px
+			right: parent.right - 10px
+			top: parent.top - 10px
 			height: itemHeight
 		)
 
 		( item2
-			top: item1.bottom
+			left: item1.left
+			right: item1.right
+			top: item1.bottom - 10px
 			height: itemHeight
 		)
 
 		( item3
-			top: item2.bottom
+			left: item1.left
+			right: item1.right
+			top: item2.bottom - 10px
 			height: itemHeight
 		)
 

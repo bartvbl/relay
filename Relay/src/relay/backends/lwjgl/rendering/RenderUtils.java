@@ -49,6 +49,7 @@ public class RenderUtils {
 		Display.create();
 		
 		glViewport(0, 0, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT);
+		glClearColor(1, 1, 1, 1);
 		
 		RenderUtils.set2DMode();
 	}

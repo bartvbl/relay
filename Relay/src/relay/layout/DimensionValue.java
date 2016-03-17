@@ -20,7 +20,7 @@ public class DimensionValue implements MutableDependentValue {
 	}
 	
 	public void updateCurrentValue() {
-		expression.evaluate();
+		currentValue = expression.evaluate();
 	}
 
 	@Override
