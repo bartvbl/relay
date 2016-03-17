@@ -23,6 +23,9 @@ public class RenderUtils {
 		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		glViewport(0, 0, Display.getWidth(), Display.getHeight()); 
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, Display.getWidth(), 0, Display.getHeight(), 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 	}

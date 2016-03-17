@@ -54,8 +54,8 @@ public class LWJGLWindow extends Window {
 			Index2D newWindowLocation = new Index2D(windowX, windowY);
 			events.dispatchEvent(new Event<Index2D>(EventType.WINDOW_MOVED, newWindowLocation));
 		}
-		
-		this.windowDimensions.set(new IndexRectangle2D(windowX, windowY, windowWidth, windowHeight));
+
+		this.windowDimensions.set(new IndexRectangle2D(windowX, windowY, windowX + windowWidth, windowY + windowHeight));
 		
 		layout.updateWindowDimensions(windowDimensions.get());
 	}
