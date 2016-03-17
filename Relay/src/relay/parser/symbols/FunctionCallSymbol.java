@@ -9,6 +9,7 @@ import relay.nodes.expressions.FunctionCallNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.ExpressionType;
 import relay.parser.symbols.types.RelaySymbolType;
+import relay.types.FunctionType;
 
 public class FunctionCallSymbol extends ExpressionSymbol {
 
@@ -26,13 +27,25 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 		ArrayList<ExpressionNode> functionParameters = new ArrayList<ExpressionNode>();
 		ParameterListSymbol currentParameterList = parameters;
 		
-		do {
+		if(currentParameterList != null) {
 			functionParameters.add((ExpressionNode)currentParameterList.parameterExpression.compact());
-			currentParameterList = currentParameterList.remainingNodes;
-		} while (currentParameterList.hasRemainingNodes);
+			
+			while (currentParameterList.hasRemainingNodes) {
+				currentParameterList = currentParameterList.remainingNodes;
+				functionParameters.add((ExpressionNode)currentParameterList.parameterExpression.compact());
+			} 
+		}
 		
 		ExpressionNode[] allParameters = functionParameters.toArray(new ExpressionNode[functionParameters.size()]);
-		return new FunctionCallNode(this.location, functionName, allParameters);
+		
+		FunctionType functionType;
+		try {			
+			functionType = FunctionType.valueOf(functionName);
+		} catch(Exception e) {
+			throw new RelayException("Unknown function type \"" + functionName +  "\".", location);
+		}
+		
+		return new FunctionCallNode(this.location, functionType, allParameters);
 	}
 
 }

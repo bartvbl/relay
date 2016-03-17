@@ -182,7 +182,9 @@ function_call ::=
 parameter_list ::=
 		expression:expression COMMA parameter_list:remainingSymbols
 																								{: RESULT = new ParameterListSymbol(new LocationRange(expression.location.start, remainingSymbols.location.end), expression, remainingSymbols); :}
-	|	/* empty */ 																			{: RESULT = null; :}
+	|	expression:expression 																	
+																								{: RESULT = new ParameterListSymbol(new LocationRange(expression.location.start, expression.location.end), expression); :}
+	|	/* empty */																				{: RESULT = null; :}
 	;
 
 variable_access ::=

@@ -17,6 +17,13 @@ public class ParameterListSymbol extends RelaySymbol {
 		this.hasRemainingNodes = remainingNodes != null;
 	}
 
+	public ParameterListSymbol(LocationRange locationRange, ExpressionSymbol expression) {
+		super(locationRange, RelaySymbolType.PARAMETER_LIST, new RelaySymbol[]{expression});
+		this.parameterExpression = expression;
+		this.remainingNodes = null;
+		this.hasRemainingNodes = false;
+	}
+
 	@Override
 	public RelayNode compact() {
 		throw new RuntimeException("Lists should not propagate into the final tree structure.");
