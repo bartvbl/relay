@@ -179,6 +179,15 @@ public class BlockDimensions {
 		double right = this.right.getCurrentValue();
 		double bottom = this.bottom.getCurrentValue();
 		double top = this.top.getCurrentValue();
+		
+		// Ensure rectangles are not smaller than 0x0
+		if(right < left) {
+			right = left;
+		}
+		if(top < bottom) {
+			top = bottom;
+		}
+		
 		return new Rectangle2D(left, bottom, right, top);
 	}
 }
