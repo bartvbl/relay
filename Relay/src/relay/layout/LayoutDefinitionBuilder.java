@@ -6,8 +6,10 @@ import relay.util.TopologicalSort;
 public class LayoutDefinitionBuilder {
 
 	public static LayoutDefinition createFromParseTree(RootNode rootNode, MutableDependentValue[] linkedValues) {
-		TopologicalSort.sort(linkedValues);
-		return null;
+		LayoutDefinition definition = new LayoutDefinition(rootNode, linkedValues);
+		definition.update();
+
+		return definition;
 	}
 
 }

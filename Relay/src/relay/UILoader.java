@@ -44,8 +44,6 @@ public class UILoader {
 			// Perform the linking phase: figure out which expressions depend on which other values
 			MutableDependentValue[] linkedValues = BlockLinker.linkBlockExpressions(rootNode);
 			
-			System.out.println("Linked " + linkedValues.length + " values.");
-			
 			//new TreeVisualiser(rootNode);
 			LayoutDefinition layout = LayoutDefinitionBuilder.createFromParseTree(rootNode, linkedValues);
 			return defaultBackend.createWindow(layout, windowTitle, windowDimensions);

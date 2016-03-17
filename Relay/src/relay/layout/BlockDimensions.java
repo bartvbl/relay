@@ -2,6 +2,7 @@ package relay.layout;
 
 import java.util.HashMap;
 
+import lib.geom.Rectangle2D;
 import relay.exceptions.RelayException;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.expressions.AdditionExpressionNode;
@@ -171,5 +172,13 @@ public class BlockDimensions {
 
 	private static DimensionValue createDimensionValue(RelayBlockPropertyType type, HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap) {
 		return new DimensionValue(propertyMap.get(type).expression);
+	}
+
+	public Rectangle2D calculateCurrentDimensions() {
+		double left = this.left.getCurrentValue();
+		double right = this.right.getCurrentValue();
+		double bottom = this.bottom.getCurrentValue();
+		double top = this.top.getCurrentValue();
+		return new Rectangle2D(left, bottom, right, top);
 	}
 }
