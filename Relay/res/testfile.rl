@@ -4,7 +4,7 @@
 		left: parent.left
 		width: max(20% of parent.width, 200px)
 		top: parent.top
-		bottom: parent.bottom
+		bottom: footer.bottom
 
 		( sidebar-element
 			left: parent.left
@@ -34,7 +34,7 @@
 		left: sidebar.right
 		right: parent.right
 		top: parent.top
-		height: parent.height
+		bottom: footer.bottom
 
 		( item1
 			left: parent.left + 10px
