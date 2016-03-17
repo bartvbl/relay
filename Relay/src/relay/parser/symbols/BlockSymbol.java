@@ -1,6 +1,7 @@
 package relay.parser.symbols;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import relay.exceptions.RelayException;
@@ -72,7 +73,11 @@ public class BlockSymbol extends RelaySymbol {
 			}
 			currentListNode = currentListNode.remainingItems;
 		} while(currentListNode.hasItemsRemaining);
-		children.add(currentListNode.listItem.compact()); //Add the final item
+
+		if(currentListNode.listItem != null) {
+			children.add(currentListNode.listItem.compact()); //Add the final item
+		}
+		Collections.reverse(children);
 		
 		RelayNode[] childNodes = children.toArray(new RelayNode[children.size()]);
 		
