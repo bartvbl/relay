@@ -11,6 +11,7 @@ import relay.parser.symbols.FunctionCallSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
 import relay.parser.symbols.ParameterListSymbol;
 import relay.parser.symbols.PercentValueSymbol;
+import relay.parser.symbols.RepeatDefinitionSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
 import relay.parser.symbols.RelaySimpleSymbol;
@@ -19,9 +20,7 @@ import relay.parser.symbols.UnitSymbol;
 import relay.parser.symbols.VariableAccessSymbol;
 import relay.parser.symbols.VariableDefinitionSymbol;
 import relay.data.Unit;
-import relay.types.BlockType;
 import java_cup.runtime.ComplexSymbolFactory.Location;
-import java_cup.runtime.XMLElement;
 
 import relay.data.Unit;
 import relay.types.BlockType;
@@ -49,6 +48,8 @@ terminal RelaySimpleSymbol OPERATOR_MINUS;
 terminal RelaySimpleSynbol OPERATOR_OF;
 
 terminal RelaySimpleSymbol KEYWORD_DEF;
+terminal RelaySimpleSymbol KEYWORD_FOR;
+terminal RelaySimpleSymbol KEYWORD_IN;
 
 /* non-terminals */
 
@@ -65,6 +66,7 @@ non terminal VariableAccessSymbol		variable_access;
 non terminal FunctionCallSymbol			function_call;
 non terminal ParameterListSymbol		parameter_list;
 non terminal UnitSymbol					unit;
+non terminal RepeatDefinitionSymbol		repeat_definition;
 
 /* precedence rules */
 
@@ -109,12 +111,19 @@ block_content_item ::=
 																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
 	|	variable_definition:item
 																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
+	|	repeat_definition:item
+																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
 	|	/* empty */																				{: RESULT = null; :}
 	;
 
 block_property ::=
 		identifyer:identifyer COLON expression:expression
 																								{: RESULT = new BlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, expression); :}
+	;
+
+repeat_definition ::=
+		KEYWORD_FOR:keywordFor identifyer:iterator KEYWORD_IN variable_access:variable COLON block:block
+																								{: RESULT = new RepeatDefinitionSymbol(new LocationRange(keywordForxleft, blockxright), iterator, variable, block); :}
 	;
 
 expression ::=

@@ -16,4 +16,5 @@ public enum RelaySymbolType {
 	EXPRESSION, 
 	PARAMETER_LIST, 
 	TOKEN, 
+	REPEAT_DEFINITION, 
 }

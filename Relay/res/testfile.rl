@@ -10,7 +10,7 @@
 			left: parent.left
 			right: parent.right
 			top: parent.top - 20px //previous.top
-			height: 20% of parent.height + 20px
+			height: min(20% of parent.height + 20px, 50px)
 
 			( icon : Image
 				left: parent.left
@@ -56,10 +56,6 @@
 			top: item2.bottom - 10px
 			height: itemHeight
 		)
-
-		/*{
-			line from (left, top) to (right, top)
-		}*/
 	)
 
 	( footer

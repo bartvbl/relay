@@ -13,12 +13,14 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	public final BlockSymbol blockNode;
 	public final BlockPropertySymbol propertyNode;
 	public final VariableDefinitionSymbol variableDefinitionNode;
+	public final RepeatDefinitionSymbol repeatDefinitionNode;
 
 	public BlockContentItemSymbol(LocationRange locationRange, BlockSymbol item) {
 		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = item;
 		this.propertyNode = null;
 		this.variableDefinitionNode = null;
+		this.repeatDefinitionNode = null;
 		this.itemType = BlockItemType.BLOCK;
 	}
 
@@ -27,6 +29,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = item;
 		this.variableDefinitionNode = null;
+		this.repeatDefinitionNode = null;
 		this.itemType = BlockItemType.PROPERTY;
 	}
 
@@ -35,6 +38,7 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.variableDefinitionNode = null;
+		this.repeatDefinitionNode = null;
 		this.itemType = BlockItemType.EMPTY;
 	}
 	
@@ -43,7 +47,17 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		this.blockNode = null;
 		this.propertyNode = null;
 		this.variableDefinitionNode = item;
+		this.repeatDefinitionNode = null;
 		this.itemType = BlockItemType.VARIABLE_DEFINITION;
+	}
+
+	public BlockContentItemSymbol(LocationRange locationRange, RepeatDefinitionSymbol item) {
+		super(locationRange, RelaySymbolType.REPEAT_DEFINITION, new RelaySymbol[]{item});
+		this.blockNode = null;
+		this.propertyNode = null;
+		this.variableDefinitionNode = null;
+		this.repeatDefinitionNode = item;
+		this.itemType = BlockItemType.REPEAT_DEFINITION;
 	}
 
 	@Override
@@ -62,6 +76,8 @@ public class BlockContentItemSymbol extends RelaySymbol {
 			return propertyNode.compact();
 		case VARIABLE_DEFINITION:
 			return variableDefinitionNode.compact();
+		case REPEAT_DEFINITION:
+			return repeatDefinitionNode.compact();
 		default:
 			throw new RuntimeException("Forgot to implement another type!");
 		}

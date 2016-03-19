@@ -87,6 +87,8 @@ Exponent = [eE] [+-]? [0-9]+
 	"-"							{ return symbol("operator_minus", OPERATOR_MINUS); }
 	
 	"def"						{ return symbol("keyword_def", KEYWORD_DEF); }
+	"for"						{ return symbol("keyword_for", KEYWORD_FOR); }
+	"in"						{ return symbol("keyword_in", KEYWORD_IN); }
 	
 	{DoubleLiteral}				{ return symbol("number", NUMBER, new Double(Double.parseDouble(yytext()))); }
 	{Identifier}				{ return symbol("identifyer", IDENTIFYER, yytext()); }
