@@ -67,6 +67,7 @@ non terminal FunctionCallSymbol			function_call;
 non terminal ParameterListSymbol		parameter_list;
 non terminal UnitSymbol					unit;
 non terminal RepeatDefinitionSymbol		repeat_definition;
+non terminal Object						multi_newline;
 
 /* precedence rules */
 
@@ -79,17 +80,22 @@ start with goal;
 
 /* grammar definition */
 
+multi_newline ::=
+		NEW_LINE																				{: RESULT = null; :}
+	|	multi_newline NEW_LINE																	{: RESULT = null; :}
+	;
+
 goal ::=	
 		block:block
 																								{: RESULT = new RootSymbol(new LocationRange(block.location.start, block.location.end), block); :}
 	;
 
 block ::=	
-		BLOCK_OPEN:openToken NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+		BLOCK_OPEN:openToken multi_newline block_content_list:blockContent BLOCK_CLOSE:closeToken	
 																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent); :}
-	|	BLOCK_OPEN:openToken identifyer:blockName NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+	|	BLOCK_OPEN:openToken identifyer:blockName multi_newline block_content_list:blockContent BLOCK_CLOSE:closeToken	
 																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName); :}
-	|	BLOCK_OPEN:openToken identifyer:blockName COLON identifyer:blockType NEW_LINE block_content_list:blockContent BLOCK_CLOSE:closeToken	
+	|	BLOCK_OPEN:openToken identifyer:blockName COLON identifyer:blockType multi_newline block_content_list:blockContent BLOCK_CLOSE:closeToken	
 																								{: RESULT = new BlockSymbol(new LocationRange(openTokenxleft, closeTokenxright), blockContent, blockName, blockType);  :}
 	;
 
@@ -100,7 +106,7 @@ block_content_list ::=
 	;
 
 block_content_line ::=
-		block_content_item:item NEW_LINE														{: RESULT = item; :}
+		block_content_item:item multi_newline													{: RESULT = item; :}
 	|	block_content_item:item SEMICOLON														{: RESULT = item; :}
 	;
 
@@ -122,7 +128,7 @@ block_property ::=
 	;
 
 repeat_definition ::=
-		KEYWORD_FOR:keywordFor identifyer:iterator KEYWORD_IN variable_access:variable COLON block:block
+		KEYWORD_FOR:keywordFor identifyer:iterator KEYWORD_IN variable_access:variable COLON multi_newline block:block
 																								{: RESULT = new RepeatDefinitionSymbol(new LocationRange(keywordForxleft, blockxright), iterator, variable, block); :}
 	;
 

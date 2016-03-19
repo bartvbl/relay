@@ -9,6 +9,7 @@ import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
 import relay.nodes.RelayNode;
+import relay.nodes.RepeatDefinitionNode;
 import relay.nodes.VariableDefinitionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
@@ -83,6 +84,7 @@ public class BlockSymbol extends RelaySymbol {
 		ArrayList<BlockNode> childBlockList = new ArrayList<BlockNode>();
 		ArrayList<BlockPropertyNode> blockPropertyList = new ArrayList<BlockPropertyNode>();
 		ArrayList<VariableDefinitionNode> variableDefinitionList = new ArrayList<VariableDefinitionNode>();
+		ArrayList<RepeatDefinitionNode> repeatDefinitionNodeList = new ArrayList<RepeatDefinitionNode>();
 		
 		for(RelayNode child : childNodes) {
 			if(child instanceof BlockNode) {
@@ -91,6 +93,8 @@ public class BlockSymbol extends RelaySymbol {
 				blockPropertyList.add((BlockPropertyNode) child);
 			} else if(child instanceof VariableDefinitionNode) {
 				variableDefinitionList.add((VariableDefinitionNode) child);
+			} else if(child instanceof RepeatDefinitionNode) {
+				repeatDefinitionNodeList.add((RepeatDefinitionNode) child);
 			} else {
 				throw new RuntimeException("Unknown node: " + child);
 			}
@@ -99,6 +103,7 @@ public class BlockSymbol extends RelaySymbol {
 		BlockNode[] childBlocks = childBlockList.toArray(new BlockNode[childBlockList.size()]);
 		BlockPropertyNode[] blockProperties = blockPropertyList.toArray(new BlockPropertyNode[blockPropertyList.size()]);
 		VariableDefinitionNode[] variableDefinitions = variableDefinitionList.toArray(new VariableDefinitionNode[variableDefinitionList.size()]);
+		RepeatDefinitionNode[] repeatDefinitions = repeatDefinitionNodeList.toArray(new RepeatDefinitionNode[repeatDefinitionNodeList.size()]);
 		
 		HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap = new HashMap<RelayBlockPropertyType, BlockPropertyNode>();
 		for(BlockPropertyNode property : blockProperties) {
@@ -107,7 +112,7 @@ public class BlockSymbol extends RelaySymbol {
 		
 		BlockDimensions dimensions = new BlockDimensions(this.location, propertyMap);	
 		
-		return new BlockNode(this.location, blockName, blockType, childNodes, childBlocks, variableDefinitions, propertyMap, dimensions);
+		return new BlockNode(this.location, blockName, blockType, childNodes, childBlocks, variableDefinitions, repeatDefinitions, propertyMap, dimensions);
 	}
 
 }

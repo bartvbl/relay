@@ -14,6 +14,7 @@ public class BlockNode extends RelayNode {
 	
 	public final BlockNode[] childBlocks;
 	public final VariableDefinitionNode[] variableDefinitions;
+	public final RepeatDefinitionNode[] repeatDefinitions;
 	
 	public final BlockDimensions dimensions;
 	
@@ -30,6 +31,7 @@ public class BlockNode extends RelayNode {
 			RelayNode[] childNodes, 
 			BlockNode[] childBlocks, 
 			VariableDefinitionNode[] variableDefinitions, 
+			RepeatDefinitionNode[] repeatDefinitions, 
 			HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap,
 			BlockDimensions dimensions
 		) {
@@ -40,6 +42,7 @@ public class BlockNode extends RelayNode {
 		this.blockType = blockType;
 		this.childBlocks = childBlocks;
 		this.variableDefinitions = variableDefinitions;
+		this.repeatDefinitions = repeatDefinitions;
 		
 		this.propertyMap = propertyMap;
 		this.dimensions = dimensions;

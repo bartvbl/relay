@@ -55,17 +55,17 @@ public class RelayParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\040\000\002\002\004\000\002\002\003\000\002\003" +
-    "\006\000\002\003\007\000\002\003\011\000\002\005\002" +
-    "\000\002\005\004\000\002\006\004\000\002\006\004\000" +
-    "\002\007\003\000\002\007\003\000\002\007\003\000\002" +
-    "\007\003\000\002\007\002\000\002\011\005\000\002\017" +
-    "\010\000\002\012\004\000\002\012\006\000\002\012\005" +
-    "\000\002\012\005\000\002\012\005\000\002\012\003\000" +
-    "\002\012\003\000\002\016\003\000\002\010\006\000\002" +
-    "\014\006\000\002\015\005\000\002\015\003\000\002\015" +
-    "\002\000\002\013\005\000\002\013\003\000\002\004\003" +
-    "" });
+    "\000\042\000\002\002\004\000\002\020\003\000\002\020" +
+    "\004\000\002\002\003\000\002\003\006\000\002\003\007" +
+    "\000\002\003\011\000\002\005\002\000\002\005\004\000" +
+    "\002\006\004\000\002\006\004\000\002\007\003\000\002" +
+    "\007\003\000\002\007\003\000\002\007\003\000\002\007" +
+    "\002\000\002\011\005\000\002\017\011\000\002\012\004" +
+    "\000\002\012\006\000\002\012\005\000\002\012\005\000" +
+    "\002\012\005\000\002\012\003\000\002\012\003\000\002" +
+    "\016\003\000\002\010\006\000\002\014\006\000\002\015" +
+    "\005\000\002\015\003\000\002\015\002\000\002\013\005" +
+    "\000\002\013\003\000\002\004\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -73,62 +73,66 @@ public class RelayParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\100\000\004\013\005\001\002\000\004\002\102\001" +
-    "\002\000\006\004\011\012\010\001\002\000\004\002\000" +
-    "\001\002\000\006\004\073\005\072\001\002\000\024\004" +
-    "\uffe2\005\uffe2\006\uffe2\007\uffe2\010\uffe2\014\uffe2\017\uffe2" +
-    "\020\uffe2\024\uffe2\001\002\000\020\004\ufffc\006\ufffc\012" +
-    "\ufffc\013\ufffc\014\ufffc\022\ufffc\023\ufffc\001\002\000\020" +
-    "\004\ufff4\006\ufff4\012\010\013\005\014\021\022\023\023" +
-    "\013\001\002\000\004\012\010\001\002\000\004\005\063" +
-    "\001\002\000\006\004\ufff6\006\ufff6\001\002\000\006\004" +
-    "\062\006\061\001\002\000\020\004\ufffb\006\ufffb\012\ufffb" +
-    "\013\ufffb\014\ufffb\022\ufffb\023\ufffb\001\002\000\006\004" +
-    "\ufff8\006\ufff8\001\002\000\010\002\uffff\004\uffff\006\uffff" +
-    "\001\002\000\006\004\ufff5\006\ufff5\001\002\000\004\012" +
-    "\010\001\002\000\006\004\ufff7\006\ufff7\001\002\000\004" +
-    "\005\026\001\002\000\010\011\032\012\033\013\031\001" +
-    "\002\000\016\004\uffec\006\uffec\010\uffec\014\uffec\017\uffec" +
-    "\020\uffec\001\002\000\022\004\uffe3\005\uffe3\006\uffe3\007" +
-    "\057\010\uffe3\014\uffe3\017\uffe3\020\uffe3\001\002\000\010" +
-    "\011\032\012\033\013\031\001\002\000\006\015\050\016" +
-    "\051\001\002\000\022\004\uffe2\006\uffe2\007\uffe2\010\uffe2" +
-    "\013\042\014\uffe2\017\uffe2\020\uffe2\001\002\000\012\004" +
-    "\uffe9\006\uffe9\017\037\020\036\001\002\000\016\004\uffeb" +
-    "\006\uffeb\010\uffeb\014\uffeb\017\uffeb\020\uffeb\001\002\000" +
-    "\010\011\032\012\033\013\031\001\002\000\010\011\032" +
-    "\012\033\013\031\001\002\000\016\004\uffef\006\uffef\010" +
-    "\uffef\014\uffef\017\uffef\020\uffef\001\002\000\016\004\uffed" +
-    "\006\uffed\010\uffed\014\uffed\017\uffed\020\uffed\001\002\000" +
-    "\012\011\032\012\033\013\031\014\uffe5\001\002\000\004" +
-    "\014\047\001\002\000\012\010\045\014\uffe6\017\037\020" +
-    "\036\001\002\000\012\011\032\012\033\013\031\014\uffe5" +
-    "\001\002\000\004\014\uffe7\001\002\000\016\004\uffe8\006" +
-    "\uffe8\010\uffe8\014\uffe8\017\uffe8\020\uffe8\001\002\000\016" +
-    "\004\uffea\006\uffea\010\uffea\014\uffea\017\uffea\020\uffea\001" +
-    "\002\000\004\021\053\001\002\000\016\004\ufff1\006\ufff1" +
-    "\010\ufff1\014\ufff1\017\ufff1\020\ufff1\001\002\000\004\012" +
-    "\010\001\002\000\016\004\ufff0\006\ufff0\010\ufff0\014\ufff0" +
-    "\017\ufff0\020\ufff0\001\002\000\010\014\056\017\037\020" +
-    "\036\001\002\000\016\004\uffee\006\uffee\010\uffee\014\uffee" +
-    "\017\uffee\020\uffee\001\002\000\004\012\010\001\002\000" +
-    "\020\004\uffe4\005\uffe4\006\uffe4\010\uffe4\014\uffe4\017\uffe4" +
-    "\020\uffe4\001\002\000\020\004\ufff9\006\ufff9\012\ufff9\013" +
-    "\ufff9\014\ufff9\022\ufff9\023\ufff9\001\002\000\020\004\ufffa" +
-    "\006\ufffa\012\ufffa\013\ufffa\014\ufffa\022\ufffa\023\ufffa\001" +
-    "\002\000\010\011\032\012\033\013\031\001\002\000\012" +
-    "\004\ufff3\006\ufff3\017\037\020\036\001\002\000\004\024" +
-    "\066\001\002\000\004\012\010\001\002\000\004\005\070" +
-    "\001\002\000\004\013\005\001\002\000\006\004\ufff2\006" +
-    "\ufff2\001\002\000\004\012\010\001\002\000\020\004\ufffc" +
-    "\006\ufffc\012\ufffc\013\ufffc\014\ufffc\022\ufffc\023\ufffc\001" +
-    "\002\000\020\004\ufff4\006\ufff4\012\010\013\005\014\075" +
-    "\022\023\023\013\001\002\000\010\002\ufffe\004\ufffe\006" +
-    "\ufffe\001\002\000\004\004\077\001\002\000\020\004\ufffc" +
-    "\006\ufffc\012\ufffc\013\ufffc\014\ufffc\022\ufffc\023\ufffc\001" +
-    "\002\000\020\004\ufff4\006\ufff4\012\010\013\005\014\101" +
-    "\022\023\023\013\001\002\000\010\002\ufffd\004\ufffd\006" +
-    "\ufffd\001\002\000\004\002\001\001\002" });
+    "\000\103\000\004\013\005\001\002\000\004\002\105\001" +
+    "\002\000\006\004\012\012\011\001\002\000\004\002\ufffe" +
+    "\001\002\000\020\004\020\006\ufffa\012\ufffa\013\ufffa\014" +
+    "\ufffa\022\ufffa\023\ufffa\001\002\000\006\004\012\005\014" +
+    "\001\002\000\024\004\uffe0\005\uffe0\006\uffe0\007\uffe0\010" +
+    "\uffe0\014\uffe0\017\uffe0\020\uffe0\024\uffe0\001\002\000\020" +
+    "\004\000\006\000\012\000\013\000\014\000\022\000\023" +
+    "\000\001\002\000\020\004\020\006\ufffa\012\ufffa\013\ufffa" +
+    "\014\ufffa\022\ufffa\023\ufffa\001\002\000\004\012\011\001" +
+    "\002\000\004\004\012\001\002\000\020\004\020\006\ufffa" +
+    "\012\ufffa\013\ufffa\014\ufffa\022\ufffa\023\ufffa\001\002\000" +
+    "\020\004\ufff2\006\ufff2\012\011\013\005\014\027\022\031" +
+    "\023\021\001\002\000\020\004\uffff\006\uffff\012\uffff\013" +
+    "\uffff\014\uffff\022\uffff\023\uffff\001\002\000\004\012\011" +
+    "\001\002\000\004\005\071\001\002\000\006\004\ufff4\006" +
+    "\ufff4\001\002\000\006\004\012\006\067\001\002\000\020" +
+    "\004\ufff9\006\ufff9\012\ufff9\013\ufff9\014\ufff9\022\ufff9\023" +
+    "\ufff9\001\002\000\006\004\ufff6\006\ufff6\001\002\000\010" +
+    "\002\ufffb\004\ufffb\006\ufffb\001\002\000\006\004\ufff3\006" +
+    "\ufff3\001\002\000\004\012\011\001\002\000\006\004\ufff5" +
+    "\006\ufff5\001\002\000\004\005\034\001\002\000\010\011" +
+    "\037\012\041\013\036\001\002\000\016\004\uffea\006\uffea" +
+    "\010\uffea\014\uffea\017\uffea\020\uffea\001\002\000\010\011" +
+    "\037\012\041\013\036\001\002\000\006\015\060\016\061" +
+    "\001\002\000\022\004\uffe1\005\uffe1\006\uffe1\007\056\010" +
+    "\uffe1\014\uffe1\017\uffe1\020\uffe1\001\002\000\022\004\uffe0" +
+    "\006\uffe0\007\uffe0\010\uffe0\013\050\014\uffe0\017\uffe0\020" +
+    "\uffe0\001\002\000\012\004\uffe7\006\uffe7\017\045\020\044" +
+    "\001\002\000\016\004\uffe9\006\uffe9\010\uffe9\014\uffe9\017" +
+    "\uffe9\020\uffe9\001\002\000\010\011\037\012\041\013\036" +
+    "\001\002\000\010\011\037\012\041\013\036\001\002\000" +
+    "\016\004\uffed\006\uffed\010\uffed\014\uffed\017\uffed\020\uffed" +
+    "\001\002\000\016\004\uffeb\006\uffeb\010\uffeb\014\uffeb\017" +
+    "\uffeb\020\uffeb\001\002\000\012\011\037\012\041\013\036" +
+    "\014\uffe3\001\002\000\004\014\055\001\002\000\012\010" +
+    "\053\014\uffe4\017\045\020\044\001\002\000\012\011\037" +
+    "\012\041\013\036\014\uffe3\001\002\000\004\014\uffe5\001" +
+    "\002\000\016\004\uffe6\006\uffe6\010\uffe6\014\uffe6\017\uffe6" +
+    "\020\uffe6\001\002\000\004\012\011\001\002\000\020\004" +
+    "\uffe2\005\uffe2\006\uffe2\010\uffe2\014\uffe2\017\uffe2\020\uffe2" +
+    "\001\002\000\016\004\uffe8\006\uffe8\010\uffe8\014\uffe8\017" +
+    "\uffe8\020\uffe8\001\002\000\004\021\063\001\002\000\016" +
+    "\004\uffef\006\uffef\010\uffef\014\uffef\017\uffef\020\uffef\001" +
+    "\002\000\004\012\011\001\002\000\016\004\uffee\006\uffee" +
+    "\010\uffee\014\uffee\017\uffee\020\uffee\001\002\000\010\014" +
+    "\066\017\045\020\044\001\002\000\016\004\uffec\006\uffec" +
+    "\010\uffec\014\uffec\017\uffec\020\uffec\001\002\000\020\004" +
+    "\ufff7\006\ufff7\012\ufff7\013\ufff7\014\ufff7\022\ufff7\023\ufff7" +
+    "\001\002\000\020\004\020\006\ufff8\012\ufff8\013\ufff8\014" +
+    "\ufff8\022\ufff8\023\ufff8\001\002\000\010\011\037\012\041" +
+    "\013\036\001\002\000\012\004\ufff1\006\ufff1\017\045\020" +
+    "\044\001\002\000\004\024\074\001\002\000\004\012\011" +
+    "\001\002\000\004\005\076\001\002\000\004\004\012\001" +
+    "\002\000\006\004\020\013\005\001\002\000\006\004\ufff0" +
+    "\006\ufff0\001\002\000\020\004\ufff2\006\ufff2\012\011\013" +
+    "\005\014\102\022\031\023\021\001\002\000\010\002\ufffc" +
+    "\004\ufffc\006\ufffc\001\002\000\020\004\ufff2\006\ufff2\012" +
+    "\011\013\005\014\104\022\031\023\021\001\002\000\010" +
+    "\002\ufffd\004\ufffd\006\ufffd\001\002\000\004\002\001\001" +
+    "\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -136,37 +140,39 @@ public class RelayParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\100\000\006\002\003\003\005\001\001\000\002\001" +
-    "\001\000\004\004\006\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\005\011\001\001\000" +
-    "\020\003\017\004\013\006\016\007\015\010\014\011\023" +
-    "\017\021\001\001\000\004\004\064\001\001\000\002\001" +
+    "\000\103\000\006\002\003\003\005\001\001\000\002\001" +
+    "\001\000\006\004\007\020\006\001\001\000\002\001\001" +
+    "\000\004\005\102\001\001\000\004\020\012\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\005\100\001\001" +
+    "\000\004\004\014\001\001\000\004\020\015\001\001\000" +
+    "\004\005\016\001\001\000\020\003\025\004\021\006\024" +
+    "\007\023\010\022\011\031\017\027\001\001\000\002\001" +
+    "\001\000\004\004\072\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\020\067\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\004\032\001\001\000\002\001\001\000\002\001\001\000" +
+    "\012\004\037\012\041\013\034\014\042\001\001\000\002" +
+    "\001\001\000\012\004\037\012\064\013\034\014\042\001" +
+    "\001\000\004\016\061\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\012\004" +
+    "\037\012\046\013\034\014\042\001\001\000\012\004\037" +
+    "\012\045\013\034\014\042\001\001\000\002\001\001\000" +
+    "\002\001\001\000\014\004\037\012\051\013\034\014\042" +
+    "\015\050\001\001\000\002\001\001\000\002\001\001\000" +
+    "\014\004\037\012\051\013\034\014\042\015\053\001\001" +
+    "\000\002\001\001\000\002\001\001\000\006\004\037\013" +
+    "\056\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\006\004\037\013\063\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\004\024\001\001\000\002\001\001\000\002\001\001" +
-    "\000\012\004\027\012\033\013\026\014\034\001\001\000" +
-    "\002\001\001\000\002\001\001\000\012\004\027\012\054" +
-    "\013\026\014\034\001\001\000\004\016\051\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\012" +
-    "\004\027\012\040\013\026\014\034\001\001\000\012\004" +
-    "\027\012\037\013\026\014\034\001\001\000\002\001\001" +
-    "\000\002\001\001\000\014\004\027\012\043\013\026\014" +
-    "\034\015\042\001\001\000\002\001\001\000\002\001\001" +
-    "\000\014\004\027\012\043\013\026\014\034\015\045\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\006\004\027\013" +
-    "\053\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\006\004\027\013\057\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\012\004\027" +
-    "\012\063\013\026\014\034\001\001\000\002\001\001\000" +
-    "\002\001\001\000\006\004\027\013\066\001\001\000\002" +
-    "\001\001\000\004\003\070\001\001\000\002\001\001\000" +
-    "\004\004\075\001\001\000\004\005\073\001\001\000\020" +
-    "\003\017\004\013\006\016\007\015\010\014\011\023\017" +
-    "\021\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\005\077\001\001\000\020\003\017\004\013\006\016\007" +
-    "\015\010\014\011\023\017\021\001\001\000\002\001\001" +
-    "\000\002\001\001" });
+    "\000\002\001\001\000\002\001\001\000\012\004\037\012" +
+    "\071\013\034\014\042\001\001\000\002\001\001\000\002" +
+    "\001\001\000\006\004\037\013\074\001\001\000\002\001" +
+    "\001\000\004\020\076\001\001\000\004\003\077\001\001" +
+    "\000\002\001\001\000\020\003\025\004\021\006\024\007" +
+    "\023\010\022\011\031\017\027\001\001\000\002\001\001" +
+    "\000\020\003\025\004\021\006\024\007\023\010\022\011" +
+    "\031\017\027\001\001\000\002\001\001\000\002\001\001" +
+    "" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -243,7 +249,25 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // goal ::= block 
+          case 1: // multi_newline ::= NEW_LINE 
+            {
+              Object RESULT =null;
+		 RESULT = null; 
+              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("multi_newline",14, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
+            }
+          return CUP$RelayParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // multi_newline ::= multi_newline NEW_LINE 
+            {
+              Object RESULT =null;
+		 RESULT = null; 
+              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("multi_newline",14, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
+            }
+          return CUP$RelayParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 3: // goal ::= block 
             {
               RootSymbol RESULT =null;
 		Location blockxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -255,7 +279,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // block ::= BLOCK_OPEN NEW_LINE block_content_list BLOCK_CLOSE 
+          case 4: // block ::= BLOCK_OPEN multi_newline block_content_list BLOCK_CLOSE 
             {
               BlockSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
@@ -273,7 +297,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // block ::= BLOCK_OPEN identifyer NEW_LINE block_content_list BLOCK_CLOSE 
+          case 5: // block ::= BLOCK_OPEN identifyer multi_newline block_content_list BLOCK_CLOSE 
             {
               BlockSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)).xleft;
@@ -294,7 +318,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // block ::= BLOCK_OPEN identifyer COLON identifyer NEW_LINE block_content_list BLOCK_CLOSE 
+          case 6: // block ::= BLOCK_OPEN identifyer COLON identifyer multi_newline block_content_list BLOCK_CLOSE 
             {
               BlockSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)).xleft;
@@ -318,7 +342,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // block_content_list ::= 
+          case 7: // block_content_list ::= 
             {
               BlockContentListSymbol RESULT =null;
 		 RESULT = null; 
@@ -327,7 +351,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // block_content_list ::= block_content_list block_content_line 
+          case 8: // block_content_list ::= block_content_list block_content_line 
             {
               BlockContentListSymbol RESULT =null;
 		Location remainingSymbolsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
@@ -342,7 +366,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // block_content_line ::= block_content_item NEW_LINE 
+          case 9: // block_content_line ::= block_content_item multi_newline 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
@@ -354,7 +378,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // block_content_line ::= block_content_item SEMICOLON 
+          case 10: // block_content_line ::= block_content_item SEMICOLON 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
@@ -366,7 +390,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // block_content_item ::= block 
+          case 11: // block_content_item ::= block 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -378,7 +402,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // block_content_item ::= block_property 
+          case 12: // block_content_item ::= block_property 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -390,7 +414,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // block_content_item ::= variable_definition 
+          case 13: // block_content_item ::= variable_definition 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -402,7 +426,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // block_content_item ::= repeat_definition 
+          case 14: // block_content_item ::= repeat_definition 
             {
               BlockContentItemSymbol RESULT =null;
 		Location itemxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -414,7 +438,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // block_content_item ::= 
+          case 15: // block_content_item ::= 
             {
               BlockContentItemSymbol RESULT =null;
 		 RESULT = null; 
@@ -423,7 +447,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // block_property ::= identifyer COLON expression 
+          case 16: // block_property ::= identifyer COLON expression 
             {
               BlockPropertySymbol RESULT =null;
 		Location identifyerxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -438,28 +462,28 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // repeat_definition ::= KEYWORD_FOR identifyer KEYWORD_IN variable_access COLON block 
+          case 17: // repeat_definition ::= KEYWORD_FOR identifyer KEYWORD_IN variable_access COLON multi_newline block 
             {
               RepeatDefinitionSymbol RESULT =null;
-		Location keywordForxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).xleft;
-		Location keywordForxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).xright;
-		RelaySimpleSymbol keywordFor = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).value;
-		Location iteratorxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)).xleft;
-		Location iteratorxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)).xright;
-		IdentifyerSymbol iterator = (IdentifyerSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-4)).value;
-		Location variablexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
-		Location variablexright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xright;
-		VariableAccessSymbol variable = (VariableAccessSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).value;
+		Location keywordForxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)).xleft;
+		Location keywordForxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)).xright;
+		RelaySimpleSymbol keywordFor = (RelaySimpleSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)).value;
+		Location iteratorxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).xleft;
+		Location iteratorxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).xright;
+		IdentifyerSymbol iterator = (IdentifyerSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)).value;
+		Location variablexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
+		Location variablexright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xright;
+		VariableAccessSymbol variable = (VariableAccessSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).value;
 		Location blockxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
 		Location blockxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xright;
 		BlockSymbol block = (BlockSymbol)((java_cup.runtime.Symbol) CUP$RelayParser$stack.peek()).value;
 		 RESULT = new RepeatDefinitionSymbol(new LocationRange(keywordForxleft, blockxright), iterator, variable, block); 
-              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("repeat_definition",13, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-5)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
+              CUP$RelayParser$result = parser.getSymbolFactory().newSymbol("repeat_definition",13, ((java_cup.runtime.Symbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-6)), ((java_cup.runtime.Symbol)CUP$RelayParser$stack.peek()), RESULT);
             }
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // expression ::= NUMBER unit 
+          case 18: // expression ::= NUMBER unit 
             {
               ExpressionSymbol RESULT =null;
 		Location valuexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-1)).xleft;
@@ -474,7 +498,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // expression ::= NUMBER UNIT_PERCENT OPERATOR_OF variable_access 
+          case 19: // expression ::= NUMBER UNIT_PERCENT OPERATOR_OF variable_access 
             {
               ExpressionSymbol RESULT =null;
 		Location valuexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
@@ -492,7 +516,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // expression ::= expression OPERATOR_PLUS expression 
+          case 20: // expression ::= expression OPERATOR_PLUS expression 
             {
               ExpressionSymbol RESULT =null;
 		Location leftHandSidexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -507,7 +531,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // expression ::= BLOCK_OPEN expression BLOCK_CLOSE 
+          case 21: // expression ::= BLOCK_OPEN expression BLOCK_CLOSE 
             {
               ExpressionSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -525,7 +549,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // expression ::= expression OPERATOR_MINUS expression 
+          case 22: // expression ::= expression OPERATOR_MINUS expression 
             {
               ExpressionSymbol RESULT =null;
 		Location leftHandSidexleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -540,7 +564,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // expression ::= variable_access 
+          case 23: // expression ::= variable_access 
             {
               ExpressionSymbol RESULT =null;
 		Location variable_accessxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -552,7 +576,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // expression ::= function_call 
+          case 24: // expression ::= function_call 
             {
               ExpressionSymbol RESULT =null;
 		Location callxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -564,7 +588,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // unit ::= UNIT_PIXELS 
+          case 25: // unit ::= UNIT_PIXELS 
             {
               UnitSymbol RESULT =null;
 		Location pixelsxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -576,7 +600,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // variable_definition ::= KEYWORD_DEF identifyer COLON expression 
+          case 26: // variable_definition ::= KEYWORD_DEF identifyer COLON expression 
             {
               VariableDefinitionSymbol RESULT =null;
 		Location openTokenxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
@@ -594,7 +618,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // function_call ::= IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE 
+          case 27: // function_call ::= IDENTIFYER BLOCK_OPEN parameter_list BLOCK_CLOSE 
             {
               FunctionCallSymbol RESULT =null;
 		Location identifyerxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-3)).xleft;
@@ -612,7 +636,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // parameter_list ::= expression COMMA parameter_list 
+          case 28: // parameter_list ::= expression COMMA parameter_list 
             {
               ParameterListSymbol RESULT =null;
 		Location expressionxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -627,7 +651,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // parameter_list ::= expression 
+          case 29: // parameter_list ::= expression 
             {
               ParameterListSymbol RESULT =null;
 		Location expressionxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -639,7 +663,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // parameter_list ::= 
+          case 30: // parameter_list ::= 
             {
               ParameterListSymbol RESULT =null;
 		 RESULT = null; 
@@ -648,7 +672,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // variable_access ::= identifyer DOT variable_access 
+          case 31: // variable_access ::= identifyer DOT variable_access 
             {
               VariableAccessSymbol RESULT =null;
 		Location identifyerxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.elementAt(CUP$RelayParser$top-2)).xleft;
@@ -663,7 +687,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // variable_access ::= identifyer 
+          case 32: // variable_access ::= identifyer 
             {
               VariableAccessSymbol RESULT =null;
 		Location identifyerxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;
@@ -675,7 +699,7 @@ class CUP$RelayParser$actions {
           return CUP$RelayParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // identifyer ::= IDENTIFYER 
+          case 33: // identifyer ::= IDENTIFYER 
             {
               IdentifyerSymbol RESULT =null;
 		Location identifyerxleft = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$RelayParser$stack.peek()).xleft;

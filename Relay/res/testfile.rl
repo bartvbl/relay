@@ -6,25 +6,26 @@
 		top: parent.top
 		bottom: footer.bottom
 
-		( sidebar-element
-			left: parent.left
-			right: parent.right
-			top: parent.top - 20px //previous.top
-			height: min(20% of parent.height + 20px, 50px)
-
-			( icon : Image
+		for item in menu_items: 
+			( sidebar-element
 				left: parent.left
-				width: parent.height
-				top: parent.top
-				height: parent.height
-			)
-			( link : Text
-				left: icon.right
 				right: parent.right
-				top: parent.top
-				height: parent.height
-			)
-		) //repeat-for link in sidebar_links 
+				top: parent.top - 20px //previous.top
+				height: min(20% of parent.height + 20px, 50px)
+
+				( icon : Image
+					left: parent.left
+					width: parent.height
+					top: parent.top
+					height: parent.height
+				)
+				( link : Text
+					left: icon.right
+					right: parent.right
+					top: parent.top
+					height: parent.height
+				)
+			) 
 
 	)
 
