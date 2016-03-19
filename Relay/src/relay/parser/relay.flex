@@ -79,19 +79,13 @@ Exponent = [eE] [+-]? [0-9]+
 	"("							{ return symbol("block_open", BLOCK_OPEN); }
 	")"							{ return symbol("block_close", BLOCK_CLOSE); }
 
-	"{"							{ return symbol("code_block_open", CODE_BLOCK_OPEN); }
-	"}"							{ return symbol("code_block_close", CODE_BLOCK_CLOSE); }
-
 	"px"						{ return symbol("unit_pixels", UNIT_PIXELS); }
 	"%"							{ return symbol("unit_percent", UNIT_PERCENT); }
 
 	"of"						{ return symbol("operator_of", OPERATOR_OF); }
 	"+"							{ return symbol("operator_plus", OPERATOR_PLUS); }
 	"-"							{ return symbol("operator_minus", OPERATOR_MINUS); }
-
-	"line"						{ return symbol("keyword_line", KEYWORD_LINE); }
-	"from"						{ return symbol("keyword_from", KEYWORD_FROM); }
-	"to"						{ return symbol("keyword_to", KEYWORD_TO); }
+	
 	"def"						{ return symbol("keyword_def", KEYWORD_DEF); }
 	
 	{DoubleLiteral}				{ return symbol("number", NUMBER, new Double(Double.parseDouble(yytext()))); }

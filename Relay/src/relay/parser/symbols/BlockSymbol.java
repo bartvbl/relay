@@ -8,7 +8,6 @@ import relay.exceptions.RelayException;
 import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
-import relay.nodes.CodeBlockNode;
 import relay.nodes.RelayNode;
 import relay.nodes.VariableDefinitionNode;
 import relay.parser.LocationRange;
@@ -82,15 +81,12 @@ public class BlockSymbol extends RelaySymbol {
 		RelayNode[] childNodes = children.toArray(new RelayNode[children.size()]);
 		
 		ArrayList<BlockNode> childBlockList = new ArrayList<BlockNode>();
-		ArrayList<CodeBlockNode> codeBlockList = new ArrayList<CodeBlockNode>();
 		ArrayList<BlockPropertyNode> blockPropertyList = new ArrayList<BlockPropertyNode>();
 		ArrayList<VariableDefinitionNode> variableDefinitionList = new ArrayList<VariableDefinitionNode>();
 		
 		for(RelayNode child : childNodes) {
 			if(child instanceof BlockNode) {
 				childBlockList.add((BlockNode) child);
-			} else if(child instanceof CodeBlockNode) {
-				codeBlockList.add((CodeBlockNode) child);
 			} else if(child instanceof BlockPropertyNode) {
 				blockPropertyList.add((BlockPropertyNode) child);
 			} else if(child instanceof VariableDefinitionNode) {
@@ -101,7 +97,6 @@ public class BlockSymbol extends RelaySymbol {
 		}
 		
 		BlockNode[] childBlocks = childBlockList.toArray(new BlockNode[childBlockList.size()]);
-		CodeBlockNode[] childCodeBlocks = codeBlockList.toArray(new CodeBlockNode[codeBlockList.size()]);
 		BlockPropertyNode[] blockProperties = blockPropertyList.toArray(new BlockPropertyNode[blockPropertyList.size()]);
 		VariableDefinitionNode[] variableDefinitions = variableDefinitionList.toArray(new VariableDefinitionNode[variableDefinitionList.size()]);
 		
@@ -112,7 +107,7 @@ public class BlockSymbol extends RelaySymbol {
 		
 		BlockDimensions dimensions = new BlockDimensions(this.location, propertyMap);	
 		
-		return new BlockNode(this.location, blockName, blockType, childNodes, childBlocks, childCodeBlocks, variableDefinitions, propertyMap, dimensions);
+		return new BlockNode(this.location, blockName, blockType, childNodes, childBlocks, variableDefinitions, propertyMap, dimensions);
 	}
 
 }

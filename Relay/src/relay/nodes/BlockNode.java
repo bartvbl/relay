@@ -13,7 +13,6 @@ public class BlockNode extends RelayNode {
 	public final BlockType blockType;
 	
 	public final BlockNode[] childBlocks;
-	public final CodeBlockNode[] childCodeBlocks;
 	public final VariableDefinitionNode[] variableDefinitions;
 	
 	public final BlockDimensions dimensions;
@@ -30,7 +29,6 @@ public class BlockNode extends RelayNode {
 			BlockType blockType, 
 			RelayNode[] childNodes, 
 			BlockNode[] childBlocks, 
-			CodeBlockNode[] childCodeBlocks, 
 			VariableDefinitionNode[] variableDefinitions, 
 			HashMap<RelayBlockPropertyType, BlockPropertyNode> propertyMap,
 			BlockDimensions dimensions
@@ -41,7 +39,6 @@ public class BlockNode extends RelayNode {
 		this.name = blockName;
 		this.blockType = blockType;
 		this.childBlocks = childBlocks;
-		this.childCodeBlocks = childCodeBlocks;
 		this.variableDefinitions = variableDefinitions;
 		
 		this.propertyMap = propertyMap;

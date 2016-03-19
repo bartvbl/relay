@@ -8,28 +8,23 @@ package relay.parser;
 /** CUP generated class containing symbol constants. */
 public class RelaySymbols {
   /* terminals */
-  public static final int KEYWORD_LINE = 18;
-  public static final int SEMICOLON = 4;
-  public static final int IDENTIFYER = 8;
-  public static final int OPERATOR_OF = 17;
   public static final int BLOCK_OPEN = 9;
-  public static final int UNIT_PERCENT = 14;
-  public static final int KEYWORD_FROM = 19;
+  public static final int UNIT_PERCENT = 12;
   public static final int COLON = 3;
-  public static final int NEW_LINE = 2;
-  public static final int COMMA = 6;
-  public static final int BLOCK_CLOSE = 10;
-  public static final int EOF = 0;
+  public static final int IDENTIFYER = 8;
+  public static final int OPERATOR_OF = 15;
   public static final int NUMBER = 7;
-  public static final int CODE_BLOCK_CLOSE = 12;
-  public static final int error = 1;
+  public static final int BLOCK_CLOSE = 10;
+  public static final int OPERATOR_MINUS = 14;
+  public static final int EOF = 0;
+  public static final int KEYWORD_DEF = 16;
   public static final int DOT = 5;
-  public static final int CODE_BLOCK_OPEN = 11;
-  public static final int KEYWORD_DEF = 21;
-  public static final int OPERATOR_PLUS = 15;
-  public static final int OPERATOR_MINUS = 16;
-  public static final int KEYWORD_TO = 20;
-  public static final int UNIT_PIXELS = 13;
+  public static final int error = 1;
+  public static final int COMMA = 6;
+  public static final int SEMICOLON = 4;
+  public static final int OPERATOR_PLUS = 13;
+  public static final int NEW_LINE = 2;
+  public static final int UNIT_PIXELS = 11;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -42,16 +37,11 @@ public class RelaySymbols {
   "IDENTIFYER",
   "BLOCK_OPEN",
   "BLOCK_CLOSE",
-  "CODE_BLOCK_OPEN",
-  "CODE_BLOCK_CLOSE",
   "UNIT_PIXELS",
   "UNIT_PERCENT",
   "OPERATOR_PLUS",
   "OPERATOR_MINUS",
   "OPERATOR_OF",
-  "KEYWORD_LINE",
-  "KEYWORD_FROM",
-  "KEYWORD_TO",
   "KEYWORD_DEF"
   };
 }

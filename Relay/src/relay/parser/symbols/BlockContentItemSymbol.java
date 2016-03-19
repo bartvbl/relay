@@ -12,14 +12,12 @@ public class BlockContentItemSymbol extends RelaySymbol {
 	
 	public final BlockSymbol blockNode;
 	public final BlockPropertySymbol propertyNode;
-	public final CodeBlockSymbol codeBlockNode;
 	public final VariableDefinitionSymbol variableDefinitionNode;
 
 	public BlockContentItemSymbol(LocationRange locationRange, BlockSymbol item) {
 		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = item;
 		this.propertyNode = null;
-		this.codeBlockNode = null;
 		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.BLOCK;
 	}
@@ -28,25 +26,14 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = item;
-		this.codeBlockNode = null;
 		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.PROPERTY;
 	}
 
-	public BlockContentItemSymbol(LocationRange locationRange, CodeBlockSymbol item) {
-		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
-		this.blockNode = null;
-		this.propertyNode = null;
-		this.codeBlockNode = item;
-		this.variableDefinitionNode = null;
-		this.itemType = BlockItemType.CODE_BLOCK;
-	}
-	
 	public BlockContentItemSymbol(LocationRange locationRange) {
 		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM);
 		this.blockNode = null;
 		this.propertyNode = null;
-		this.codeBlockNode = null;
 		this.variableDefinitionNode = null;
 		this.itemType = BlockItemType.EMPTY;
 	}
@@ -55,7 +42,6 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		super(locationRange, RelaySymbolType.BLOCK_CONTENT_ITEM, new RelaySymbol[]{item});
 		this.blockNode = null;
 		this.propertyNode = null;
-		this.codeBlockNode = null;
 		this.variableDefinitionNode = item;
 		this.itemType = BlockItemType.VARIABLE_DEFINITION;
 	}
@@ -70,8 +56,6 @@ public class BlockContentItemSymbol extends RelaySymbol {
 		switch(itemType) {
 		case BLOCK:
 			return blockNode.compact();
-		case CODE_BLOCK:
-			return codeBlockNode.compact();
 		case EMPTY:
 			throw new RuntimeException("An empty node can not be compacted!");
 		case PROPERTY:

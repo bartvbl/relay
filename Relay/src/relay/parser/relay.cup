@@ -5,19 +5,15 @@ import relay.parser.symbols.BlockContentItemSymbol;
 import relay.parser.symbols.BlockContentListSymbol;
 import relay.parser.symbols.BlockPropertySymbol;
 import relay.parser.symbols.BracketExpressionSymbol;
-import relay.parser.symbols.CodeBlockSymbol;
-import relay.parser.symbols.CodeStatementSymbol;
 import relay.parser.symbols.ConstantValueSymbol;
 import relay.parser.symbols.ExpressionSymbol;
 import relay.parser.symbols.FunctionCallSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
-import relay.parser.symbols.LineStatementSymbol;
 import relay.parser.symbols.ParameterListSymbol;
 import relay.parser.symbols.PercentValueSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
 import relay.parser.symbols.RelaySimpleSymbol;
-import relay.parser.symbols.StatementListSymbol;
 import relay.parser.symbols.SubtractionExpressionSymbol;
 import relay.parser.symbols.UnitSymbol;
 import relay.parser.symbols.VariableAccessSymbol;
@@ -45,9 +41,6 @@ terminal String IDENTIFYER;
 terminal RelaySimpleSymbol BLOCK_OPEN;
 terminal RelaySimpleSymbol BLOCK_CLOSE;
 
-terminal RelaySimpleSymbol CODE_BLOCK_OPEN;
-terminal RelaySimpleSymbol CODE_BLOCK_CLOSE;
-
 terminal UnitSymbol UNIT_PIXELS;
 terminal UnitSymbol UNIT_PERCENT;
 
@@ -55,9 +48,6 @@ terminal RelaySimpleSymbol OPERATOR_PLUS;
 terminal RelaySimpleSymbol OPERATOR_MINUS;
 terminal RelaySimpleSynbol OPERATOR_OF;
 
-terminal RelaySimpleSymbol KEYWORD_LINE;
-terminal RelaySimpleSymbol KEYWORD_FROM;
-terminal RelaySimpleSymbol KEYWORD_TO;
 terminal RelaySimpleSymbol KEYWORD_DEF;
 
 /* non-terminals */
@@ -73,9 +63,6 @@ non terminal BlockPropertySymbol		block_property;
 non terminal ExpressionSymbol 			expression;
 non terminal VariableAccessSymbol		variable_access;
 non terminal FunctionCallSymbol			function_call;
-non terminal CodeBlockSymbol 			code_block;
-non terminal StatementListSymbol		code_statement_list;
-non terminal CodeStatementSymbol		code_statement;
 non terminal ParameterListSymbol		parameter_list;
 non terminal UnitSymbol					unit;
 
@@ -120,28 +107,9 @@ block_content_item ::=
 																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
 	|	block_property:item
 																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
-	|	code_block:item
-																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
 	|	variable_definition:item
 																								{: RESULT = new BlockContentItemSymbol(new LocationRange(item.location.start, item.location.end), item); :}
 	|	/* empty */																				{: RESULT = null; :}
-	;
-
-code_block ::=
-		CODE_BLOCK_OPEN:openToken code_statement_list:statementList CODE_BLOCK_CLOSE:closeToken	
-																								{: RESULT = new CodeBlockSymbol(new LocationRange(openToken.location.start, closeToken.location.end), statementList); :}
-	;
-
-code_statement_list ::=
-		code_statement:statement code_statement_list:remainingSymbols
-																								{: RESULT = new StatementListSymbol(new LocationRange(statement.location.start, statement.location.end), statement, remainingSymbols); :}
-	|	code_statement:statement
-																								{: RESULT = new StatementListSymbol(new LocationRange(statement.location.start, statement.location.end), statement); :}
-	;
-
-code_statement ::=
-		KEYWORD_LINE:firstToken KEYWORD_FROM BLOCK_OPEN expression:fromX COMMA expression:fromY BLOCK_CLOSE KEYWORD_TO BLOCK_OPEN expression:toX COMMA expression:toY BLOCK_CLOSE:endToken
-																								{: RESULT = new LineStatementSymbol(new LocationRange(firstToken.location.start, endToken.location.end), fromX, fromY, toX, toY); :}
 	;
 
 block_property ::=
