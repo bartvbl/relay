@@ -3,6 +3,7 @@ import java_cup.runtime.*;
 import relay.parser.symbols.AdditionExpressionSymbol;
 import relay.parser.symbols.BlockContentItemSymbol;
 import relay.parser.symbols.BlockContentListSymbol;
+import relay.parser.symbols.BlockDetailsSymbol;
 import relay.parser.symbols.BlockPropertySymbol;
 import relay.parser.symbols.BracketExpressionSymbol;
 import relay.parser.symbols.ConstantValueSymbol;
@@ -21,9 +22,6 @@ import relay.parser.symbols.VariableAccessSymbol;
 import relay.parser.symbols.VariableDefinitionSymbol;
 import relay.data.Unit;
 import java_cup.runtime.ComplexSymbolFactory.Location;
-
-import relay.data.Unit;
-import relay.types.BlockType;
 
 /* terminals */
 
@@ -68,6 +66,7 @@ non terminal UnitSymbol					unit;
 non terminal RepeatDefinitionSymbol		repeat_definition;
 non terminal BlockDetailsSymbol			block_details;
 non terminal Object						statement_terminator;
+non terminal Object						optional_statement_terminator;
 
 /* precedence rules */
 
@@ -121,13 +120,18 @@ statement_terminator ::=
 	|	statement_terminator NEW_LINE															{: RESULT = null; :}
 	;
 
+optional_statement_terminator ::=
+		statement_terminator 																	{: RESULT = null; :}
+	|	/* empty */																				{: RESULT = null; :}
+	;
+
 block_property ::=
 		identifyer:identifyer COLON expression:expression
 																								{: RESULT = new BlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, expression); :}
 	;
 
 repeat_definition ::=
-		KEYWORD_FOR:keywordFor identifyer:iterator KEYWORD_IN variable_access:variable COLON block:block
+		KEYWORD_FOR:keywordFor identifyer:iterator KEYWORD_IN variable_access:variable COLON optional_statement_terminator block:block
 																								{: RESULT = new RepeatDefinitionSymbol(new LocationRange(keywordForxleft, blockxright), iterator, variable, block); :}
 	;
 

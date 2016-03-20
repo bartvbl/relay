@@ -1,11 +1,8 @@
-package relay.symbols;
+package relay.parser.symbols;
 
 import relay.exceptions.RelayException;
 import relay.nodes.RelayNode;
 import relay.parser.LocationRange;
-import relay.parser.symbols.IdentifyerSymbol;
-import relay.parser.symbols.ParameterListSymbol;
-import relay.parser.symbols.RelaySymbol;
 import relay.parser.symbols.types.RelaySymbolType;
 
 public class BlockDetailsSymbol extends RelaySymbol {

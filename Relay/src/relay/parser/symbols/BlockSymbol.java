@@ -14,7 +14,6 @@ import relay.nodes.VariableDefinitionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
-import relay.symbols.BlockDetailsSymbol;
 import relay.types.BlockType;
 import relay.types.RelayBlockPropertyType;
 import relay.util.RelayUtil;
