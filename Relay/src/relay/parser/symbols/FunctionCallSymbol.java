@@ -13,10 +13,10 @@ import relay.types.FunctionType;
 
 public class FunctionCallSymbol extends ExpressionSymbol {
 
-	public final String functionName;
+	public final IdentifyerSymbol functionName;
 	public final ParameterListSymbol parameters;
 
-	public FunctionCallSymbol(LocationRange locationRange, String identifyer, ParameterListSymbol parameters) {
+	public FunctionCallSymbol(LocationRange locationRange, IdentifyerSymbol identifyer, ParameterListSymbol parameters) {
 		super(locationRange, ExpressionType.FUNCTION_CALL, new RelaySymbol[]{parameters});
 		this.functionName = identifyer;
 		this.parameters = parameters;
@@ -40,7 +40,7 @@ public class FunctionCallSymbol extends ExpressionSymbol {
 		
 		FunctionType functionType;
 		try {			
-			functionType = FunctionType.valueOf(functionName);
+			functionType = FunctionType.valueOf(functionName.value);
 		} catch(Exception e) {
 			throw new RelayException("Unknown function type \"" + functionName +  "\".", location);
 		}

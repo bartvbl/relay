@@ -14,45 +14,33 @@ import relay.nodes.VariableDefinitionNode;
 import relay.parser.LocationRange;
 import relay.parser.symbols.types.BlockItemType;
 import relay.parser.symbols.types.RelaySymbolType;
+import relay.symbols.BlockDetailsSymbol;
 import relay.types.BlockType;
 import relay.types.RelayBlockPropertyType;
 import relay.util.RelayUtil;
 
 public class BlockSymbol extends RelaySymbol {
 
-	public final IdentifyerSymbol nameNode;
 	public final IdentifyerSymbol blockTypeNode;
 	public final BlockContentListSymbol childList;
-
-	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockName, IdentifyerSymbol blockType) {
-		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.nameNode = blockName;
-		this.blockTypeNode = blockType;
-		this.childList = childList;
-	}
+	public final BlockDetailsSymbol blockDetails;
 	
-	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList, IdentifyerSymbol blockName) {
+
+	public BlockSymbol(LocationRange locationRange, BlockDetailsSymbol blockDetails, BlockContentListSymbol childList) {
 		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.nameNode = blockName;
 		this.blockTypeNode = null;
 		this.childList = childList;
+		this.blockDetails = blockDetails;
 	}
 	
-	public BlockSymbol(LocationRange locationRange, BlockContentListSymbol childList) {
-		super(locationRange, RelaySymbolType.BLOCK, new RelaySymbol[]{childList});
-		this.nameNode = null;
-		this.blockTypeNode = null;
-		this.childList = childList;
-	}
-
 	@Override
 	public String toString() {
-		return "Block named \"" + nameNode.value + "\"";
+		return "Block named \"" + blockDetails.blockName.value + "\"";
 	}
 
 	@Override
 	public RelayNode compact() throws RelayException {
-		String blockName = (nameNode == null) ? "block_" + RelayUtil.generateUUID() : nameNode.value;
+		String blockName = (blockDetails.blockName == null) ? "block_" + RelayUtil.generateUUID() : blockDetails.blockName.value;
 		BlockType blockType;
 		try {
 			blockType = (blockTypeNode == null) ? BlockType.Basic : BlockType.valueOf(this.blockTypeNode.value);
