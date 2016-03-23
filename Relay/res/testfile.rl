@@ -10,8 +10,8 @@
 			( sidebar-element
 				left: parent.left
 				right: parent.right
-				top: parent.top - 20px //previous.top
-				height: min(20% of parent.height + 20px, 50px)
+				top: previous.top
+				height: 20% of this.width
 
 				( icon : Image
 					left: parent.left
@@ -30,7 +30,7 @@
 	)
 
 	( maincontent
-		def itemHeight: 100px
+		def itemHeight: 20% of parent.height
 
 		left: sidebar.right
 		right: parent.right
