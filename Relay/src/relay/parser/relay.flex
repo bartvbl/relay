@@ -85,10 +85,23 @@ Exponent = [eE] [+-]? [0-9]+
 	"of"						{ return symbol("operator_of", OPERATOR_OF); }
 	"+"							{ return symbol("operator_plus", OPERATOR_PLUS); }
 	"-"							{ return symbol("operator_minus", OPERATOR_MINUS); }
+	"*"							{ return symbol("operator_multiply", OPERATOR_MULTIPLY); }
+	"/"							{ return symbol("operator_division", OPERATOR_DIVIDE); }
+	"<"							{ return symbol("operator_less_than", OPERATOR_LESS_THAN); }
+	"<="						{ return symbol("operator_less_or_equal", OPERATOR_LESS_OR_EQUAL); }
+	"=="						{ return symbol("operator_equals", OPERATOR_EQUALS); }
+	">="						{ return symbol("operator_greater_or_equal", OPERATOR_GREATER_OR_EQUAL); }
+	">"							{ return symbol("operator_greater_than", OPERATOR_GREATER_THAN); }
+	"and"						{ return symbol("operator_boolean_and", OPERATOR_BOOLEAN_AND); }
+	"or"						{ return symbol("operator_boolean_or", OPERATOR_BOOLEAN_OR); }
+	"xor"						{ return symbol("operator_boolean_xor", OPERATOR_BOOLEAN_XOR); }
+	"not"						{ return symbol("operator_boolean_not", OPERATOR_BOOLEAN_NOT); }
 	
 	"def"						{ return symbol("keyword_def", KEYWORD_DEF); }
 	"for"						{ return symbol("keyword_for", KEYWORD_FOR); }
 	"in"						{ return symbol("keyword_in", KEYWORD_IN); }
+	"if"						{ return symbol("keyword_if", KEYWORD_IF); }
+	"otherwise"					{ return symbol("keyword_otherwise", KEYWORD_OTHERWISE); }
 	
 	{DoubleLiteral}				{ return symbol("number", NUMBER, new Double(Double.parseDouble(yytext()))); }
 	{Identifier}				{ return symbol("identifyer", IDENTIFYER, yytext()); }

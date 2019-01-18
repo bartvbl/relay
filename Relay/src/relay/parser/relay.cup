@@ -6,22 +6,34 @@ import relay.parser.symbols.BlockContentListSymbol;
 import relay.parser.symbols.BlockDetailsSymbol;
 import relay.parser.symbols.BlockPropertySymbol;
 import relay.parser.symbols.BracketExpressionSymbol;
+import relay.parser.symbols.ConditionalBlockPropertySymbol;
 import relay.parser.symbols.ConstantValueSymbol;
+import relay.parser.symbols.DivisionExpressionSymbol;
+import relay.parser.symbols.EqualityComparisonSymbol;
 import relay.parser.symbols.ExpressionSymbol;
 import relay.parser.symbols.FunctionCallSymbol;
+import relay.parser.symbols.GreaterEqualComparisonSymbol;
+import relay.parser.symbols.GreaterThanComparisonSymbol;
 import relay.parser.symbols.IdentifyerSymbol;
+import relay.parser.symbols.LessEqualComparisonSymbol;
+import relay.parser.symbols.LessThanComparisonSymbol;
+import relay.parser.symbols.MultiplicationExpressionSymbol;
 import relay.parser.symbols.ParameterListSymbol;
 import relay.parser.symbols.PercentValueSymbol;
 import relay.parser.symbols.RepeatDefinitionSymbol;
 import relay.parser.symbols.RootSymbol;
 import relay.parser.symbols.BlockSymbol;
+import relay.parser.symbols.BooleanAndSymbol;
+import relay.parser.symbols.BooleanExpressionSymbol;
+import relay.parser.symbols.BooleanNotSymbol;
+import relay.parser.symbols.BooleanOrSymbol;
+import relay.parser.symbols.BooleanXorSymbol;
 import relay.parser.symbols.RelaySimpleSymbol;
 import relay.parser.symbols.SubtractionExpressionSymbol;
 import relay.parser.symbols.UnitSymbol;
 import relay.parser.symbols.VariableAccessSymbol;
 import relay.parser.symbols.VariableDefinitionSymbol;
 import relay.data.Unit;
-import java_cup.runtime.ComplexSymbolFactory.Location;
 
 /* terminals */
 
@@ -43,11 +55,24 @@ terminal UnitSymbol UNIT_PERCENT;
 
 terminal RelaySimpleSymbol OPERATOR_PLUS;
 terminal RelaySimpleSymbol OPERATOR_MINUS;
-terminal RelaySimpleSynbol OPERATOR_OF;
+terminal RelaySimpleSymbol OPERATOR_OF;
+terminal RelaySimpleSymbol OPERATOR_MULTIPLY;
+terminal RelaySimpleSymbol OPERATOR_DIVIDE;
+terminal RelaySimpleSymbol OPERATOR_LESS_THAN;
+terminal RelaySimpleSymbol OPERATOR_LESS_OR_EQUAL;
+terminal RelaySimpleSymbol OPERATOR_EQUALS;
+terminal RelaySimpleSymbol OPERATOR_GREATER_OR_EQUAL;
+terminal RelaySimpleSymbol OPERATOR_GREATER_THAN;
+terminal RelaySimpleSymbol OPERATOR_BOOLEAN_AND;
+terminal RelaySimpleSymbol OPERATOR_BOOLEAN_OR;
+terminal RelaySimpleSymbol OPERATOR_BOOLEAN_XOR;
+terminal RelaySimpleSymbol OPERATOR_BOOLEAN_NOT;
 
 terminal RelaySimpleSymbol KEYWORD_DEF;
 terminal RelaySimpleSymbol KEYWORD_FOR;
 terminal RelaySimpleSymbol KEYWORD_IN;
+terminal RelaySimpleSymbol KEYWORD_IF;
+terminal RelaySimpleSymbol KEYWORD_OTHERWISE;
 
 /* non-terminals */
 
@@ -59,6 +84,7 @@ non terminal BlockContentItemSymbol		block_content_item;
 non terminal VariableDefinitionSymbol	variable_definition;
 non terminal BlockPropertySymbol		block_property;
 non terminal ExpressionSymbol 			expression;
+non terminal BooleanExpressionSymbol	booleanExpression;
 non terminal VariableAccessSymbol		variable_access;
 non terminal FunctionCallSymbol			function_call;
 non terminal ParameterListSymbol		parameter_list;
@@ -70,7 +96,8 @@ non terminal Object						optional_statement_terminator;
 
 /* precedence rules */
 
-precedence left OPERATOR_PLUS, OPERATOR_MINUS; 
+precedence left OPERATOR_MULTIPLY, OPERATOR_DIVIDE, OPERATOR_PLUS, OPERATOR_MINUS; 
+precedence left OPERATOR_BOOLEAN_AND, OPERATOR_BOOLEAN_OR, OPERATOR_BOOLEAN_XOR;
 
 /* start symbol definition */
 
@@ -128,6 +155,10 @@ optional_statement_terminator ::=
 block_property ::=
 		identifyer:identifyer COLON expression:expression
 																								{: RESULT = new BlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, expression); :}
+	|	identifyer:identifyer BLOCK_OPEN:openToken KEYWORD_IF booleanExpression:conditionExpression BLOCK_CLOSE:closeToken COLON expression:expression
+																								{: RESULT = new ConditionalBlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, conditionExpression, expression); :}
+	|	identifyer:identifyer BLOCK_OPEN:openToken KEYWORD_OTHERWISE BLOCK_CLOSE:closeToken COLON expression:expression
+																								{: RESULT = new ConditionalBlockPropertySymbol(new LocationRange(identifyer.location.start, expression.location.end), identifyer, expression); :}
 	;
 
 repeat_definition ::=
@@ -137,11 +168,15 @@ repeat_definition ::=
 
 expression ::=
 		NUMBER:value unit:unit
-																								{: RESULT = new ConstantValueSymbol(new LocationRange(valuexleft, unit.location.end), value, unit); :}
+																								{: RESULT = new ConstantValueSymbol(new LocationRange(valuexleft, unit.location != null ? unit.location.end : valuexright), value, unit); :}
 	|	NUMBER:value UNIT_PERCENT:percent OPERATOR_OF variable_access:variable_access													
 																								{: RESULT = new PercentValueSymbol(new LocationRange(valuexleft, variable_accessxright), value, variable_access); :}
 	|	expression:leftHandSide OPERATOR_PLUS expression:rightHandSide
 																								{: RESULT = new AdditionExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_MULTIPLY expression:rightHandSide
+																								{: RESULT = new MultiplicationExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_DIVIDE expression:rightHandSide
+																								{: RESULT = new DivisionExpressionSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
 	|	BLOCK_OPEN:openToken expression:expression BLOCK_CLOSE:closeToken 
 																								{: RESULT = new BracketExpressionSymbol(new LocationRange(openToken.location.start, openToken.location.end), expression); :}
 	|	expression:leftHandSide OPERATOR_MINUS expression:rightHandSide							
@@ -149,10 +184,35 @@ expression ::=
 	|	variable_access:variable_access 														{: RESULT = variable_access; :}
 	|	function_call:call																		{: RESULT = call; :}
 	;
-
+	
+booleanExpression ::=
+		expression:leftHandSide OPERATOR_LESS_THAN expression:rightHandSide			
+																								{: RESULT = new LessThanComparisonSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_LESS_OR_EQUAL expression:rightHandSide
+																								{: RESULT = new LessEqualComparisonSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_EQUALS expression:rightHandSide
+																								{: RESULT = new EqualityComparisonSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_GREATER_OR_EQUAL expression:rightHandSide
+																								{: RESULT = new GreaterEqualComparisonSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	expression:leftHandSide OPERATOR_GREATER_THAN expression:rightHandSide
+																								{: RESULT = new GreaterThanComparisonSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	BLOCK_OPEN booleanExpression:expression BLOCK_CLOSE
+																								{: RESULT = expression; :}
+	|	booleanExpression:leftHandSide OPERATOR_BOOLEAN_AND booleanExpression:rightHandSide
+																								{: RESULT = new BooleanAndSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	booleanExpression:leftHandSide OPERATOR_BOOLEAN_OR booleanExpression:rightHandSide
+																								{: RESULT = new BooleanOrSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	booleanExpression:leftHandSide OPERATOR_BOOLEAN_XOR booleanExpression:rightHandSide
+																								{: RESULT = new BooleanXorSymbol(new LocationRange(leftHandSide.location.start, rightHandSide.location.end), leftHandSide, rightHandSide); :}
+	|	OPERATOR_BOOLEAN_NOT booleanExpression:expression
+																								{: RESULT = new BooleanNotSymbol(new LocationRange(expression.location.start, expression.location.end), expression); :}
+	;
+	
 unit ::=
 		UNIT_PIXELS:pixels
 																								{: RESULT = new UnitSymbol(new LocationRange(pixelsxleft, pixelsxright), Unit.PIXELS); :}
+	|	/* empty */
+																								{: RESULT = new UnitSymbol(null, Unit.NUMERIC_CONSTANT); :}
 	;
 
 variable_definition ::=

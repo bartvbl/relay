@@ -10,22 +10,35 @@ public class RelaySymbols {
   /* terminals */
   public static final int SEMICOLON = 4;
   public static final int IDENTIFYER = 8;
+  public static final int OPERATOR_BOOLEAN_NOT = 26;
   public static final int OPERATOR_OF = 15;
-  public static final int KEYWORD_IN = 18;
+  public static final int KEYWORD_IN = 29;
   public static final int BLOCK_OPEN = 9;
   public static final int UNIT_PERCENT = 12;
+  public static final int KEYWORD_IF = 30;
   public static final int COLON = 3;
+  public static final int OPERATOR_BOOLEAN_OR = 24;
   public static final int NEW_LINE = 2;
   public static final int COMMA = 6;
   public static final int BLOCK_CLOSE = 10;
+  public static final int KEYWORD_OTHERWISE = 31;
   public static final int EOF = 0;
   public static final int NUMBER = 7;
+  public static final int OPERATOR_LESS_THAN = 18;
+  public static final int OPERATOR_GREATER_OR_EQUAL = 21;
   public static final int error = 1;
   public static final int DOT = 5;
-  public static final int KEYWORD_DEF = 16;
+  public static final int KEYWORD_DEF = 27;
+  public static final int OPERATOR_BOOLEAN_XOR = 25;
+  public static final int OPERATOR_EQUALS = 20;
+  public static final int OPERATOR_GREATER_THAN = 22;
+  public static final int OPERATOR_MULTIPLY = 16;
   public static final int OPERATOR_PLUS = 13;
   public static final int OPERATOR_MINUS = 14;
-  public static final int KEYWORD_FOR = 17;
+  public static final int OPERATOR_DIVIDE = 17;
+  public static final int OPERATOR_LESS_OR_EQUAL = 19;
+  public static final int OPERATOR_BOOLEAN_AND = 23;
+  public static final int KEYWORD_FOR = 28;
   public static final int UNIT_PIXELS = 11;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -44,9 +57,22 @@ public class RelaySymbols {
   "OPERATOR_PLUS",
   "OPERATOR_MINUS",
   "OPERATOR_OF",
+  "OPERATOR_MULTIPLY",
+  "OPERATOR_DIVIDE",
+  "OPERATOR_LESS_THAN",
+  "OPERATOR_LESS_OR_EQUAL",
+  "OPERATOR_EQUALS",
+  "OPERATOR_GREATER_OR_EQUAL",
+  "OPERATOR_GREATER_THAN",
+  "OPERATOR_BOOLEAN_AND",
+  "OPERATOR_BOOLEAN_OR",
+  "OPERATOR_BOOLEAN_XOR",
+  "OPERATOR_BOOLEAN_NOT",
   "KEYWORD_DEF",
   "KEYWORD_FOR",
-  "KEYWORD_IN"
+  "KEYWORD_IN",
+  "KEYWORD_IF",
+  "KEYWORD_OTHERWISE"
   };
 }
 

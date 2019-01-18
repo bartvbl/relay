@@ -6,7 +6,7 @@ public enum BlockType {
 	// inputs
 	
 	Input_TextLine,
-	Input_TextMultiline,
+	//Input_TextMultiline, Why should this be different?
 	Input_Number,
 	Input_Search,
 	Input_Date,

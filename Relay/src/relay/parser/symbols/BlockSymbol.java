@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import relay.exceptions.RelayException;
+import relay.exceptions.RelayRuntimeException;
 import relay.layout.BlockDimensions;
 import relay.nodes.BlockNode;
 import relay.nodes.BlockPropertyNode;
@@ -48,6 +49,10 @@ public class BlockSymbol extends RelaySymbol {
 		}
 		ArrayList<RelayNode> children = new ArrayList<RelayNode>();
 		BlockContentListSymbol currentListNode = childList;
+		
+		if(currentListNode == null) {
+			throw new RelayRuntimeException("Defining an empty block is not allowed.", location);
+		}
 		
 		do {
 			BlockContentItemSymbol currentChild = (BlockContentItemSymbol) currentListNode.listItem;

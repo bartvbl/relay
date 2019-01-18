@@ -1,7 +1,7 @@
 ( root
 
 	( sidebar
-		left: parent.left
+		left:parent.left
 		width: max(20% of parent.width, 200px)
 		top: parent.top
 		bottom: footer.bottom

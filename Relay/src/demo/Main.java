@@ -25,7 +25,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			setSwingSettings();
-			File sourceFile = new File("res/testfile.rl");
+			File sourceFile = new File("res/sample.rl");
 			Window window = UILoader.buildUIFromFile(sourceFile, "Some window", new IndexRectangle2D(100, 100, 1024, 768));
 			window.open();
 			new Main(window);
